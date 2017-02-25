@@ -1,0 +1,1 @@
+start cmd /C "set DEBUG=DoddCMS & npm start"
