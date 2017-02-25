@@ -1,5 +1,5 @@
 module.exports = {
-	sessionConfig: {
+	"sessionConfig": {
 		"cookie": {
 			"maxAge": 1800000
 		},
@@ -10,6 +10,17 @@ module.exports = {
 			"db": 1,
 			"ttl": 1800,
 			"logErrors": true
+		}
+	},
+	"mysqlConfig": {
+		"dbhost": "localhost",
+		"dbname": "test",
+		"dbuser": "root",
+		"dbpwd": "",
+		"pool": {
+			"max": 5,
+			"min": 0,
+			"idle": 10000
 		}
 	}
 }

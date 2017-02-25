@@ -1,6 +1,6 @@
 var routes={
-	"/":require("./routes/index"),
-	"/login":require("./routes/login.js")
+	"/":require("./Route/index"),
+	"/login":require("./Route/login.js")
 }
 module.exports = function(app) {
 	for(var key of Object.keys(routes)){

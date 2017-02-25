@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon'); //网页logo
+// var favicon = require('serve-favicon'); //网页logo
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -32,7 +32,7 @@ app.use(session({
     cookie : sessionConfig.cookie,
     store : new RedisStrore(sessionConfig.sessionStore)
 }));
-
+require("./DAO/initMysql");//初始化数据库
 require("./routes")(app);
 
 // catch 404 and forward to error handler
