@@ -1,10 +1,12 @@
 {
   "apps": [
     {
+
       "name": "DoddCMS",
       "script": "bin/www",
       "watch": "../",
-      "log_date_format": "YYYY-MM-DD HH:mm Z"
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "log_file":"./pm2.log"
     }
   ]
 }

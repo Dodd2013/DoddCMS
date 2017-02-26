@@ -1,0 +1,22 @@
+[{
+	"permissionId": "0001",
+	"actionUrl": "/",
+	"method":"GET",
+	"permissionName": "home_get",
+	"DESC": "主页get方法",
+	"public":true
+},{
+	"permissionId": "0002",
+	"actionUrl": "/login",
+	"method":"POST",
+	"permissionName": "login_post",
+	"DESC": "登录post方法",
+	"public":true
+},{
+	"permissionId": "0003",
+	"actionUrl": "/login",
+	"method":"GET",
+	"permissionName": "login_get",
+	"DESC": "登录get方法",
+	"public":true
+}]

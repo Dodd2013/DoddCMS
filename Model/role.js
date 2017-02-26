@@ -15,6 +15,6 @@ var role = {
         allowNull: true
     }
 };
-module.exports =sequelize.define('permission_role', role, {
+module.exports =sequelize.define('role', role, {
     freezeTableName: true
 });

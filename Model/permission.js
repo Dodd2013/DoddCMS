@@ -2,12 +2,17 @@ var Sequelize = require('sequelize');
 var sequelize = require("../DAO/dao");
 var permission = {
     permissionId: {
-        type: Sequelize.INTEGER,
-        unique: true
+        type: Sequelize.STRING,
+        primaryKey: true
     },
     actionUrl: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    method: {
+        type: Sequelize.STRING,
+        defaultValue: "get",
+        allowNull: false
     },
     permissionName: {
         type: Sequelize.STRING,
@@ -16,8 +21,13 @@ var permission = {
     DESC: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    "public": {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     }
 };
-module.exports = sequelize.define('permission_permission', permission, {
+module.exports = sequelize.define('permission', permission, {
     freezeTableName: true
 });
