@@ -10,6 +10,7 @@ module.exports = function(req, res, next) {
 		if (permission) {
 			if (permission.public) next();
 			else {
+				//TODO
 				res.jsonp({
 					"msg": "You don't have permission to do this!",
 					status: "no"
