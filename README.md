@@ -5,10 +5,15 @@
 * nodejs >=6
 * pm2
 * express >=4
+<<<<<<< HEAD
 
 ## 安装项目
 在目录下打开控制台，输入npm install
 
+=======
+## 安装项目
+在目录下打开控制台，输入npm install
+>>>>>>> 464c1d2bfae708c0f9756c081b01d7718b4282e8
 ## 运行
 windowns下可以运行run.bat(需要pm2)
 平台通用启动代码 pm2 start process.json
