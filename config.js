@@ -23,5 +23,6 @@ module.exports = {
 			"idle": 10000
 		}
 	},
-	"secretKey":"DoddCMS"
+	"secretKey":"DoddCMS",
+	"cros":"*"//跨域相关重要安全性配置，请改成前端所在域名
 }

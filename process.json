@@ -1,10 +1,17 @@
 {
   "apps": [
     {
-
       "name": "DoddCMS",
       "script": "bin/www",
-      "watch": "../",
+      "watch":[
+		"bin",
+		"Controller",
+		"DAO",
+		"Model",
+		"node_modules",
+		"Route",
+		"*.*"
+	],//需要监控的目录
       "log_date_format": "YYYY-MM-DD HH:mm Z",
       "log_file":"./pm2.log"
     }

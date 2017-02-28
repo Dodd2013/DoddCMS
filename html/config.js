@@ -1,3 +1,4 @@
 var config={
-	"projectName":"DoddCMS"
+	"projectName":"DoddCMS",
+	"api":"http://localhost:3008"
 }

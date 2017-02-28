@@ -33,6 +33,14 @@ app.use(session({
   cookie: sessionConfig.cookie,
   store: new RedisStrore(sessionConfig.sessionStore)
 }));
+//允许跨域
+app.use('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", config.cros==="*"?req.headers.origin:config.cros);
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Credentials","true");//跨域session
+    next();
+});
 // if (config.initMysql) {
 require("./DAO/initMysql"); //初始化数据库
 // config.initMysql=false;

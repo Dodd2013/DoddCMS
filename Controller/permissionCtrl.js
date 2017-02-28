@@ -3,7 +3,7 @@ module.exports = function(req, res, next) {
 	Permission.findOne({
 		where: {
 			method: req.method,
-			actionUrl: req.originalUrl
+			actionUrl: req._parsedUrl.pathname
 		}
 	}).then(function(permission) {
 		console.log(JSON.stringify(permission));
@@ -17,9 +17,15 @@ module.exports = function(req, res, next) {
 				});
 			}
 		} else {
-			var err = new Error('This api is not exist!');
-			err.status = 404;
-			next(err);
+			res.status(404);
+
+			console.dir(req);
+			res.jsonp({
+				// actionUrl:req._parsedUrl.pathname,
+				// method:req.method,
+				"msg": "You don't have permission to do this!",
+				status: "no"
+			});
 		}
 	});
 

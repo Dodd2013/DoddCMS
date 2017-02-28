@@ -19,4 +19,18 @@
 	"permissionName": "login_get",
 	"DESC": "登录get方法",
 	"public":true
+},{
+	"permissionId": "0004",
+	"actionUrl": "/login/status",
+	"method":"GET",
+	"permissionName": "login/status_get",
+	"DESC": "获取登录状态",
+	"public":true
+},{
+	"permissionId": "0005",
+	"actionUrl": "/logout",
+	"method":"GET",
+	"permissionName": "logout_get",
+	"DESC": "退出登录",
+	"public":true
 }]

@@ -25,13 +25,14 @@ body {
 /*加载特效*/
 
 .load-cover {
-    position: absolute;
+	z-index: 1035;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     opacity: 1;
-    transition:all 0.8s;
+    transition:all 1s;
     background-color: #EEEEEE;
 }
 
