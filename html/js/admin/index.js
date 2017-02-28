@@ -33,12 +33,9 @@
 			data: {
 				userName: $scope.userName,
 				passWord: $scope.password
-			},
-			xhrFields: {
-				withCredentials: true
 			}
 		}).success(function(data) {
-			if(data.status==="ok")window.location.reload();
+			if (data.status === "ok") window.location.reload();
 		});
 
 	});

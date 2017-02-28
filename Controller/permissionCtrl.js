@@ -8,8 +8,9 @@ module.exports = function(req, res, next) {
 	}).then(function(permission) {
 		console.log(JSON.stringify(permission));
 		if (permission) {
-			if (permission.public) next();
-			else {
+			if (permission.public) {
+				next();
+			} else {
 				//TODO
 				res.jsonp({
 					"msg": "You don't have permission to do this!",
@@ -18,8 +19,6 @@ module.exports = function(req, res, next) {
 			}
 		} else {
 			res.status(404);
-
-			console.dir(req);
 			res.jsonp({
 				// actionUrl:req._parsedUrl.pathname,
 				// method:req.method,
