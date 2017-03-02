@@ -1,36 +1,51 @@
 [{
-	"permissionId": "0001",
-	"actionUrl": "/",
-	"method":"GET",
-	"permissionName": "home_get",
-	"DESC": "主页get方法",
-	"public":true
-},{
-	"permissionId": "0002",
-	"actionUrl": "/login",
-	"method":"POST",
-	"permissionName": "login_post",
-	"DESC": "登录post方法",
-	"public":true
-},{
-	"permissionId": "0003",
-	"actionUrl": "/login",
-	"method":"GET",
-	"permissionName": "login_get",
-	"DESC": "登录get方法",
-	"public":true
-},{
-	"permissionId": "0004",
-	"actionUrl": "/login/status",
-	"method":"GET",
-	"permissionName": "login/status_get",
-	"DESC": "获取登录状态",
-	"public":true
-},{
-	"permissionId": "0005",
-	"actionUrl": "/logout",
-	"method":"GET",
-	"permissionName": "logout_get",
-	"DESC": "退出登录",
-	"public":true
+	"permission": {
+		"permissionId": "0001",
+		"actionUrl": "/",
+		"method": "GET",
+		"permissionName": "home_get",
+		"DESC": "主页get方法",
+		"public": true
+	},
+	"belongTo": 1
+}, {
+	"permission": {
+		"permissionId": "0002",
+		"actionUrl": "/login",
+		"method": "POST",
+		"permissionName": "login_post",
+		"DESC": "登录post方法",
+		"public": true
+	},
+	"belongTo": 1
+}, {
+	"permission": {
+		"permissionId": "0003",
+		"actionUrl": "/login",
+		"method": "GET",
+		"permissionName": "login_get",
+		"DESC": "登录get方法",
+		"public": true
+	},
+	"belongTo": 1
+}, {
+	"permission": {
+		"permissionId": "0004",
+		"actionUrl": "/login/status",
+		"method": "GET",
+		"permissionName": "login/status_get",
+		"DESC": "获取登录状态",
+		"public": true
+	},
+	"belongTo": 1
+}, {
+	"permission": {
+		"permissionId": "0005",
+		"actionUrl": "/logout",
+		"method": "GET",
+		"permissionName": "logout_get",
+		"DESC": "退出登录",
+		"public": true
+	},
+	"belongTo": 1
 }]

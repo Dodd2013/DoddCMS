@@ -3,8 +3,8 @@ var functionModel = require("../functionModel");
 var Sequelize = require('sequelize');
 var sequelize = require("../../DAO/dao");
 var functionModelPermission = {
-	functionModelID: {
-		type: Sequelize.INTEGER,
+	functionModelId: {
+		type: Sequelize.STRING,
 		allowNull: false
 	},
 	permissionId: {
@@ -19,12 +19,12 @@ FunctionModel_Permission.sync().then(function() {
 	permission.belongsToMany(functionModel, {
 		as: "functionModel",
 		through: "FunctionModel_Permission",
-		foreignKey: 'functionModelID'
+		foreignKey: 'permissionId'
 	});
 	functionModel.belongsToMany(permission, {
 		as: "permission",
 		through: "FunctionModel_Permission",
-		foreignKey: 'permissionId'
+		foreignKey: 'functionModelId'
 	});
 });
 module.exports=FunctionModel_Permission;
