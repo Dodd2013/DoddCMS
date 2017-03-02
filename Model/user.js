@@ -1,3 +1,4 @@
+//用户模型
 var Sequelize = require('sequelize');
 var sequelize=require("../DAO/dao");
 var user = {

@@ -1,3 +1,5 @@
+//permission权限模型
+
 var Sequelize = require('sequelize');
 var sequelize = require("../DAO/dao");
 var permission = {

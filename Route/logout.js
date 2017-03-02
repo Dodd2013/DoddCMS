@@ -8,14 +8,14 @@ router.get('/', function(req, res) {
 		res.jsonp({
 			logout: true,
 			userName: userName,
-			msg: 'Logout success!', //TODO
+			msg: 'Logout success!',
 			status: "ok"
 		});
 
 	}else{
 		res.jsonp({
 			logout: false,
-			msg: "You did't login!", //TODO
+			msg: "You did't login!",
 			status: "no"
 		});
 	}

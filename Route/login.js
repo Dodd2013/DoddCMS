@@ -13,13 +13,13 @@ router.get('/status', function(req, res, next) {
 		res.jsonp({
 			isLogin: true,
 			userName: req.session.userName,
-			msg: 'Welcome!', //TODO
+			msg: 'Welcome!',
 			status: "ok"
 		});
 	}else{
 		res.jsonp({
 			isLogin: false,
-			msg: 'Plase Login!', //TODO
+			msg: 'Plase Login!',
 			status: "no"
 		});
 	}

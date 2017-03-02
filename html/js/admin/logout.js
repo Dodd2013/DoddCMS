@@ -8,10 +8,7 @@
 		url: config.api + '/logout',
 		type: 'GET',
 		dataType: 'json',
-		data: {},
-		xhrFields: {
-			withCredentials: true
-		}
+		data: {}
 	}).success(function(data) {
 		if (data.logout) {
 			alert("退出成功");

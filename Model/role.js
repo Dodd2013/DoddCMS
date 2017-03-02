@@ -1,3 +1,4 @@
+//用户组/角色模型
 var Sequelize = require('sequelize');
 var sequelize = require("../DAO/dao");
 var role = {
