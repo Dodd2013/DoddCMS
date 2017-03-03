@@ -15,19 +15,19 @@ var rolePermission = {
 var Role_Permission = sequelize.define('Role_Permission', rolePermission, {
 	freezeTableName: true
 });
-Role_Permission.sync().then(function() {
+var p=Role_Permission.sync().then(function() {
 	permission.belongsToMany(role, {
 		as: "role",
 		through: "Role_Permission",
-		foreignKey: 'roleId'
+		foreignKey: 'permissionId'
 	});
 	role.belongsToMany(permission, {
 		as: "permission",
 		through: "Role_Permission",
-		foreignKey: 'permissionId'
+		foreignKey: 'roleId'
 	});
 });
-module.exports=Role_Permission;
+module.exports={promise:p,model:Role_Permission};
 // .then(function() {
 // 	return role.create({
 // 		// where: {

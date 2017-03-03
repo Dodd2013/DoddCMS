@@ -15,16 +15,16 @@ var userRole = {
 var User_Role = sequelize.define('User_Role', userRole, {
 	freezeTableName: true
 });
-User_Role.sync().then(function() {
+var p=User_Role.sync().then(function() {
 	user.belongsToMany(role, {
 		as: "role",
 		through: "User_Role",
-		foreignKey: 'roleId',
+		foreignKey: 'userName',
 	});
 	role.belongsToMany(user, {
 		as: "user",
 		through: "User_Role",
-		foreignKey: 'userName'
+		foreignKey: 'roleId'
 	});
 });
-module.exports=User_Role;
+module.exports={promise:p,model:User_Role};

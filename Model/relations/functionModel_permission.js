@@ -15,7 +15,7 @@ var functionModelPermission = {
 var FunctionModel_Permission = sequelize.define('FunctionModel_Permission', functionModelPermission, {
 	freezeTableName: true
 });
-FunctionModel_Permission.sync().then(function() {
+var p=FunctionModel_Permission.sync().then(function() {
 	permission.belongsToMany(functionModel, {
 		as: "functionModel",
 		through: "FunctionModel_Permission",
@@ -27,7 +27,7 @@ FunctionModel_Permission.sync().then(function() {
 		foreignKey: 'functionModelId'
 	});
 });
-module.exports=FunctionModel_Permission;
+module.exports={promise:p,model:FunctionModel_Permission};
 // .then(function() {
 // 	return role.create({
 // 		// where: {
