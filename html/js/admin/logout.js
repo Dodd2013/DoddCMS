@@ -12,10 +12,11 @@
 	}).success(function(data) {
 		if (data.logout) {
 			alert("退出成功");
-			window.location.href="/admin"
-			//TODO
+			window.location.href = "/admin"
+				//TODO
 		} else {
 			alert("你没有登录，退出个P啊！");
+			window.location.href = "/admin"
 		}
 
 	}).fail(function() {

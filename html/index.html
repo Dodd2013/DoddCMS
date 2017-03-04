@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
-    <script type="text/javascript" src="config.js"></script>
+    <link rel="stylesheet" href="assets/css/swiper-3.4.1.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/swiper-3.4.1.jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/angular.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <title>主页- {{config.projectName}} </title>
@@ -21,15 +24,84 @@
                 <img src="assets/img/logo.png" alt="logo">
             </div>
             <div class="col-sm-offset-6 col-sm-2">
-            	<p class="language"><a href="admin" title="admin">管理后台</a></p>
+                <p class="language"><a href="admin" title="admin">管理后台</a></p>
             </div>
         </div>
         <div id="nav" ng-include="'include/nav.html'"></div>
-    </div>
-    <div class="container">
+        <div class="swiper-container" ng-controller="swiperCtrl">
+            <div class="swiper-wrapper">
+                <div ng-repeat="x in imgs" class="swiper-slide">
+                    <img class="swiper-index-img" src="{{ x.src }}" alt="{{ x.alt }}" /></div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <!-- 如果需要滚动条 -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span class="fa fa-book"></span>&nbsp;栏目一</div>
+                    <div class="panel-body">
+                        <ul class="context-ul">
+                            <li><a href="#" title="">内容一</a></li>
+                            <li><a href="#" title="">内容二</a></li>
+                            <li><a href="#" title="">内容三</a></li>
+                            <li><a href="#" title="">内容四</a></li>
+                            <li><a href="#" title="">内容五</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span class="fa fa-bookmark"></span>&nbsp;栏目二</div>
+                    <div class="panel-body">
+                        <ul class="context-ul">
+                            <li><a href="#" title="">内容一</a></li>
+                            <li><a href="#" title="">内容二</a></li>
+                            <li><a href="#" title="">内容三</a></li>
+                            <li><a href="#" title="">内容四</a></li>
+                            <li><a href="#" title="">内容五</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span class="fa fa-cc"></span>&nbsp;栏目三</div>
+                    <div class="panel-body">
+                        <ul class="context-ul">
+                            <li><a href="#" title="">内容一</a></li>
+                            <li><a href="#" title="">内容二</a></li>
+                            <li><a href="#" title="">内容三</a></li>
+                            <li><a href="#" title="">内容四</a></li>
+                            <li><a href="#" title="">内容五</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+<!--             <div class="col-sm-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span class="fa fa-cc"></span>&nbsp;栏目三</div>
+                    <div class="panel-body">
+                        <ul class="context-ul">
+                            <li><a href="#" title="">内容一</a></li>
+                            <li><a href="#" title="">内容二</a></li>
+                            <li><a href="#" title="">内容三</a></li>
+                            <li><a href="#" title="">内容四</a></li>
+                            <li><a href="#" title="">内容五</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+        </div>
     </div>
     <div id="footer" ng-include="'include/footer.html'"></div>
-
 </body>
 
 </html>

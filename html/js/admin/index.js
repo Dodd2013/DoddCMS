@@ -1,4 +1,5 @@
 (function() {
+	
 	//消除load遮盖层
 	var removeLoadCover = function() {
 		$(".load-cover").css({

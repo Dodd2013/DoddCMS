@@ -8,6 +8,7 @@ body {
 }
 
 .my-navbar {
+    margin-bottom: 0px;
     background-color: #444444;
     border-color: #444444;
 }
@@ -125,4 +126,17 @@ body {
     50% {
         transform: translateZ(0.5em);
     }
+}
+.swiper-container {
+    width: 100%;
+    /* height: 460px; */
+}  
+
+.swiper-index-img{
+    width: 100%;
+    /* height: 460px;*/
+}
+
+.context-ul{
+    padding-left: 20px
 }
