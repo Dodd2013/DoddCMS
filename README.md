@@ -2,10 +2,11 @@
 内容管理系统 毕业设计项目
 启动项目`pm2 start process.js`
 ## 项目依赖项
-* nodejs >=6
-* pm2
-* express >=4
-* browser-sync (前端运行可选)
+* nodejs >=6  nodejs官网下载:https://nodejs.org/en/download/  
+* npm源国内推荐淘宝cnpm(选装) https://npm.taobao.org/
+* pm2  安装方法 :npm install pm2 -g
+* express >=4   这个在安装项目时会自动安装
+* browser-sync (前端运行可选)  安装方法:npm install browser-sync -g
 
 
 ## 安装项目
