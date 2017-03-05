@@ -12,7 +12,7 @@
 	}).success(function(data) {
 		if (data.logout) {
 			alert("退出成功");
-			window.location.href = "/admin"
+			window.location.href = "/"
 				//TODO
 		} else {
 			alert("你没有登录，退出个P啊！");
