@@ -25,7 +25,7 @@ router.get('/status', function(req, res, next) {
 	}
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
 	if (req.body.userName == undefined || req.body.passWord == undefined) {
 		res.jsonp({
 			msg: 'Error! Plase post your userName and passWord!',

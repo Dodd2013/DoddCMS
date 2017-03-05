@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 router.get('/', function(req, res) {
-	console.dir(req.session);
 	if (req.session.userName) {
 		var userName=req.session.userName;
 		req.session.destroy();

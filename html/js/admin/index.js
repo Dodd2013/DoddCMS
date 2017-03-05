@@ -1,5 +1,5 @@
 (function() {
-	
+
 	//消除load遮盖层
 	var removeLoadCover = function() {
 		$(".load-cover").css({
@@ -37,17 +37,24 @@
 			}
 		}).success(function(data) {
 			if (data.status === "ok") window.location.reload();
+			else {
+				var msg;
+				if(data.msg=="PassWord is not right!")msg="密码不正确！";
+				else msg="用户不存在！";
+				new PNotify({
+					type: 'error',
+					text: msg
+				});
+			}
 		});
 
 	});
+
 	$.ajax({
 		url: config.api + '/login/status',
 		type: 'GET',
 		dataType: 'json',
-		data: {},
-		xhrFields: {
-			withCredentials: true
-		}
+		data: {}
 	}).success(function(data) {
 		var $scope = $("html").scope(); //获取angular的scope
 		if (data.isLogin) {
