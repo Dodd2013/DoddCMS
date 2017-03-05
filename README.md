@@ -2,6 +2,8 @@
 内容管理系统 毕业设计项目
 启动项目`pm2 start process.js`
 ## 项目依赖项
+* mysql >=5.6.21 连接配置在config.js里
+* redis win下的程序请参照http://blog.csdn.net/renfufei/article/details/38474435安装，同样配置文件在config.js里
 * nodejs >=6  nodejs官网下载:https://nodejs.org/en/download/  
 * npm源国内推荐淘宝cnpm(选装) https://npm.taobao.org/
 * pm2  安装方法 :npm install pm2 -g
