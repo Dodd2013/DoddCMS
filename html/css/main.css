@@ -146,3 +146,6 @@ body {
 .footer{
     text-align: center;
 }
+.content-more,.content-more:visited,.content-more:hover,.content-more:active,.content-more:link{
+    color: #fff;
+}
