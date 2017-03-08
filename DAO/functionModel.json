@@ -3,4 +3,19 @@
 	"functionModelName":"用户管理",
 	"adminUrl":"userAdmin",
 	"DESC":"用户管理模块"
+},{
+	"functionModelId":"2",
+	"functionModelName":"系统设置",
+	"adminUrl":"systemAdmin",//TODO
+	"DESC":"系统设置模块"
+},{
+	"functionModelId":"3",
+	"functionModelName":"权限管理",
+	"adminUrl":"permissionAdmin",//TODO
+	"DESC":"权限管理模块"
+},{
+	"functionModelId":"4",
+	"functionModelName":"内容管理",
+	"adminUrl":"contentAdmin",//TODO
+	"DESC":"内容管理模块"
 }]

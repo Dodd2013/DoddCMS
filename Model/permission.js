@@ -13,7 +13,7 @@ var permission = {
     },
     method: {
         type: Sequelize.STRING,
-        defaultValue: "get",
+        defaultValue: "GET",
         allowNull: false
     },
     permissionName: {
