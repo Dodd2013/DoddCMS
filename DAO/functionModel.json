@@ -6,16 +6,16 @@
 },{
 	"functionModelId":"2",
 	"functionModelName":"系统设置",
-	"adminUrl":"systemAdmin",//TODO
+	"adminUrl":"systemAdmin",
 	"DESC":"系统设置模块"
 },{
 	"functionModelId":"3",
 	"functionModelName":"权限管理",
-	"adminUrl":"permissionAdmin",//TODO
+	"adminUrl":"permissionAdmin",
 	"DESC":"权限管理模块"
 },{
 	"functionModelId":"4",
 	"functionModelName":"内容管理",
-	"adminUrl":"contentAdmin",//TODO
+	"adminUrl":"contentAdmin",
 	"DESC":"内容管理模块"
 }]

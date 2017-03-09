@@ -32,6 +32,7 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+  padding-top: 0px;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -41,7 +42,9 @@ body {
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
@@ -102,4 +105,28 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+.nav-model{
+
+    padding-bottom: 2px;
+}
+.active .nav-model-header{
+  background-color: #3333CC;
+}
+.nav-model-list{
+  display: none;
+}
+.active .nav-model-list{
+  display: block;
+}
+.nav-model-header{
+  padding-left: 20px;
+  line-height: 40px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #666666;
+}
+.nav-model-list li{
+  font-size: 15px;
+  line-height: 30px;
 }

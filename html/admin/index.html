@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/admin/index.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/pnotify.min.css">
     <script src="../assets/js/prefixfree.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="../assets/js/jquery.js"></script>
@@ -36,7 +37,6 @@
                     <li><a href="#">个人设置</a></li>
                     <!-- <li><a href="#">帮助</a></li> -->
                     <li><a href="#">欢迎你！&nbsp;&nbsp;<strong ng-bind="userName"></strong></a></li>
-
                     <li><a href="logout.html">退出</a></li>
                 </ul>
                 <!-- <form class="navbar-form navbar-right">
@@ -49,13 +49,42 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                <li ng-repeat="link in navLinks"><a href=""></a></li>
+                    <li ng-repeat="link in navLinks">
+                        <a href="#"></a>
+                    </li>
                     <!-- <li class="active"><a href="#">Overview </a></li>
                     <li><a href="#">Reports</a></li>
                     <li><a href="#">Analytics</a></li>
                     <li><a href="#">Export</a></li> -->
+                    <div class="nav-model active">
+                        <div class="nav-model-header"><span class="fa fa-book"></span>&nbsp;内容管理模块</div>
+                        <ul class="nav-model-list">
+                            <li><a href="#" title="">投稿</a></li>
+                            <li><a href="#" title="">内容列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-model active">
+                        <div class="nav-model-header"><span class="fa fa-database"></span>&nbsp;系统设置模块</div>
+                        <ul class="nav-model-list">
+                            <li><a href="#" title="">投稿</a></li>
+                            <li><a href="#" title="">内容列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-model">
+                        <div class="nav-model-header"><span class="fa fa-superpowers"></span>&nbsp;权限管理模块</div>
+                        <ul class="nav-model-list">
+                            <li><a href="#" title="">投稿</a></li>
+                            <li><a href="#" title="">内容列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-model">
+                        <div class="nav-model-header"><span class="fa fa-user-o"></span>&nbsp;用户管理模块</div>
+                        <ul class="nav-model-list">
+                            <li><a href="#" title="">投稿</a></li>
+                            <li><a href="#" title="">内容列表</a></li>
+                        </ul>
+                    </div>
                 </ul>
-
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <ui-view></ui-view>
@@ -83,14 +112,14 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                      <div class="form-group">
-                        <label for="userName">帐号</label>
-                        <input type="text" class="form-control" id="userName" placeholder="用户名" ng-model="userName">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword">密码</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="密码" ng-model="password">
-                      </div>
+                        <div class="form-group">
+                            <label for="userName">帐号</label>
+                            <input type="text" class="form-control" id="userName" placeholder="用户名" ng-model="userName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">密码</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="密码" ng-model="password">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
