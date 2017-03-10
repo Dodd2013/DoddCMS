@@ -1,21 +1,85 @@
 [{
 	"functionModelId":"1",
+	"parentFunctionModelId":"0",
 	"functionModelName":"用户管理",
-	"adminUrl":"userAdmin",
-	"DESC":"用户管理模块"
+	"adminUrl":"",
+	"DESC":"1用户管理模块"
+},{
+	"functionModelId":"101",
+	"parentFunctionModelId":"1",
+	"functionModelName":"用户管理",
+	"adminUrl":"",
+	"DESC":"1用户管理模块-01用户管理"
+},{
+	"functionModelId":"102",
+	"parentFunctionModelId":"1",
+	"functionModelName":"用户角色管理",
+	"adminUrl":"",
+	"DESC":"1用户管理模块-02用户角色管理"
 },{
 	"functionModelId":"2",
+	"parentFunctionModelId":"0",
 	"functionModelName":"系统设置",
-	"adminUrl":"systemAdmin",
-	"DESC":"系统设置模块"
+	"adminUrl":"",
+	"DESC":"2系统设置模块"
+},{
+	"functionModelId":"201",
+	"parentFunctionModelId":"2",
+	"functionModelName":"导航栏管理",
+	"adminUrl":"",
+	"DESC":"2系统设置模块-01导航栏管理"
+},{
+	"functionModelId":"202",
+	"parentFunctionModelId":"2",
+	"functionModelName":"广告位管理",
+	"adminUrl":"",
+	"DESC":"2系统设置模块-02导航栏管理"
+},{
+	"functionModelId":"203",
+	"parentFunctionModelId":"2",
+	"functionModelName":"数据库备份",
+	"adminUrl":"",
+	"DESC":"2系统设置模块-03数据库备份"
 },{
 	"functionModelId":"3",
+	"parentFunctionModelId":"0",
 	"functionModelName":"权限管理",
-	"adminUrl":"permissionAdmin",
-	"DESC":"权限管理模块"
+	"adminUrl":"",
+	"DESC":"3权限管理模块"
+},{
+	"functionModelId":"301",
+	"parentFunctionModelId":"3",
+	"functionModelName":"角色管理",
+	"adminUrl":"columnAdmin",
+	"DESC":"3权限管理-01角色管理"
+},{
+	"functionModelId":"302",
+	"parentFunctionModelId":"3",
+	"functionModelName":"角色权限管理",
+	"adminUrl":"columnAdmin",
+	"DESC":"3权限管理-01角色权限管理"
 },{
 	"functionModelId":"4",
+	"parentFunctionModelId":"0",
 	"functionModelName":"内容管理",
-	"adminUrl":"contentAdmin",
-	"DESC":"内容管理模块"
+	"adminUrl":"",
+	"DESC":"4内容管理模块"
+},{
+	"functionModelId":"401",
+	"parentFunctionModelId":"4",
+	"functionModelName":"栏目管理",
+	"adminUrl":"",
+	"DESC":"4栏目管理模块-01栏目管理"
+},{
+	"functionModelId":"402",
+	"parentFunctionModelId":"4",
+	"functionModelName":"投稿",
+	"adminUrl":"",
+	"DESC":"4内容管理模块-02投稿"
+},{
+	"functionModelId":"403",
+	"parentFunctionModelId":"4",
+	"functionModelName":"内容管理",
+	"adminUrl":"",
+	"DESC":"4内容管理模块-03内容管理"
 }]

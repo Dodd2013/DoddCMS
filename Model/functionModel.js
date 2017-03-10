@@ -7,6 +7,9 @@ var functionModel = {
         type: Sequelize.STRING,
         primaryKey: true
     },
+    parentFunctionModelId:{
+        type: Sequelize.STRING
+    },
     functionModelName: {
         type: Sequelize.STRING,
         allowNull: false

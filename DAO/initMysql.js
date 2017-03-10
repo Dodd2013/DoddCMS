@@ -5,7 +5,9 @@ Promise.all([
 	models.user.sync(),
 	models.role.sync(),
 	models.permission.sync( /*{force: true}*/ ),
-	models.functionModel.sync()
+	models.functionModel.sync(),
+	models.column.sync(),
+	models.content.sync()
 ]).then(function() {
 	//基础表建完之后建立关系表
 	return Promise.all([require("../Model/relations/role_permission").promise,
