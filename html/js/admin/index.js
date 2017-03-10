@@ -49,7 +49,9 @@
 		});
 
 	});
-
+	$('.nav-model').on('click', '.nav-model-header', function(event) {
+		$(event.target).parent(".nav-model").toggleClass('active');
+	});
 	$.ajax({
 		url: config.api + '/login/status',
 		type: 'GET',
