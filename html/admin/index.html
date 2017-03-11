@@ -56,41 +56,10 @@
                     <li><a href="#">Reports</a></li>
                     <li><a href="#">Analytics</a></li>
                     <li><a href="#">Export</a></li> -->
-                    <div class="nav-model active">
-                        <div class="nav-model-header"><span class="fa fa-book"></span>&nbsp;栏目管理</div>
+                    <div class="nav-model active" ng-repeat="x in navList">
+                        <div class="nav-model-header"><span class="fa {{ adminPages[x.title].icon}}"></span>&nbsp;{{adminPages[x.title].name}}</div>
                         <ul class="nav-model-list">
-                            <li><a href="#" title="">栏目管理</a></li>
-                            <li><a href="#" title="">内容列表</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="nav-model active">
-                        <div class="nav-model-header"><span class="fa fa-book"></span>&nbsp;内容管理</div>
-                        <ul class="nav-model-list">
-                            <li><a href="#" title="">投稿</a></li>
-                            <li><a href="#" title="">内容列表/审核</a></li>
-                        </ul>
-                    </div>
-                    <div class="nav-model active">
-                        <div class="nav-model-header"><span class="fa fa-database"></span>&nbsp;系统设置</div>
-                        <ul class="nav-model-list">
-                            <li><a href="#" title="">导航栏管理</a></li>
-                            <li><a href="#" title="">广告位管理</a></li>
-                            <li><a href="#" title="">数据库备份</a></li>
-                        </ul>
-                    </div>
-                    <div class="nav-model active">
-                        <div class="nav-model-header"><span class="fa fa-superpowers"></span>&nbsp;权限管理</div>
-                        <ul class="nav-model-list">
-                            <li><a href="#" title="">角色权限管理</a></li>
-                            <li><a href="#" title="">角色管理</a></li>
-                        </ul>
-                    </div>
-                    <div class="nav-model active">
-                        <div class="nav-model-header"><span class="fa fa-user-o"></span>&nbsp;用户管理</div>
-                        <ul class="nav-model-list">
-                            <li><a href="#" title="">用户管理</a></li>
-                            <li><a href="#" title="">用户角色分配</a></li>
+                            <li ng-repeat="y in x.nav"><a href="{{adminPages[y].url}}" title="">{{adminPages[y].name}}</a></li>
                         </ul>
                     </div>
                 </ul>

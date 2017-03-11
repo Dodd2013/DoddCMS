@@ -15,6 +15,20 @@
 		$scope.title = "管理主页-" + config.projectName;
 		$scope.userName = "";
 		$scope.password = "";
+		$scope.adminPages = adminPages;
+		$scope.navList = [{
+			"title": "1",
+			"nav": ["101", "102"]
+		}, {
+			"title": "2",
+			"nav": ["201", "202", "203"]
+		}, {
+			"title": "3",
+			"nav": ["301", "302"]
+		}, {
+			"title": "4",
+			"nav": ["401", "402", "403"]
+		}];
 		// $scope.login = function() {
 		// 	alert("fdas");
 		// 	$http.post(config.api + '/login', {
@@ -39,8 +53,8 @@
 			if (data.status === "ok") window.location.reload();
 			else {
 				var msg;
-				if(data.msg=="PassWord is not right!")msg="密码不正确！";
-				else msg="用户不存在！";
+				if (data.msg == "PassWord is not right!") msg = "密码不正确！";
+				else msg = "用户不存在！";
 				new PNotify({
 					type: 'error',
 					text: msg
