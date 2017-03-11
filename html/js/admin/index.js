@@ -63,7 +63,7 @@
 		});
 
 	});
-	$('.nav-model').on('click', '.nav-model-header', function(event) {
+	$('.sidebar').on('click', '.nav-model .nav-model-header', function(event) {
 		$(event.target).parent(".nav-model").toggleClass('active');
 	});
 	$.ajax({
