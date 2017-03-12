@@ -21,7 +21,7 @@ Promise.all([
 		models.functionModel.upsert(obj);
 	};
 	//初始化权限
-	for (let obj of permissionJson) {
+	for (let obj of permissionJson) { 
 		(function() {
 			models.permission.upsert(obj.permission).then(function(created) {
 				return models.permission.findOne({
@@ -29,7 +29,9 @@ Promise.all([
 						permissionId: obj.permission.permissionId
 					}
 				}).then(function(per) {
-					per.setFunctionModel([obj.belongTo]);
+					if (obj.belongTo !== null) {
+						per.setFunctionModel([obj.belongTo]);
+					}
 				});
 			});
 		})();

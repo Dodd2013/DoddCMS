@@ -7,7 +7,7 @@
 		"DESC": "主页get方法",
 		"public": true
 	},
-	"belongTo": 1
+	"belongTo": null
 }, {
 	"permission": {
 		"permissionId": "0002",
@@ -17,7 +17,7 @@
 		"DESC": "登录post方法",
 		"public": true
 	},
-	"belongTo": 1
+	"belongTo": null
 }, {
 	"permission": {
 		"permissionId": "0003",
@@ -27,7 +27,7 @@
 		"DESC": "登录get方法",
 		"public": true
 	},
-	"belongTo": 1
+	"belongTo": null
 }, {
 	"permission": {
 		"permissionId": "0004",
@@ -37,7 +37,7 @@
 		"DESC": "获取登录状态",
 		"public": true
 	},
-	"belongTo": 1
+	"belongTo": null
 }, {
 	"permission": {
 		"permissionId": "0005",
@@ -47,5 +47,5 @@
 		"DESC": "退出登录",
 		"public": true
 	},
-	"belongTo": 1
+	"belongTo": null
 }]
