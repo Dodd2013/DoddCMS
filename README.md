@@ -31,5 +31,6 @@ config.js配置好后台api地址即可
 前端可以运行在任何能响应http请求的服务器中
 
 例如apache、nginx、tomcat、iis。
-
-开发时使用browser-sync运行具有热重载功能的服务器，若装有browser-sync可以直接运行html下的run.bat或者在该目录下控制台输`browser-sync start --server --files "**/*.css, **/*.html,**/*.js,**/*.htm,*/*.*,*.*"`
+<del>开发时使用browser-sync运行具有热重载功能的服务器，若装有browser-sync可以直接运行html下的run.bat或者在该目录下控制台输`browser-sync start --server --files "**/*.css, **/*.html,**/*.js,**/*.htm,*/*.*,*.*"`</del>
+现改为直接用gulp运行
+请在html目录下运行npm install 然后gulp即可启动
