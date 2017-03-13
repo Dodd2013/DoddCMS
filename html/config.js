@@ -65,4 +65,4 @@ $.ajaxSetup({
 		withCredentials: true //全局跨域session
 	}
 });
-PNotify.prototype.options.styling = "bootstrap3"; //"fontawesome";
+if(PNotify)PNotify.prototype.options.styling = "bootstrap3"; //"fontawesome";

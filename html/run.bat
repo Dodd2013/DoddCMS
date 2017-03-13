@@ -1,1 +1,1 @@
-browser-sync start --server --files "**/*.css, **/*.html,**/*.js,**/*.htm,*/*.*,*.*" --port 80
+gulp
