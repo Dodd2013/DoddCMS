@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userCtrl = require("../Controller/userCtrl");
+var userCtrl = require("../Ctrl/userCtrl");
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.jsonp({

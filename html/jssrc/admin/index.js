@@ -10,7 +10,6 @@
 		}, 2000);
 	};
 	var app = angular.module('admin', ['ui.router']);
-
 	app.controller('adminCtrl', function($scope, $http) {
 		$scope.config = config;
 		$scope.title = "管理主页-" + config.projectName;
@@ -18,17 +17,17 @@
 		$scope.password = "";
 		$scope.adminPages = adminPages;
 		$scope.navList = [{
+			"title": "4",
+			"nav": ["401", "402", "403"]
+		},{
 			"title": "1",
 			"nav": ["101", "102"]
-		}, {
-			"title": "2",
-			"nav": ["201", "202", "203"]
 		}, {
 			"title": "3",
 			"nav": ["301", "302"]
 		}, {
-			"title": "4",
-			"nav": ["401", "402", "403"]
+			"title": "2",
+			"nav": ["201", "202", "203"]
 		}];
 		// $scope.login = function() {
 		// 	alert("fdas");
@@ -71,8 +70,21 @@
 	});
 	app.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
-			$stateProvider
-			.state('index', {
+			$stateProvider.state('settings', {
+				url: '/settings',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/settings.html',
+				// controller: 'UIRouterCtrl',
+			}).state('index', {
 				url: '/',
 				resolve: {
 					// myData2: function(myData1, $stateParams) {

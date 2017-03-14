@@ -1,4 +1,4 @@
-var permission = require("./Controller/permissionCtrl");
+var permission = require("./Ctrl/permissionCtrl");
 var routes = {
 	"/": require("./Route/index"),
 	"/login": require("./Route/login.js"),

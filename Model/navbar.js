@@ -1,30 +1,25 @@
 //TODO模型
 var Sequelize = require('sequelize');
 var sequelize = require("../DAO/dao");
-var content = {
-    contentId: {
+var navbar = {
+    itemId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    contentType: {
+    itemName: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    url: {
         type: Sequelize.STRING,
         allowNull: true
     },
-    content: {
-        type: Sequelize.TEXT,
-        allowNull: true
-    },
-    isHot: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-    },
-    viewCount:{
+    orderby:{
         type:Sequelize.INTEGER,
         defaultValue: "0",
     }
 };
-module.exports =sequelize.define('content', content, {
+module.exports =sequelize.define('navbar', navbar, {
     freezeTableName: true
 });

@@ -4,5 +4,6 @@ module.exports={
 	permission:require("../Model/permission"),
 	functionModel:require("../Model/functionModel"),
 	column:require("../Model/column"),
-	content:require("../Model/content")
+	content:require("../Model/content"),
+	navbar:require("../Model/navbar")
 }

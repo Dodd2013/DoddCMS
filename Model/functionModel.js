@@ -7,7 +7,7 @@ var functionModel = {
         type: Sequelize.STRING,
         primaryKey: true
     },
-    parentFunctionModelId:{
+    parentFunctionModelId: {
         type: Sequelize.STRING
     },
     functionModelName: {
@@ -21,6 +21,10 @@ var functionModel = {
     DESC: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    orderby: {
+        type: Sequelize.INTEGER,
+        defaultValue: "0",
     }
 };
 module.exports = sequelize.define('functionModel', functionModel, {
