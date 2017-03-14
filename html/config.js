@@ -12,7 +12,7 @@ var adminPages = {
 		"name": "用户管理"
 	},
 	"102": {
-		"url": "#",
+		"url": "userRoleManage",
 		"name": "用户角色管理"
 	},
 	"2": {
@@ -20,15 +20,15 @@ var adminPages = {
 		"name": "系统设置"
 	},
 	"201": {
-		"url": "#",
+		"url": "navManage",
 		"name": "导航栏管理"
 	},
 	"202": {
-		"url": "#",
+		"url": "adManage",
 		"name": "广告位管理"
 	},
 	"203": {
-		"url": "#",
+		"url": "dbManage",
 		"name": "数据库备份"
 	},
 	"3": {
@@ -36,11 +36,11 @@ var adminPages = {
 		"name": "权限管理"
 	},
 	"301": {
-		"url": "#",
+		"url": "roleManage",
 		"name": "角色管理"
 	},
 	"302": {
-		"url": "#",
+		"url": "rolePermissionManage",
 		"name": "角色权限管理"
 	},
 	"4": {
@@ -48,15 +48,15 @@ var adminPages = {
 		"name": "内容管理"
 	},
 	"401": {
-		"url": "#",
+		"url": "columnManage",
 		"name": "栏目管理"
 	},
 	"402": {
-		"url": "#",
+		"url": "publish",
 		"name": "投稿"
 	},
 	"403": {
-		"url": "#",
+		"url": "contentManage",
 		"name": "内容管理"
 	}
 };

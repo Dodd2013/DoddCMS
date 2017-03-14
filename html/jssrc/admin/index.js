@@ -39,27 +39,41 @@
 		// 	});
 		// };
 	});
+	app.controller('userManageCtrl', function($scope, $http) {
+
+	});
+	app.controller('userRoleManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('navManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('adManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('dbManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('rolePermissionManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('roleManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('columnManageCtrl', function($scope, $http) {
+		
+	});
+	app.controller('publishCtrl', function($scope, $http) {
+		
+	});
+	app.controller('contentManageCtrl', function($scope, $http) {
+		
+	});
 	app.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
-			$urlRouterProvider
-			// // 错误的路由重定向
-			// 	.when('/c?id', '/contacts/:id')
-			// 	.when('/user/:id', '/contacts/:id')
-				.otherwise('/');
-			$stateProvider.
-			state('userManage', {
-				url: '/userManage',
-				// template: '<h1>Welcome to UI-Router Demo</h1>',
-
-				// optional below
-				// templateProvider: ['$timeout',
-				// 	function($timeout) {
-				// 		return $timeout(function() {
-				// 			return '<p class="lead">UI-Router Resource</p>' +
-				// 				'<p>The second line</p>'
-				// 		}, 100);
-				// 	}
-				// ],
+			$stateProvider
+			.state('index', {
+				url: '/',
 				resolve: {
 					// myData2: function(myData1, $stateParams) {
 					// 	return myData1.get({
@@ -68,20 +82,153 @@
 					// 		//对取回来的response还可以干些事情
 					// 		return response;
 					// 	});
-					// },
-					// contacts: function() {
-					// 	// 以下方法被放在 contacts.service.js 中，以 factory 存在
-					// 	return contacts.all();
 					// }
 				},
 				templateUrl: 'tpls/hello.html',
-
-				// templateUrl: function() {
-				// 	return 'about.html';
-				// },
-
-				controller: 'UIRouterCtrl',
+				// controller: 'UIRouterCtrl',
+			}).state('userManage', {
+				url: '/userManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/userManage.html',
+				controller: 'userManageCtrl',
+			}).state('userRoleManage', {
+				url: '/userRoleManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/userRoleManage.html',
+				controller: 'userRoleManageCtrl',
+			}).state('navManage', {
+				url: '/navManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/navManage.html',
+				controller: 'navManageCtrl',
+			}).state('adManage', {
+				url: '/adManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/adManage.html',
+				controller: 'adManageCtrl',
+			}).state('dbManage', {
+				url: '/dbManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/dbManage.html',
+				controller: 'dbManageCtrl',
+			}).state('roleManage', {
+				url: '/roleManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/roleManage.html',
+				controller: 'roleManageCtrl',
+			}).state('rolePermissionManage', {
+				url: '/rolePermissionManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/rolePermissionManage.html',
+				controller: 'rolePermissionManageCtrl',
+			}).state('columnManage', {
+				url: '/columnManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/columnManage.html',
+				controller: 'columnManageCtrl',
+			}).state('publish', {
+				url: '/publish',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/publish.html',
+				controller: 'publishCtrl',
+			}).state('contentManage', {
+				url: '/contentManage',
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// }
+				},
+				templateUrl: 'tpls/contentManage.html',
+				controller: 'contentManageCtrl',
 			});
+			$urlRouterProvider
+				.otherwise('/');
 		}
 	]);
 	$("#loginSubmit").on('click', "", function(event) {
