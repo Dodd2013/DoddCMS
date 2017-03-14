@@ -59,7 +59,7 @@
                     <div class="nav-model active" ng-repeat="x in navList">
                         <div class="nav-model-header"><span class="fa {{ adminPages[x.title].icon}}"></span>&nbsp;{{adminPages[x.title].name}}</div>
                         <ul class="nav-model-list">
-                            <li ng-repeat="y in x.nav"><a href="{{adminPages[y].url}}" title="">{{adminPages[y].name}}</a></li>
+                            <li ng-repeat="y in x.nav" ui-sref-active="active"><a ui-sref="{{adminPages[y].url}}">{{adminPages[y].name}}</a></li>
                         </ul>
                     </div>
                 </ul>

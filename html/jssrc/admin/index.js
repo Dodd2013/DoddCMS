@@ -10,6 +10,7 @@
 		}, 2000);
 	};
 	var app = angular.module('admin', ['ui.router']);
+
 	app.controller('adminCtrl', function($scope, $http) {
 		$scope.config = config;
 		$scope.title = "管理主页-" + config.projectName;
@@ -38,7 +39,51 @@
 		// 	});
 		// };
 	});
+	app.config(['$stateProvider', '$urlRouterProvider',
+		function($stateProvider, $urlRouterProvider) {
+			$urlRouterProvider
+			// // 错误的路由重定向
+			// 	.when('/c?id', '/contacts/:id')
+			// 	.when('/user/:id', '/contacts/:id')
+				.otherwise('/');
+			$stateProvider.
+			state('userManage', {
+				url: '/userManage',
+				// template: '<h1>Welcome to UI-Router Demo</h1>',
 
+				// optional below
+				// templateProvider: ['$timeout',
+				// 	function($timeout) {
+				// 		return $timeout(function() {
+				// 			return '<p class="lead">UI-Router Resource</p>' +
+				// 				'<p>The second line</p>'
+				// 		}, 100);
+				// 	}
+				// ],
+				resolve: {
+					// myData2: function(myData1, $stateParams) {
+					// 	return myData1.get({
+					// 		id: $stateParams.itemId
+					// 	}).$promise.then(function(response) {
+					// 		//对取回来的response还可以干些事情
+					// 		return response;
+					// 	});
+					// },
+					// contacts: function() {
+					// 	// 以下方法被放在 contacts.service.js 中，以 factory 存在
+					// 	return contacts.all();
+					// }
+				},
+				templateUrl: 'tpls/hello.html',
+
+				// templateUrl: function() {
+				// 	return 'about.html';
+				// },
+
+				controller: 'UIRouterCtrl',
+			});
+		}
+	]);
 	$("#loginSubmit").on('click', "", function(event) {
 		var $scope = $("html").scope(); //获取angular的scope
 		$.ajax({

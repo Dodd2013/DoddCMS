@@ -8,7 +8,7 @@ var adminPages = {
 		"name": "用户管理"
 	},
 	"101": {
-		"url": "#userManage",
+		"url": "userManage",
 		"name": "用户管理"
 	},
 	"102": {
