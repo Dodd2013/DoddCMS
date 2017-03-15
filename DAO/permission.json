@@ -48,4 +48,14 @@
 		"public": true
 	},
 	"belongTo": null
+},{
+	"permission": {
+		"permissionId": "0006",
+		"actionUrl": "/getNavBar",
+		"method": "GET",
+		"permissionName": "getNavBar",
+		"DESC": "获取导航条",
+		"public": true
+	},
+	"belongTo": null
 }]

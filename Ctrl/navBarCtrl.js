@@ -1,8 +1,8 @@
 var navBar=require("../Model/navbar");
 module.exports={
-	getNavbarOrder:function(){
-		return {
-			
-		}
+	getNavbarByOrder:function(){
+		return navBar.findAll({
+			order: 'orderby DESC'
+		});
 	}
 }
