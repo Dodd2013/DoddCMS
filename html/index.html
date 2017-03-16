@@ -27,11 +27,11 @@
                 <p class="language"><a href="admin" title="admin">管理后台</a></p>
             </div>
         </div>
-        <div id="nav" ng-include="'include/nav.html'"></div>
+        <div id="nav" ng-controller="navCtrl" ng-include="'include/nav.html'"></div>
         <div class="swiper-container" ng-controller="swiperCtrl">
             <div class="swiper-wrapper">
                 <div ng-repeat="x in imgs" class="swiper-slide">
-                    <img class="swiper-index-img" src="{{ x.src }}" alt="{{ x.alt }}" /></div>
+                    <img class="swiper-index-img" ng-src="{{ x.src }}" alt="{{ x.alt }}" /></div>
             </div>
             <!-- 如果需要分页器 -->
             <div class="swiper-pagination"></div>

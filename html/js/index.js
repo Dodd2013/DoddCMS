@@ -14,6 +14,14 @@ $(document).ready(function () {
 	});
 });
 var app = angular.module('index', []);
+app.controller('navCtrl', function ($scope, $http) {
+	$http({
+		url: config.api + '/getNavBar',
+		method: 'GET'
+	}).then(function (data) {
+		$scope.navbar = data.data;
+	}, function (data) {});
+});
 app.controller('headCtrl', function ($scope) {
 	$scope.config = config;
 }).controller('swiperCtrl', function ($scope) {
