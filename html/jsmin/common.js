@@ -1,0 +1,1 @@
+"use strict";define(["jquery","bootstrap"],function(t){"undefined"!=typeof t&&t.ajaxSetup({xhrFields:{withCredentials:!0}}),"undefined"!=typeof PNotify&&(PNotify.prototype.options.styling="bootstrap3")});

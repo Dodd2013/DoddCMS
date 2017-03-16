@@ -32,7 +32,7 @@ gulp.task('serve', ['es6'], function() {
 			baseDir: './'
 		}
 	});
-	 gulp.watch('jssrc/**/*.js', ['js-watch']);
+	 gulp.watch(['jssrc/**/*.js','jssrc/**/**/*.js'], ['js-watch']);
 	 gulp.watch(['**/*.html','**/*.css','assets/**/*.*']).on("change",function() {
 	 	browserSync.reload();
 	 });

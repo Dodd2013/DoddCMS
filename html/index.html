@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="index">
+<html>
 
 <head ng-controller="headCtrl">
     <meta charset="utf-8">
@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="assets/css/swiper-3.4.1.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <!--<script type="text/javascript" src="assets/js/jquery.js"></script>
     <script type="text/javascript" src="config.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/swiper-3.4.1.jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/angular.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <title>主页- {{config.projectName}} </title>
+    <script type="text/javascript" src="js/index.js"></script> -->
+    <title ng-cloak class="ng-cloak">主页- {{config.projectName}} </title>
 </head>
 
 <body>
@@ -28,16 +28,16 @@
             </div>
         </div>
         <div id="nav" ng-controller="navCtrl" ng-include="'include/nav.html'"></div>
-        <div class="swiper-container" ng-controller="swiperCtrl">
+        <div class="swiper-container" ng-cloak ng-controller="swiperCtrl">
             <div class="swiper-wrapper">
                 <div ng-repeat="x in imgs" class="swiper-slide">
-                    <img class="swiper-index-img" ng-src="{{ x.src }}" alt="{{ x.alt }}" /></div>
+                    <img  class="swiper-index-img" ng-src="{{ x.src }}" ng-alt="{{ x.alt }}" /></div>
             </div>
             <!-- 如果需要分页器 -->
-            <div class="swiper-pagination"></div>
+            <div ng-cloak class="swiper-pagination"></div>
             <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div ng-cloak class="swiper-button-prev"></div>
+            <div ng-cloak class="swiper-button-next"></div>
             <!-- 如果需要滚动条 -->
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>
@@ -88,6 +88,8 @@
         </div>
     </div>
     <div id="footer" ng-include="'include/footer.html'"></div>
+    <script type="text/javascript">var deps=['view/index'];</script>
+    <script data-main="js/app.js" src="assets/js/require.js"></script>
 </body>
 
 </html>

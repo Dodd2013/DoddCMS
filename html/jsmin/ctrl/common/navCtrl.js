@@ -1,0 +1,1 @@
+"use strict";define(["angular","config"],function(n,t){return["$scope","$http",function(n,i){i({url:t.config.api+"/getNavBar",method:"GET",xhrFields:{withCredentials:!0}}).then(function(t){n.navbar=t.data},function(n){})}]});
