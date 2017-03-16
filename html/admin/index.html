@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="admin" ng-controller="adminCtrl">
+<html ng-controller="adminCtrl">
 
 <head>
     <meta charset="utf-8">
@@ -102,7 +102,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="loginSubmit" class="btn btn-primary">登录</button>
+                    <button type="button" id="loginSubmit" ng-click="login()" class="btn btn-primary">登录</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -112,6 +112,6 @@
     <!-- /.modal -->
 </body>
 <script type="text/javascript">var deps=['view/admin/index'];</script>
-<script data-main="js/app.js" src="assets/js/require.js"></script>
+<script data-main="../js/app.js" src="../assets/js/require.js"></script>
 
 </html>
