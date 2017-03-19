@@ -58,4 +58,14 @@
 		"public": true
 	},
 	"belongTo": null
+},{
+	"permission": {
+		"permissionId": "2011",
+		"actionUrl": "/navbar",
+		"method": "GET",
+		"permissionName": "getNavNarManage",
+		"DESC": "首页导航管理获取数据",
+		"public": false
+	},
+	"belongTo": 201
 }]

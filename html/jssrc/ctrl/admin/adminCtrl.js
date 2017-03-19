@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'config','jquery'], function(angular, config,$) {
+define(['angular', 'config', 'jquery', 'pnotify'], function(angular, config, $, PNotify) {
 	var removeLoadCover = function() {
 		$(".load-cover").css({
 			opacity: 0
@@ -45,11 +45,11 @@ define(['angular', 'config','jquery'], function(angular, config,$) {
 					var msg;
 					if (resdata.msg == "PassWord is not right!") msg = "密码不正确！";
 					else msg = "用户不存在！";
-					alert(msg);
-					// new PNotify({
-					// 	type: 'error',
-					// 	text: msg
-					// });
+					// alert(msg);
+					new PNotify({
+						type: 'error',
+						text: msg
+					});
 				}
 			});
 

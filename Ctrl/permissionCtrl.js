@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
 			actionUrl: req._parsedUrl.pathname
 		}
 	}).then(function(permission) {
-		console.log(JSON.stringify(permission));
+		// console.log(JSON.stringify(permission));
 		if (permission) {
 			if (permission.public) {
 				next();

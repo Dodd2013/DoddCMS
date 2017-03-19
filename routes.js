@@ -2,7 +2,8 @@ var permission = require("./Ctrl/permissionCtrl");
 var routes = {
 	"/": require("./Route/index"),
 	"/login": require("./Route/login.js"),
-	"/logout": require("./Route/logout.js")
+	"/logout": require("./Route/logout.js"),
+	"/navbar": require("./Route/navbar.js")
 }
 module.exports = function(app) {
 	app.use(permission);//权限过滤器

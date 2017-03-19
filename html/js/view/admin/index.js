@@ -10,7 +10,7 @@ define(function (require, exports, module) {
 	var routeCtrlsBasePath = "ctrl/admin/";
 	var routeCtrls = ['settingCtrl', 'indexCtrl', 'userManageCtrl', 'navManageCtrl', 'adManageCtrl', 'dbManageCtrl', 'roleManageCtrl', 'rolePermissionManageCtrl', 'columnManageCtrl', 'publishCtrl', 'contentManageCtrl'];
 	var routeCtrlsImpl = [];
-
+	var bootstrapTableNg = require('bootstrapTableNg');
 	//todo 用ng去代替
 	$('.sidebar').on('click', '.nav-model .nav-model-header', function (event) {
 		$(event.target).parent(".nav-model").toggleClass('active');
@@ -46,7 +46,7 @@ define(function (require, exports, module) {
 			}
 		}
 
-		var app = ng.module('admin', ['ui.router']);
+		var app = ng.module('admin', ['ui.router', 'bsTable']);
 
 		// 注册Ctrl
 		var _iteratorNormalCompletion2 = true;
