@@ -4,10 +4,11 @@
 require.config({
 	paths: {
 		angular: '../assets/js/angular',
+		route: '../assets/js/ui-router',
 		jquery: '../assets/js/jquery',
 		bootstrap: '../assets/js/bootstrap',
 		swiper: '../assets/js/swiper-3.4.1.jquery.min',
-		config:'./config'
+		config: './config'
 	},
 	shim: {
 		jquery: {
@@ -21,7 +22,10 @@ require.config({
 		},
 		angular: {
 			exports: 'angular'
+		},
+		route: {
+			deps: ['angular']
 		}
-	}
+	},
 	deps: [].concat(deps)
 });
