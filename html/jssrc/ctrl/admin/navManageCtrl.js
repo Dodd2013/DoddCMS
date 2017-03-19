@@ -25,21 +25,15 @@ define(['angular', 'bootstrapTableNg', 'config'], function(angular) {
 			"fn": ['$scope', '$http', function($scope, $http) {
 				$scope.ajaxRequest = function(params) {
 					// data you need
-					// console.log(JSON.stringify(params));
+					// console.log(JSON.stringify(params.data));
 					$http({
-						url: config.api + '/getNavBar',
+						url: config.api + '/navbar',
 						method: 'GET',
 						withCredentials: true,
+						params:params.data
 					}).then(function(data) {
 						//todo
-						params.success({
-							total: 100,
-							rows: [{
-								"id": 0,
-								"name": "Item 0",
-								"price": "$0"
-							}]
-						});
+						params.success(data.data);
 					});
 				}
 				$scope.tableCtrl = {
@@ -62,24 +56,41 @@ define(['angular', 'bootstrapTableNg', 'config'], function(angular) {
 						showRefresh: true,
 						minimumCountColumns: 2,
 						clickToSelect: false,
-						showToggle: true,
 						maintainSelected: true,
 						columns: [{
-							field: 'id',
-							title: 'Item ID',
+							field: 'itemId',
+							title: '导航ID',
 							align: 'center',
 							valign: 'bottom',
 							sortable: true
 						}, {
-							field: 'name',
-							title: '名称',
+							field: 'itemName',
+							title: '导航名称',
 							align: 'center',
 							valign: 'middle',
 						}, {
-							field: 'price',
-							title: '价格',
+							field: 'url',
+							title: '地址',
 							align: 'left',
 							valign: 'top',
+						}, {
+							field: 'orderby',
+							title: '优先级',
+							align: 'left',
+							valign: 'top',
+							sortable: true
+						}, {
+							field: 'createdAt',
+							title: '创建时间',
+							align: 'left',
+							valign: 'top',
+							sortable: true
+						}, {
+							field: 'updatedAt',
+							title: '更新时间',
+							align: 'left',
+							valign: 'top',
+							sortable: true
 						}]
 					}
 				};
