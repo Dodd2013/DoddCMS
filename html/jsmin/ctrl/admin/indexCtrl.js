@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(t){var e="indexCtrl";return{route:{path:"index",route:{url:"/",templateUrl:"tpls/hello.html",controller:e}},ctrl:{name:e,fn:["$scope",function(t){}]}}});

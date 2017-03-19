@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(n){var e="columnManageCtrl";return{route:{path:"columnManage",route:{url:"/columnManage",templateUrl:"tpls/columnManage.html",controller:e}},ctrl:{name:e,fn:["$scope",function(n){}]}}});

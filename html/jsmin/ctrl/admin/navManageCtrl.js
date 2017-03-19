@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(a){var n="navManageCtrl";return{route:{path:"navManage",route:{url:"/navManage",templateUrl:"tpls/navManage.html",controller:n}},ctrl:{name:n,fn:["$scope",function(a){}]}}});

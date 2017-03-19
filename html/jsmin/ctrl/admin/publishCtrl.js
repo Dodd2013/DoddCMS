@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(t){var l="publishCtrl";return{route:{path:"publish",route:{url:"/publish",templateUrl:"tpls/publish.html",controller:l}},ctrl:{name:l,fn:["$scope",function(t){}]}}});

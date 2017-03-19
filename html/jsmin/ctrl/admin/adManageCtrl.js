@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(a){var e="adManageCtrl";return{route:{path:"adManage",route:{url:"/adManage",templateUrl:"tpls/adManage.html",controller:e}},ctrl:{name:e,fn:["$scope",function(a){}]}}});

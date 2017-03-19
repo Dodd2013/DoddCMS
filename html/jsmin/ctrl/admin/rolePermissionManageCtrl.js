@@ -1,0 +1,1 @@
+"use strict";define(["angular"],function(e){var r="rolePermissionManageCtrl";return{route:{path:"rolePermissionManage",route:{url:"/rolePermissionManage",templateUrl:"tpls/rolePermissionManage.html",controller:r}},ctrl:{name:r,fn:["$scope",function(e){}]}}});
