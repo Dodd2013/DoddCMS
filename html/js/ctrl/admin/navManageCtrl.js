@@ -130,10 +130,10 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (
 							var pms = _step.value;
 
 							if (pms.permissionName === 'editNavBar') {
-								editBtn = "<a href='#' class='opBtn'><span class='glyphicon glyphicon-edit'></span></a>";
+								editBtn = "<a href='#' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a><a href='#' class='opBtn' title='修改优先级'><span class='glyphicon glyphicon-resize-vertical'></span></a>";
 							}
 							if (pms.permissionName === 'deleteNavBar') {
-								deleteBtn = "<a href='#' class='opBtn'><span class='glyphicon glyphicon-trash'></span></a>";
+								deleteBtn = "<a href='#' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>";
 							}
 						}
 					} catch (err) {
