@@ -10,6 +10,7 @@ require.config({
 		pnotify: '../assets/js/pnotify.min',
 		bootstrapTable: '../assets/bs-table/bootstrap-table.min',
 		bootstrapTableNg: '../assets/bs-table/extensions/angular/bootstrap-table-angular.min',
+		bootstrapTableCN: '../assets/bs-table/locale/bootstrap-table-zh-CN.min',
 		config: './config'
 	},
 	shim: {
@@ -33,7 +34,10 @@ require.config({
 			exports: "bootstrapTable"
 		},
 		bootstrapTableNg: {
-			deps:['bootstrapTable']
+			deps: ['bootstrapTable']
+		},
+		bootstrapTableCN: {
+			deps: ['bootstrapTable']
 		}
 	},
 	deps: [].concat(deps)

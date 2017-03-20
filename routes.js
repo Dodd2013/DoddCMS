@@ -6,7 +6,7 @@ var routes = {
 	"/navbar": require("./Route/navbar.js")
 }
 module.exports = function(app) {
-	app.use(permission);//权限过滤器
+	app.use(permission.middleware);//权限过滤器
 	for (var key of Object.keys(routes)) {
 		app.use(key, routes[key]);
 	}

@@ -150,3 +150,11 @@ body {
     color: #fff;
 }
 
+.opBtn{
+    margin-right: 4px;
+    margin-left: 4px;
+}
+.bs-bars{
+    float:right !important;
+    margin-left: 20px;
+}

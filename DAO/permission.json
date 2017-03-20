@@ -68,4 +68,54 @@
 		"public": false
 	},
 	"belongTo": 201
+},{
+	"permission": {
+		"permissionId": "2012",
+		"actionUrl": "/navbar/add",
+		"method": "POST",
+		"permissionName": "addNavBar",
+		"DESC": "添加导航",
+		"public": false
+	},
+	"belongTo": 201
+},{
+	"permission": {
+		"permissionId": "2013",
+		"actionUrl": "/navbar/delete",
+		"method": "GET",
+		"permissionName": "deleteNavBar",
+		"DESC": "删除导航",
+		"public": false
+	},
+	"belongTo": 201
+},{
+	"permission": {
+		"permissionId": "2014",
+		"actionUrl": "/navbar/edit",
+		"method": "POST",
+		"permissionName": "editNavBar",
+		"DESC": "修改导航",
+		"public": false
+	},
+	"belongTo": 201
+},{
+	"permission": {
+		"permissionId": "2015",
+		"actionUrl": "/navbar/changeOrderBy",
+		"method": "POST",
+		"permissionName": "NavBarChangeOrderBy",
+		"DESC": "修改导航优先级",
+		"public": false
+	},
+	"belongTo": 201
+},{
+	"permission": {
+		"permissionId": "2015",
+		"actionUrl": "/navbar/getPermission",
+		"method": "GET",
+		"permissionName": "NavBargetPermission",
+		"DESC": "导航管理权限获取",
+		"public": true
+	},
+	"belongTo": null
 }]

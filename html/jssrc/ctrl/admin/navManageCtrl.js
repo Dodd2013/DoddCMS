@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'bootstrapTableNg', 'config'], function(angular) {
+define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(angular) {
 	var CtrlName = "navManageCtrl";
 	var config = require('config').config;
 	return {
@@ -23,28 +23,46 @@ define(['angular', 'bootstrapTableNg', 'config'], function(angular) {
 		"ctrl": {
 			"name": CtrlName,
 			"fn": ['$scope', '$http', function($scope, $http) {
+				$scope.premission = null;
+				//获取数据用的ajax
 				$scope.ajaxRequest = function(params) {
-					// data you need
-					// console.log(JSON.stringify(params.data));
-					$http({
-						url: config.api + '/navbar',
-						method: 'GET',
-						withCredentials: true,
-						params:params.data
-					}).then(function(data) {
-						//todo
-						params.success(data.data);
-					});
-				}
+						// data you need
+						// console.log(JSON.stringify(params.data));
+						var getdata = $http({
+							url: config.api + '/navbar',
+							method: 'GET',
+							withCredentials: true,
+							params: params.data
+						});
+						if ($scope.premission === null) {
+							$http({
+								url: config.api + '/navbar/getPermission',
+								method: 'GET',
+								withCredentials: true,
+							}).then(function(data) {
+								$scope.premission=data.data;
+								return getdata;
+							}).then(function(data) {
+								params.success(data.data);
+							});;
+						} else {
+							getdata.then(function(data) {
+								params.success(data.data);
+							});
+						}
+
+					}
+					//bs-table
 				$scope.tableCtrl = {
 					options: {
+						toolbar:"#toolbar",
 						ajax: $scope.ajaxRequest,
 						rowStyle: function(row, index) {
 							return {
 								classes: 'none'
 							};
 						},
-						sidePagination:'server',
+						sidePagination: 'server',
 						cache: false,
 						height: 500,
 						striped: true,
@@ -91,9 +109,30 @@ define(['angular', 'bootstrapTableNg', 'config'], function(angular) {
 							align: 'left',
 							valign: 'top',
 							sortable: true
+						}, {
+							field: 'op',
+							title: '操作',
+							align: 'center',
+							valign: 'middle',
+							clickToSelect: false,
+							formatter: opFormatter,
+							// 操作按钮单元格
 						}]
 					}
 				};
+				function opFormatter(value, row, index) {
+					let editBtn=''
+					let deleteBtn='';
+					for(let pms of $scope.premission){
+						if(pms.permissionName==='editNavBar'){
+							editBtn="<a href='#' class='opBtn'><span class='glyphicon glyphicon-edit'></span></a>"
+						}
+						if(pms.permissionName==='deleteNavBar'){
+							deleteBtn="<a href='#' class='opBtn'><span class='glyphicon glyphicon-trash'></span></a>"
+						}
+					}
+					return editBtn+deleteBtn;
+				}
 			}]
 		}
 	};

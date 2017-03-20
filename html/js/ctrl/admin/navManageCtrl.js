@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'bootstrapTableNg', 'config'], function (angular) {
+define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (angular) {
 	var CtrlName = "navManageCtrl";
 	var config = require('config').config;
 	return {
@@ -23,21 +23,38 @@ define(['angular', 'bootstrapTableNg', 'config'], function (angular) {
 		"ctrl": {
 			"name": CtrlName,
 			"fn": ['$scope', '$http', function ($scope, $http) {
+				$scope.premission = null;
+				//获取数据用的ajax
 				$scope.ajaxRequest = function (params) {
 					// data you need
 					// console.log(JSON.stringify(params.data));
-					$http({
+					var getdata = $http({
 						url: config.api + '/navbar',
 						method: 'GET',
 						withCredentials: true,
 						params: params.data
-					}).then(function (data) {
-						//todo
-						params.success(data.data);
 					});
+					if ($scope.premission === null) {
+						$http({
+							url: config.api + '/navbar/getPermission',
+							method: 'GET',
+							withCredentials: true
+						}).then(function (data) {
+							$scope.premission = data.data;
+							return getdata;
+						}).then(function (data) {
+							params.success(data.data);
+						});;
+					} else {
+						getdata.then(function (data) {
+							params.success(data.data);
+						});
+					}
 				};
+				//bs-table
 				$scope.tableCtrl = {
 					options: {
+						toolbar: "#toolbar",
 						ajax: $scope.ajaxRequest,
 						rowStyle: function rowStyle(row, index) {
 							return {
@@ -91,9 +108,51 @@ define(['angular', 'bootstrapTableNg', 'config'], function (angular) {
 							align: 'left',
 							valign: 'top',
 							sortable: true
+						}, {
+							field: 'op',
+							title: '操作',
+							align: 'center',
+							valign: 'middle',
+							clickToSelect: false,
+							formatter: opFormatter
 						}]
 					}
 				};
+				function opFormatter(value, row, index) {
+					var editBtn = '';
+					var deleteBtn = '';
+					var _iteratorNormalCompletion = true;
+					var _didIteratorError = false;
+					var _iteratorError = undefined;
+
+					try {
+						for (var _iterator = $scope.premission[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+							var pms = _step.value;
+
+							if (pms.permissionName === 'editNavBar') {
+								editBtn = "<a href='#' class='opBtn'><span class='glyphicon glyphicon-edit'></span></a>";
+							}
+							if (pms.permissionName === 'deleteNavBar') {
+								deleteBtn = "<a href='#' class='opBtn'><span class='glyphicon glyphicon-trash'></span></a>";
+							}
+						}
+					} catch (err) {
+						_didIteratorError = true;
+						_iteratorError = err;
+					} finally {
+						try {
+							if (!_iteratorNormalCompletion && _iterator.return) {
+								_iterator.return();
+							}
+						} finally {
+							if (_didIteratorError) {
+								throw _iteratorError;
+							}
+						}
+					}
+
+					return editBtn + deleteBtn;
+				}
 			}]
 		}
 	};
