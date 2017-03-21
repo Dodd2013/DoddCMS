@@ -146,7 +146,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 								editBtn = '<a data-op=\'edit\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5BFC\u822A\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
 							}
 							if (pms.permissionName === 'deleteNavBar') {
-								deleteBtn = '<a data-op=\'remove\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5BFC\u822A\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
+								deleteBtn = '<a data-op=\'delete\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5BFC\u822A\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
 							}
 						}
 					} catch (err) {
@@ -179,7 +179,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 						$scope.$apply(function () {
 							$scope.showEdit(item);
 						});
-					} else if (op === 'remove') {
+					} else if (op === 'delete') {
 						$scope.$apply(function () {
 							$scope.showRemove(item);
 						});
@@ -196,18 +196,16 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 					$scope.navName = item.itemName;
 					$scope.navUrl = item.url;
 					$scope.navOrderBy = item.orderby;
-					console.log($scope.navName);
 					$('#addAndEditModal').modal('show');
 				};
-				$scope.showRemove = function (itemId) {
-					$scope.editId = item.itemId;
-					// $('#').modal('show');
+				$scope.showRemove = function (item) {
+					$scope.navId = item.itemId;
+					$('#deleteModal').modal('show');
 				};
-				//添加导航逻辑
-				$scope.addAndEditNavBtn = function () {
-
+				//删除导航逻辑
+				$scope.deleteNavBtn = function () {
 					$http({
-						url: config.api + '/navbar/add',
+						url: config.api + '/navbar/delete',
 						method: 'POST',
 						withCredentials: true,
 						headers: {
@@ -216,24 +214,82 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 						},
 						transformRequest: $.param,
 						data: {
-							itemName: $scope.navName,
-							url: $scope.navUrl,
-							orderby: $scope.navOrderBy
+							itemId: $scope.navId
 						}
 					}).then(function (data) {
-						new PNotify({
-							type: 'info',
-							text: '\u6DFB\u52A0\u6210\u529F'
-						});
-						$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
-						$('#addAndEditModal').modal('hide');
-						$('#navTable').bootstrapTable('refresh');
-					}, function (data) {
-						new PNotify({
-							type: 'error',
-							text: '\u6DFB\u52A0\u5931\u8D25'
-						});
+						if (data.data.status === 'ok') {
+							new PNotify({
+								type: 'danger',
+								text: '\u5220\u9664\u6210\u529F'
+							});
+							$scope.navId = $scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#deleteModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}
 					});
+				};
+				//添加导航逻辑
+				$scope.addAndEditNavBtn = function () {
+					if ($scope.addOrEdit == 'edit') {
+						$http({
+							url: config.api + '/navbar/edit',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								itemId: $scope.navId,
+								itemName: $scope.navName,
+								url: $scope.navUrl,
+								orderby: $scope.navOrderBy
+							}
+						}).then(function (data) {
+							new PNotify({
+								type: 'info',
+								text: '\u4FEE\u6539\u6210\u529F'
+							});
+							$scope.navId = $scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#addAndEditModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}, function (data) {
+							new PNotify({
+								type: 'error',
+								text: '\u4FEE\u6539\u5931\u8D25'
+							});
+						});
+					} else if ($scope.addOrEdit == 'add') {
+						$http({
+							url: config.api + '/navbar/add',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								itemName: $scope.navName,
+								url: $scope.navUrl,
+								orderby: $scope.navOrderBy
+							}
+						}).then(function (data) {
+							new PNotify({
+								type: 'info',
+								text: '\u6DFB\u52A0\u6210\u529F'
+							});
+							$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#addAndEditModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}, function (data) {
+							new PNotify({
+								type: 'error',
+								text: '\u6DFB\u52A0\u5931\u8D25'
+							});
+						});
+					}
 				};
 			}]
 		}

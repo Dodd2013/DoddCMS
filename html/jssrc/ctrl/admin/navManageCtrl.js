@@ -141,7 +141,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 							editBtn = `<a data-op='edit' data-orderby='${row.orderby}' data-url='${row.url}' data-itemName='${row.itemName}' data-itemId='${row.itemId}' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a>`
 						}
 						if (pms.permissionName === 'deleteNavBar') {
-							deleteBtn = `<a data-op='remove' data-orderby='${row.orderby}' data-url='${row.url}' data-itemName='${row.itemName}' data-itemId='${row.itemId}' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>`
+							deleteBtn = `<a data-op='delete' data-orderby='${row.orderby}' data-url='${row.url}' data-itemName='${row.itemName}' data-itemId='${row.itemId}' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>`
 						}
 					}
 					return editBtn + deleteBtn;
@@ -156,10 +156,14 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 						orderby: parseInt($(e.target).parent().attr('data-orderby'))
 					};
 					if (op === 'edit') {
-						$scope.$apply(function() {$scope.showEdit(item);});
-						
-					} else if (op === 'remove') {
-						$scope.$apply(function() {$scope.showRemove(item);});
+						$scope.$apply(function() {
+							$scope.showEdit(item);
+						});
+
+					} else if (op === 'delete') {
+						$scope.$apply(function() {
+							$scope.showRemove(item);
+						});
 					}
 				});
 				$scope.showAdd = function() {
@@ -173,18 +177,16 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 					$scope.navName = item.itemName;
 					$scope.navUrl = item.url;
 					$scope.navOrderBy = item.orderby;
-					console.log($scope.navName);
 					$('#addAndEditModal').modal('show');
 				};
-				$scope.showRemove = function(itemId) {
-					$scope.editId = item.itemId;
-					// $('#').modal('show');
+				$scope.showRemove = function(item) {
+					$scope.navId = item.itemId;
+					$('#deleteModal').modal('show');
 				};
-				//添加导航逻辑
-				$scope.addAndEditNavBtn = function() {
-
+				//删除导航逻辑
+				$scope.deleteNavBtn = function() {
 					$http({
-						url: config.api + '/navbar/add',
+						url: config.api + '/navbar/delete',
 						method: 'POST',
 						withCredentials: true,
 						headers: {
@@ -193,25 +195,82 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 						},
 						transformRequest: $.param,
 						data: {
-							itemName: $scope.navName,
-							url: $scope.navUrl,
-							orderby: $scope.navOrderBy
+							itemId: $scope.navId,
 						}
 					}).then(function(data) {
-						new PNotify({
-							type: 'info',
-							text: `添加成功`
-						});
-						$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
-						$('#addAndEditModal').modal('hide');
-						$('#navTable').bootstrapTable('refresh');
-					}, function(data) {
-						new PNotify({
-							type: 'error',
-							text: `添加失败`
-						});
+						if(data.data.status==='ok'){
+							new PNotify({
+								type: 'danger',
+								text: `删除成功`
+							});
+							$scope.navId = $scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#deleteModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}
 					});
-
+				};
+				//添加导航逻辑
+				$scope.addAndEditNavBtn = function() {
+					if ($scope.addOrEdit == 'edit') {
+						$http({
+							url: config.api + '/navbar/edit',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								itemId: $scope.navId,
+								itemName: $scope.navName,
+								url: $scope.navUrl,
+								orderby: $scope.navOrderBy
+							}
+						}).then(function(data) {
+							new PNotify({
+								type: 'info',
+								text: `修改成功`
+							});
+							$scope.navId = $scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#addAndEditModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}, function(data) {
+							new PNotify({
+								type: 'error',
+								text: `修改失败`
+							});
+						});
+					} else if ($scope.addOrEdit == 'add') {
+						$http({
+							url: config.api + '/navbar/add',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								itemName: $scope.navName,
+								url: $scope.navUrl,
+								orderby: $scope.navOrderBy
+							}
+						}).then(function(data) {
+							new PNotify({
+								type: 'info',
+								text: `添加成功`
+							});
+							$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+							$('#addAndEditModal').modal('hide');
+							$('#navTable').bootstrapTable('refresh');
+						}, function(data) {
+							new PNotify({
+								type: 'error',
+								text: `添加失败`
+							});
+						});
+					}
 				};
 			}]
 		}
