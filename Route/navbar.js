@@ -18,4 +18,14 @@ router.post('/add', function(req, res, next) {
 		if(data!=null)res.jsonp(data);
 	});
 });
+router.post('/edit', function(req, res, next) {
+	navBarCtrl.editNavBar(req.body).then(function(data) {
+		if(data!=null)res.jsonp(data);
+	});
+});
+router.post('/delete', function(req, res, next) {
+	navBarCtrl.deleteNavBar(req.body).then(function(data) {
+		if(data==1)res.jsonp({status:'ok'});
+	});
+});
 module.exports = router;

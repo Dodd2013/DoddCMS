@@ -82,7 +82,7 @@
 	"permission": {
 		"permissionId": "2013",
 		"actionUrl": "/navbar/delete",
-		"method": "GET",
+		"method": "POST",
 		"permissionName": "deleteNavBar",
 		"DESC": "删除导航",
 		"public": false
