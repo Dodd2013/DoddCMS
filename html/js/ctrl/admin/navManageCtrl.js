@@ -143,10 +143,10 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 							var pms = _step.value;
 
 							if (pms.permissionName === 'editNavBar') {
-								editBtn = "<a href='#' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a><a href='#' class='opBtn' title='修改优先级'><span class='glyphicon glyphicon-resize-vertical'></span></a>";
+								editBtn = '<a data-op=\'edit\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5BFC\u822A\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
 							}
 							if (pms.permissionName === 'deleteNavBar') {
-								deleteBtn = "<a href='#' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>";
+								deleteBtn = '<a data-op=\'remove\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5BFC\u822A\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
 							}
 						}
 					} catch (err) {
@@ -166,8 +166,46 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 
 					return editBtn + deleteBtn;
 				};
+				$scope.addOrEdit = 'add';
+				$('#navTable').on('click', '.opBtn', function (e) {
+					var op = $(e.target).parent().attr('data-op');
+					var item = {
+						itemId: $(e.target).parent().attr('data-itemId'),
+						itemName: $(e.target).parent().attr('data-itemName'),
+						url: $(e.target).parent().attr('data-url'),
+						orderby: parseInt($(e.target).parent().attr('data-orderby'))
+					};
+					if (op === 'edit') {
+						$scope.$apply(function () {
+							$scope.showEdit(item);
+						});
+					} else if (op === 'remove') {
+						$scope.$apply(function () {
+							$scope.showRemove(item);
+						});
+					}
+				});
+				$scope.showAdd = function () {
+					$scope.addOrEdit = 'add';
+					$('#addAndEditModal').modal('show');
+				};
+				$scope.showEdit = function (item) {
+
+					$scope.navId = item.itemId;
+					$scope.addOrEdit = 'edit';
+					$scope.navName = item.itemName;
+					$scope.navUrl = item.url;
+					$scope.navOrderBy = item.orderby;
+					console.log($scope.navName);
+					$('#addAndEditModal').modal('show');
+				};
+				$scope.showRemove = function (itemId) {
+					$scope.editId = item.itemId;
+					// $('#').modal('show');
+				};
 				//添加导航逻辑
-				$scope.addNavBtn = function () {
+				$scope.addAndEditNavBtn = function () {
+
 					$http({
 						url: config.api + '/navbar/add',
 						method: 'POST',
@@ -188,7 +226,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 							text: '\u6DFB\u52A0\u6210\u529F'
 						});
 						$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
-						$('#myModal').modal('hide');
+						$('#addAndEditModal').modal('hide');
 						$('#navTable').bootstrapTable('refresh');
 					}, function (data) {
 						new PNotify({

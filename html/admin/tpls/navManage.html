@@ -1,12 +1,12 @@
 <h3 class="text-center">首页导航管理</h3>
 <div id="toolbar">
     <div class="form-inline btn-group" role="form">
-        <button id="add" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+        <button id="add" type="button" class="btn btn-default" ng-click="showAdd()"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
 </div>
 <table id='navTable' bs-table-control="tableCtrl"></table>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="addAndEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form>
@@ -15,6 +15,7 @@
                     <h4 class="modal-title" id="myModalLabel">添加导航</h4>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" ng-model='navId' class="form-control" name='navId' id="navId">
                     <div class="form-group">
                         <label for="navName">导航名称</label>
                         <input type="text" ng-model='navName' class="form-control" name='navName' id="navName" placeholder="导航名称">
@@ -29,7 +30,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" ng-click="addNavBtn()">提交</button>
+                    <button type="submit" class="btn btn-primary" ng-click="addAndEditNavBtn()">提交</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 </div>
             </form>

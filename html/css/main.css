@@ -153,6 +153,7 @@ body {
 .opBtn{
     margin-right: 4px;
     margin-left: 4px;
+    cursor: pointer;
 }
 .bs-bars{
     float:right !important;

@@ -65,7 +65,6 @@ module.exports = {
 					// });
 				}
 			} else {
-				console("fdsafdsafdsafdsa");
 				res.status(404);
 				res.jsonp({
 					// actionUrl:req._parsedUrl.pathname,
