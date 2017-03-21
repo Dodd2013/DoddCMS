@@ -13,4 +13,9 @@ router.get('/getPermission', function(req, res, next) {
 		res.jsonp(data);
 	});
 });
+router.post('/add', function(req, res, next) {
+	navBarCtrl.addNavBar(req.body).then(function(data) {
+		if(data!=null)res.jsonp(data);
+	});
+});
 module.exports = router;

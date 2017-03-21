@@ -8,6 +8,7 @@
  */
 
 define(['angular', 'config', 'jquery', 'pnotify'], function(angular, config, $, PNotify) {
+	PNotify.prototype.options.styling = "bootstrap3";
 	var removeLoadCover = function() {
 		$(".load-cover").css({
 			opacity: 0

@@ -7,9 +7,12 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (angular) {
+define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 'jquery'], function (angular) {
 	var CtrlName = "navManageCtrl";
 	var config = require('config').config;
+	var $ = require('jquery');
+	var PNotify = require('pnotify');
+	PNotify.prototype.options.styling = "bootstrap3";
 	return {
 		"route": {
 			"path": "navManage",
@@ -101,12 +104,14 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (
 							title: '创建时间',
 							align: 'left',
 							valign: 'top',
+							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'updatedAt',
 							title: '更新时间',
 							align: 'left',
 							valign: 'top',
+							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'op',
@@ -118,6 +123,14 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (
 						}]
 					}
 				};
+
+				function timeFormatter(value, row, index) {
+					if (value == null) return '未知时间';
+					var date = new Date(value);
+					var localeString = date.toLocaleString();
+					return localeString;
+				};
+
 				function opFormatter(value, row, index) {
 					var editBtn = '';
 					var deleteBtn = '';
@@ -152,7 +165,38 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config'], function (
 					}
 
 					return editBtn + deleteBtn;
-				}
+				};
+				//添加导航逻辑
+				$scope.addNavBtn = function () {
+					$http({
+						url: config.api + '/navbar/add',
+						method: 'POST',
+						withCredentials: true,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Accept': "*/*"
+						},
+						transformRequest: $.param,
+						data: {
+							itemName: $scope.navName,
+							url: $scope.navUrl,
+							orderby: $scope.navOrderBy
+						}
+					}).then(function (data) {
+						new PNotify({
+							type: 'info',
+							text: '\u6DFB\u52A0\u6210\u529F'
+						});
+						$scope.navName = $scope.navUrl = $scope.navOrderBy = '';
+						$('#myModal').modal('hide');
+						$('#navTable').bootstrapTable('refresh');
+					}, function (data) {
+						new PNotify({
+							type: 'error',
+							text: '\u6DFB\u52A0\u5931\u8D25'
+						});
+					});
+				};
 			}]
 		}
 	};

@@ -7,9 +7,12 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(angular) {
+define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 'jquery'], function(angular) {
 	var CtrlName = "navManageCtrl";
 	var config = require('config').config;
+	var $ = require('jquery');
+	var PNotify = require('pnotify');
+	PNotify.prototype.options.styling = "bootstrap3";
 	return {
 		"route": {
 			"path": "navManage",
@@ -40,7 +43,7 @@ define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(ang
 								method: 'GET',
 								withCredentials: true,
 							}).then(function(data) {
-								$scope.premission=data.data;
+								$scope.premission = data.data;
 								return getdata;
 							}).then(function(data) {
 								params.success(data.data);
@@ -55,7 +58,7 @@ define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(ang
 					//bs-table
 				$scope.tableCtrl = {
 					options: {
-						toolbar:"#toolbar",
+						toolbar: "#toolbar",
 						ajax: $scope.ajaxRequest,
 						rowStyle: function(row, index) {
 							return {
@@ -102,12 +105,14 @@ define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(ang
 							title: '创建时间',
 							align: 'left',
 							valign: 'top',
+							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'updatedAt',
 							title: '更新时间',
 							align: 'left',
 							valign: 'top',
+							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'op',
@@ -120,19 +125,59 @@ define(['angular', 'bootstrapTableNg','bootstrapTableCN','config'], function(ang
 						}]
 					}
 				};
+
+				function timeFormatter(value, row, index) {
+					if(value==null)return '未知时间';
+					var date = new Date(value);
+					var localeString = date.toLocaleString();
+					return localeString;
+				};
+
 				function opFormatter(value, row, index) {
-					let editBtn=''
-					let deleteBtn='';
-					for(let pms of $scope.premission){
-						if(pms.permissionName==='editNavBar'){
-							editBtn="<a href='#' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a><a href='#' class='opBtn' title='修改优先级'><span class='glyphicon glyphicon-resize-vertical'></span></a>"
+					let editBtn = ''
+					let deleteBtn = '';
+					for (let pms of $scope.premission) {
+						if (pms.permissionName === 'editNavBar') {
+							editBtn = "<a href='#' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a><a href='#' class='opBtn' title='修改优先级'><span class='glyphicon glyphicon-resize-vertical'></span></a>"
 						}
-						if(pms.permissionName==='deleteNavBar'){
-							deleteBtn="<a href='#' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>"
+						if (pms.permissionName === 'deleteNavBar') {
+							deleteBtn = "<a href='#' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>"
 						}
 					}
-					return editBtn+deleteBtn;
-				}
+					return editBtn + deleteBtn;
+				};
+				//添加导航逻辑
+				$scope.addNavBtn = function() {
+					$http({
+						url: config.api + '/navbar/add',
+						method: 'POST',
+						withCredentials: true,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Accept': "*/*"
+						},
+						transformRequest: $.param,
+						data: {
+							itemName: $scope.navName,
+							url: $scope.navUrl,
+							orderby: $scope.navOrderBy
+						}
+					}).then(function(data) {
+						new PNotify({
+							type: 'info',
+							text: `添加成功`
+						});
+						$scope.navName=$scope.navUrl=$scope.navOrderBy='';
+						$('#myModal').modal('hide');
+						$('#navTable').bootstrapTable('refresh');
+					}, function(data) {
+						new PNotify({
+							type: 'error',
+							text: `添加失败`
+						});
+					});
+
+				};
 			}]
 		}
 	};

@@ -1,5 +1,8 @@
 var navBar = require("../Model/navbar");
 module.exports = {
+	addNavBar:function(navbar) {
+		return navBar.create(navbar);
+	},
 	getNavbarByOrder: function() {
 		return navBar.findAll({
 			order: 'orderby DESC'
