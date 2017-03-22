@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'upload')));
+app.use(express.static(path.join(__dirname, 'public')));
 var sessionConfig = config.sessionConfig;
 app.use(session({
   name: "sid",
@@ -37,9 +37,10 @@ app.use(session({
 app.use('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", config.cros==="*"?req.headers.origin:config.cros);
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,x_requested_with");
     res.header("Access-Control-Allow-Credentials","true");//跨域session
-    next();
+    if(req.method=="OPTIONS") res.sendStatus(200);/*让options请求快速返回*/
+    else  next();
 });
 // if (config.initMysql) {
 require("./DAO/initMysql"); //初始化数据库
@@ -79,7 +80,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.jsonp({
     msg: err.message,
-    error: {},
+    error: err,
     status:"no"
   });
 });

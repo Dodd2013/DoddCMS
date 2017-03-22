@@ -1,11 +1,12 @@
 "use strict";
 
+window.config = {
+	"projectName": "DoddCMS",
+	"api": "http://localhost:3008"
+};
 define([], function () {
 	return {
-		config: {
-			"projectName": "DoddCMS",
-			"api": "http://localhost:3008"
-		},
+		config: window.config,
 		adminPages: {
 			"1": {
 				"icon": "fa-user-o",

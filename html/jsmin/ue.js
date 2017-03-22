@@ -1,0 +1,1 @@
+"use strict";define(function(n,e,t){function u(n){var e=new RegExp("(^|&)"+n+"=([^&]*)(&|$)"),t=window.location.search.substr(1).match(e);return null!=t?unescape(t[2]):null}var r=n("jquery");r("body").html(u("obj"))});

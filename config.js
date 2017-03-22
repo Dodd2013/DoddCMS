@@ -23,6 +23,8 @@ module.exports = {
 			"idle": 10000
 		}
 	},
-	"secretKey":"DoddCMS",//密码加密选项
+	"secretKey":"DoddCMS",//密码加密选项,
+	"webAddress":"http://localhost/",
+	"host":"http://localhost:3008/",
 	"cros":"*"//跨域相关重要安全性配置，请改成前端所在域名
 }

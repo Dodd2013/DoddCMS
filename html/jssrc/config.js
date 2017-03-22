@@ -1,8 +1,8 @@
-define([], function() {
-	window.config = config: {
+window.config = {
 		"projectName": "DoddCMS",
 		"api": "http://localhost:3008"
-	};
+};
+define([], function() {
 	return {
 		config:window.config,
 		adminPages: {
