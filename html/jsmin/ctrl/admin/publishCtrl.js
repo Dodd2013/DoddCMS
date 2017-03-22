@@ -1,1 +1,1 @@
-"use strict";define(["angular"],function(t){var l="publishCtrl";return{route:{path:"publish",route:{url:"/publish",templateUrl:"tpls/publish.html",controller:l}},ctrl:{name:l,fn:["$scope",function(t){}]}}});
+"use strict";define(["require","angular","ueditor","jquery","zeroclipboard"],function(r,e,t,i,l){var o="publishCtrl";return{route:{path:"publish",route:{url:"/publish",templateUrl:"tpls/publish.html",controller:o}},ctrl:{name:o,fn:["$scope",function(r){window.ZeroClipboard=l,window.UE.getEditor("container")}]}}});

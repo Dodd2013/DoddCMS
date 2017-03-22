@@ -4,6 +4,9 @@
 require.config({
 	paths: {
 		angular: '../assets/js/angular',
+		ueditor_config: '../assets/ueditor/ueditor.config',
+		ueditor: '../assets/ueditor/ueditor.all.min',
+		zeroclipboard: '../assets/ueditor/third-party/zeroclipboard/ZeroClipboard.min',
 		route: '../assets/js/ui-router',
 		jquery: '../assets/js/jquery',
 		bootstrap: '../assets/js/bootstrap',
@@ -39,6 +42,13 @@ require.config({
 		},
 		bootstrapTableCN: {
 			deps: ['bootstrapTable']
+		},
+		ueditor_config: {
+			deps: ['config'],
+			exports: "ueditor_config"
+		},
+		ueditor: {
+			deps: ['jquery', 'ueditor_config', 'zeroclipboard']
 		}
 	},
 	deps: [].concat(deps)

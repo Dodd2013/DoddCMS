@@ -11,10 +11,12 @@ Promise.all([
 	models.navbar.sync()
 ]).then(function() {
 	//基础表建完之后建立关系表
+	require("../Model/relations/user_content");
 	return Promise.all([require("../Model/relations/role_permission").promise,
 		require("../Model/relations/user_role").promise,
-		require("../Model/relations/functionModel_permission").promise
+		require("../Model/relations/functionModel_permission").promise,
 	]);
+	
 
 }).then(function() {
 	//初始化功能模块

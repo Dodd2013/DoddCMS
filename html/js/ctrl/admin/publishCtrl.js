@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular'], function (angular) {
+define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard'], function (require, angular, UE, $, zcl) {
 	var CtrlName = "publishCtrl";
 	return {
 		"route": {
@@ -21,7 +21,10 @@ define(['angular'], function (angular) {
 		},
 		"ctrl": {
 			"name": CtrlName,
-			"fn": ['$scope', function ($scope) {}]
+			"fn": ['$scope', function ($scope) {
+				window.ZeroClipboard = zcl;
+				window.UE.getEditor('container');
+			}]
 		}
 	};
 });

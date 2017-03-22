@@ -1,9 +1,10 @@
 define([], function() {
+	window.config = config: {
+		"projectName": "DoddCMS",
+		"api": "http://localhost:3008"
+	};
 	return {
-		config: {
-			"projectName": "DoddCMS",
-			"api": "http://localhost:3008"
-		},
+		config:window.config,
 		adminPages: {
 			"1": {
 				"icon": "fa-user-o",
