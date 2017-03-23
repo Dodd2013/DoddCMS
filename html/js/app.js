@@ -5,7 +5,7 @@ require.config({
 	paths: {
 		angular: '../assets/js/angular',
 		ueditor_config: '../assets/ueditor/ueditor.config',
-		ueditor: '../assets/ueditor/ueditor.all.min',
+		ueditor: '../assets/ueditor/ueditor.all',
 		zeroclipboard: '../assets/ueditor/third-party/zeroclipboard/ZeroClipboard.min',
 		route: '../assets/js/ui-router',
 		jquery: '../assets/js/jquery',

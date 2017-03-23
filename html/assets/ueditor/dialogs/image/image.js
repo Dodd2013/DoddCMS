@@ -363,6 +363,7 @@
             }
 
             uploader = _this.uploader = WebUploader.create({
+                withCredentials:true,
                 pick: {
                     id: '#filePickerReady',
                     label: lang.uploadSelectFile
@@ -370,7 +371,7 @@
                 accept: {
                     title: 'Images',
                     extensions: acceptExtensions,
-                    mimeTypes: 'image/*'
+                    mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
                 },
                 swf: '../../third-party/webuploader/Uploader.swf',
                 server: actionUrl,
