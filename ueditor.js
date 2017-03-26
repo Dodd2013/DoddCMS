@@ -81,9 +81,8 @@ var respond = function(static_url, callback) {
                 'original': filename,
                 'state': 'SUCCESS'
               }
-              console.dir(req);
               if (req.xhr||req.headers['x_requested_with']==='XMLHttpRequest') {
-                res.json(obj);
+                res.jsonp(obj);
               } else {
                 res.redirect(webAddress + "ue.html?obj=" + encodeURIComponent(JSON.stringify(obj)));
               }
