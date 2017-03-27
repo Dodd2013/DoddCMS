@@ -8,7 +8,7 @@ define(function(require, exports, module) {
 	var routeCtrlsBasePath = "ctrl/admin/";
 	var routeCtrls = ['settingCtrl', 'indexCtrl', 'userManageCtrl', 'navManageCtrl'
 	, 'adManageCtrl', 'dbManageCtrl', 'roleManageCtrl', 'rolePermissionManageCtrl'
-	,'columnManageCtrl','publishCtrl','contentManageCtrl'];
+	,'columnManageCtrl','publishCtrl','contentManageCtrl','userRoleManageCtrl'];
 	var routeCtrlsImpl = [];
 	var bootstrapTableNg=require('bootstrapTableNg');
 	//todo 用ng去代替

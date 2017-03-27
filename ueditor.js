@@ -17,6 +17,44 @@ var respond = function(static_url, callback) {
     if (req.query.action === 'config') {
       callback(req, res, next);
       return;
+    } else if (req.query.action === 'listfile') {
+      res.ue_list = function(list_dir) {
+        var str = '';
+        var i = 0;
+        var list = [];
+        fs.readdir(static_url + list_dir, function(err, files) {
+          if (err) throw err;
+
+          var total = files.length;
+          files.forEach(function(file) {
+
+            var filetype = 'doc,docx,xls,xlsx,ppt,pptx,txt';
+            var tmplist = file.split('.');
+            var _filetype = tmplist[tmplist.length - 1];
+            if (filetype.indexOf(_filetype.toLowerCase()) >= 0) {
+              var temp = {};
+              if (list_dir === '/') {
+                temp.url = host + "upload/" + list_dir + file;
+              } else {
+                temp.url = host + "upload/" + list_dir + "/" + file;
+              }
+              list[i] = (temp);
+            } else {}
+            i++;
+            // send file name string when all files was processed
+            if (i === total) {
+              res.jsonp({
+                "state": "SUCCESS",
+                "list": list,
+                "start": 1,
+                "total": total
+              });
+            }
+          });
+        });
+      };
+      callback(req, res, next);
+
     } else if (req.query.action === 'listimage') {
       res.ue_list = function(list_dir) {
         var str = '';
@@ -34,9 +72,9 @@ var respond = function(static_url, callback) {
             if (filetype.indexOf(_filetype.toLowerCase()) >= 0) {
               var temp = {};
               if (list_dir === '/') {
-                temp.url = host + "upload/" +list_dir + file;
+                temp.url = host + "upload/" + list_dir + file;
               } else {
-                temp.url = host + "upload/" +list_dir + "/" + file;
+                temp.url = host + "upload/" + list_dir + "/" + file;
               }
               list[i] = (temp);
             } else {}
@@ -81,7 +119,7 @@ var respond = function(static_url, callback) {
                 'original': filename,
                 'state': 'SUCCESS'
               }
-              if (req.xhr||req.headers['x_requested_with']==='XMLHttpRequest') {
+              if (req.xhr || req.headers['x_requested_with'] === 'XMLHttpRequest') {
                 res.jsonp(obj);
               } else {
                 res.redirect(webAddress + "ue.html?obj=" + encodeURIComponent(JSON.stringify(obj)));

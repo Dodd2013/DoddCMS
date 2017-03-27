@@ -1,1 +1,20 @@
-<textarea id="container" name="content"></textarea>
+<form>
+    <div class="form-group">
+        <label for="simpletitle">简要标题</label>
+        <input type="text" class="form-control" id="simpletitle" placeholder="文章标题">
+    </div>
+    <div class="form-group">
+        <label for="title">文章标题</label>
+        <input type="text" class="form-control" id="title" placeholder="文章标题">
+    </div>
+    <div class="form-group">
+        <label for="column">所属栏目</label>
+        <select ng-init="column = columns[0]" ng-model="column" ng-options="x for x in columns">
+        	
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="container">文章内容</label>
+        <textarea name="content" id="container"></textarea>
+    </div>
+</form>
