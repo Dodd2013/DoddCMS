@@ -3,6 +3,7 @@
 define(function (require, exports, module) {
 	var ng = require('angular');
 	var $ = require('jquery');
+	var ngJsTree = require('ngJsTree');
 	var config = require('config').config;
 	var adminPages = require('config').adminPages;
 	var bootstrap = require('bootstrap');
@@ -46,7 +47,7 @@ define(function (require, exports, module) {
 			}
 		}
 
-		var app = ng.module('admin', ['ui.router', 'bsTable']);
+		var app = ng.module('admin', ['ui.router', 'bsTable', 'ngJsTree']);
 
 		// 注册Ctrl
 		var _iteratorNormalCompletion2 = true;

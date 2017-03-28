@@ -9,6 +9,8 @@ require.config({
 		zeroclipboard: '../assets/ueditor/third-party/zeroclipboard/ZeroClipboard.min',
 		route: '../assets/js/ui-router',
 		jquery: '../assets/js/jquery',
+		jstree: '../assets/js/jstree/jstree.min',
+		ngJsTree: '../assets/js/ngJsTree.min',
 		bootstrap: '../assets/js/bootstrap',
 		swiper: '../assets/js/swiper-3.4.1.jquery.min',
 		pnotify: '../assets/js/pnotify.min',
@@ -20,6 +22,13 @@ require.config({
 	shim: {
 		jquery: {
 			exports: 'jquery'
+		},
+		jstree: {
+			deps: ['jquery'],
+			exports: 'jstree'
+		},
+		ngJsTree: {
+			deps: ['jstree']
 		},
 		swiper: {
 			deps: ['jquery']

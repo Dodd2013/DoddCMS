@@ -5,7 +5,8 @@ var routes = {
 	"/": require("./Route/index"),
 	"/login": require("./Route/login.js"),
 	"/logout": require("./Route/logout.js"),
-	"/navbar": require("./Route/navbar.js")
+	"/navbar": require("./Route/navbar.js"),
+	"/column": require("./Route/column.js")
 }
 module.exports = function(app) {
 
@@ -31,7 +32,7 @@ module.exports = function(app) {
 		} else if (req.query.action === 'listfile') {
 			var dir_url = req.session.userName + "/" + 'uploadfile'; // 要展示给客户端的文件夹路径
 			res.ue_list(dir_url); // 客户端会列出 dir_url 目录下的所有文件
-		}else {// 客户端发起其它请求
+		} else { // 客户端发起其它请求
 
 			res.setHeader('Content-Type', 'application/json');
 			// 这里填写 ueditor.config.json 这个文件的路径

@@ -8,9 +8,13 @@ var column = {
         autoIncrement: true
     },
     parentColumnId:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
     },
     columnName: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    type:{
         type: Sequelize.STRING,
         allowNull: true
     },

@@ -118,4 +118,14 @@
 		"public": true
 	},
 	"belongTo": null
+},{
+	"permission": {
+		"permissionId": "0007",
+		"actionUrl": "/column",
+		"method": "GET",
+		"permissionName": "getColumnList",
+		"DESC": "栏目获取",
+		"public": true
+	},
+	"belongTo": null
 }]
