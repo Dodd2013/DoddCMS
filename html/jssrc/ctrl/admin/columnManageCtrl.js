@@ -7,7 +7,8 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config'], function(angular, $, jstree, ngtree, config) {
+define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], function(angular, $, jstree, ngtree, config, PNotify) {
+	PNotify.prototype.options.styling = "bootstrap3";
 	var CtrlName = "columnManageCtrl";
 	config = config.config;
 	return {
@@ -23,6 +24,8 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config'], function(angular, 
 		"ctrl": {
 			"name": CtrlName,
 			"fn": ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+				$scope.columnName = '';
+				$scope.DESC = '';
 				$scope.initJsTree = function() {
 					$http({
 						url: config.api + '/column',
@@ -30,16 +33,129 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config'], function(angular, 
 						withCredentials: true,
 					}).then(function(data) {
 						$scope.originalData = data.data
-							// $scope.treeInstance.refresh();
 						$scope.reCreateTree();
 					});
 				};
+				$scope.createNewColumn = function() {
+					if ($scope.selected.type != 'root' && $scope.parentColumnId != '#') {
+						new PNotify({
+							type: 'warning',
+							text: '子栏目不允许有二级子栏目!'
+						});
+					} else {
+						if ($scope.columnName === '' || $scope.DESC === '') {
+							new PNotify({
+								type: 'warning',
+								text: '栏目名称或者栏目描述不能为空!'
+							});
+						} else {
+							$http({
+								url: config.api + '/column/add',
+								method: 'POST',
+								withCredentials: true,
+								headers: {
+									'Content-Type': 'application/x-www-form-urlencoded',
+									'Accept': "*/*"
+								},
+								transformRequest: $.param,
+								data: {
+									parentColumnId: $scope.parentColumnId,
+									type: $scope.type,
+									columnName: $scope.columnName,
+									DESC: $scope.DESC
+								}
+							}).then(function(data) {
+								new PNotify({
+									type: 'success',
+									text: '添加栏目成功!'
+								});
+								$scope.initJsTree();
+							}, function() {
+								new PNotify({
+									type: 'error',
+									text: '添加栏目失败!'
+								});
+							});
+						}
+					}
+				};
+				$scope.editColumn = function() {
+					$http({
+						url: config.api + '/column/edit',
+						method: 'POST',
+						withCredentials: true,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Accept': "*/*"
+						},
+						transformRequest: $.param,
+						data: {
+							columnId: $scope.selected.id,
+							columnName: $scope.selectedcolumnName,
+							DESC: $scope.selectedDESC
+						}
+					}).then(function(data) {
+						new PNotify({
+							type: 'success',
+							text: '修改栏目成功!'
+						});
+						$scope.initJsTree();
+					}, function() {
+						new PNotify({
+							type: 'error',
+							text: '修改栏目失败!'
+						});
+					});
+				};
+				$scope.deleteColumn=function() {
+					$http({
+						url: config.api + '/column/delete',
+						method: 'POST',
+						withCredentials: true,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Accept': "*/*"
+						},
+						transformRequest: $.param,
+						data: {
+							columnId: $scope.selected.id,
+						}
+					}).then(function(data) {
+						new PNotify({
+							type: 'success',
+							text: '删除栏目成功!'
+						});
+						$scope.initJsTree();
+						$("#deleteColumnModal").modal("hide");
+					}, function() {
+						new PNotify({
+							type: 'error',
+							text: '删除栏目失败!'
+						});
+					});
+					
+				};
+				$scope.selectRootColumn = function() {
+					$scope.parentColumnName = "顶级父节点";
+					$scope.parentColumnId = '#';
+					$scope.type = 'root';
+					$scope.treeInstance.jstree(true).deselect_all()
+				};
+				$scope.selectColumn = function(node, selected, event) {
+					$scope.selected = $scope.originalData[parseInt(selected.selected[0]) - 1];
+					$scope.selectedcolumnName = $scope.parentColumnName = $scope.selected.text;
+					$scope.parentColumnId = $scope.selected.id;
+					$scope.selectedDESC = $scope.selected.DESC;
+					$scope.type = null;
+				};
+				$scope.treeEventsObj = {
+					'select_node': $scope.selectColumn
+				}
 				$scope.ignoreChanges = false;
 				$scope.treeInstance = {};
 				$scope.originalData = [];
 				$scope.treeData = [];
 				angular.copy($scope.originalData, $scope.treeData);
-				
 				$scope.treeConfig = {
 					core: {
 						multiple: false,
@@ -66,15 +182,6 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config'], function(angular, 
 					angular.copy($scope.originalData, $scope.treeData);
 					$scope.treeConfig.version++;
 				};
-
-				$scope.addNewNode = function() {
-					$scope.treeData.push({
-						id: (newId++).toString(),
-						parent: $scope.newNode.parent,
-						text: $scope.newNode.text
-					});
-				};
-
 				$scope.applyModelChanges = function() {
 					return !$scope.ignoreChanges;
 				};

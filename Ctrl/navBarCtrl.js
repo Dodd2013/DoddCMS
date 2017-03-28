@@ -5,7 +5,7 @@ module.exports = {
 			where: {
 				itemId:navbar.itemId
 			}
-		}) 
+		});
 	},
 	editNavBar: function(navbar) {
 		return navBar.update(navbar, {

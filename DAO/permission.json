@@ -128,4 +128,34 @@
 		"public": true
 	},
 	"belongTo": null
+},{
+	"permission": {
+		"permissionId": "4011",
+		"actionUrl": "/column/add",
+		"method": "POST",
+		"permissionName": "addColumn",
+		"DESC": "添加栏目",
+		"public": false
+	},
+	"belongTo": 401
+},{
+	"permission": {
+		"permissionId": "4012",
+		"actionUrl": "/column/edit",
+		"method": "POST",
+		"permissionName": "editColumn",
+		"DESC": "修改栏目",
+		"public": false
+	},
+	"belongTo": 401
+},{
+	"permission": {
+		"permissionId": "4013",
+		"actionUrl": "/column/delete",
+		"method": "POST",
+		"permissionName": "deleteColumn",
+		"DESC": "删除栏目",
+		"public": false
+	},
+	"belongTo": 401
 }]
