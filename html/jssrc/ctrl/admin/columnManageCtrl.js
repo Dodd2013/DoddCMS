@@ -142,7 +142,13 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 					$scope.treeInstance.jstree(true).deselect_all()
 				};
 				$scope.selectColumn = function(node, selected, event) {
-					$scope.selected = $scope.originalData[parseInt(selected.selected[0]) - 1];
+					for(let key in $scope.originalData){
+						if($scope.originalData[key].id===selected.selected[0]){
+							$scope.selected=$scope.originalData[key];
+							break;
+						}
+					}
+					// $scope.selected = $scope.originalData[parseInt(selected.selected[0]) - 1];
 					$scope.selectedcolumnName = $scope.parentColumnName = $scope.selected.text;
 					$scope.parentColumnId = $scope.selected.id;
 					$scope.selectedDESC = $scope.selected.DESC;
