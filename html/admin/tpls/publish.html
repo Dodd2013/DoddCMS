@@ -1,20 +1,42 @@
 <form>
     <div class="form-group">
+        <label for="title">文章标题</label>
+        <input type="text" class="form-control" ng-model='contentTitle' id="title" placeholder="文章标题">
+    </div>
+    <div class="form-group">
         <label for="simpletitle">简要标题</label>
         <input type="text" class="form-control" id="simpletitle" placeholder="文章标题">
     </div>
     <div class="form-group">
-        <label for="title">文章标题</label>
-        <input type="text" class="form-control" id="title" placeholder="文章标题">
+        <label for="title">简介</label>
+        <textarea type="text" class="form-control" ng-model='contentDESC' id="contentDESC" placeholder="简介"></textarea>
     </div>
     <div class="form-group">
         <label for="column">所属栏目</label>
-        <select ng-init="column = columns[0]" ng-model="column" ng-options="x for x in columns">
-        	
-        </select>
+        <input type="text" class="form-control" ng-model='belongtoColumn' readonly placeholder="点击选择所属栏目" ng-click='selectColumnInput()'>
     </div>
     <div class="form-group">
         <label for="container">文章内容</label>
         <textarea name="content" id="container"></textarea>
     </div>
 </form>
+<div class="modal fade" id="seletColumnModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">请选择一个栏目</h4>
+            </div>
+            <div class="modal-body">
+                <div js-tree="treeConfig" ng-model="treeData" should-apply="applyModelChanges()" tree="treeInstance" tree-events-obj="treeEventsObj"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click='selectColumnClick()'>确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

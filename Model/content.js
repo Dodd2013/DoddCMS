@@ -7,7 +7,7 @@ var content = {
         primaryKey: true,
         autoIncrement: true
     },
-    contentTitel: {
+    contentTitle: {
         type: Sequelize.STRING,
         allowNull: true
     },
@@ -40,6 +40,9 @@ var content = {
         },
         allowNull: false
     },
+    columnId:{
+        type: Sequelize.INTEGER
+    }
 };
 module.exports = sequelize.define('content', content, {
     freezeTableName: true
