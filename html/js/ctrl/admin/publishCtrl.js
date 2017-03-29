@@ -7,7 +7,8 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config'], function (require, angular, UE, $, zcl, config) {
+define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'pnotify'], function (require, angular, UE, $, zcl, config, PNotify) {
+	PNotify.prototype.options.styling = "bootstrap3";
 	var CtrlName = "publishCtrl";
 	config = config.config;
 	return {
@@ -25,13 +26,54 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config'], f
 			"fn": ['$scope', '$http', function ($scope, $http) {
 				window.ZeroClipboard = zcl;
 				window.UE.delEditor("container");
-				var editor = window.UE.getEditor('container');
+				$scope.editor = window.UE.getEditor('container');
 				$scope.selectColumnInput = function () {
 					$('#seletColumnModal').modal('show');
 				};
 				$scope.selectColumnClick = function () {
-					$scope.belongtoColumn = $scope.selectedcolumnName;
+					$scope.belongtoColumn = $scope.selected.text;
+					$scope.belongtoColumnId = $scope.selected.id;
 					$('#seletColumnModal').modal('hide');
+				};
+				$scope.publish = function () {
+					$http({
+						url: config.api + '/content/add',
+						method: 'POST',
+						withCredentials: true,
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded',
+							'Accept': "*/*"
+						},
+						transformRequest: $.param,
+						data: {
+							source: $scope.source,
+							sourceUrl: $scope.sourceUrl,
+							contentTitle: $scope.contentTitle,
+							simpleTitle: $scope.simpleTitle,
+							columnId: $scope.belongtoColumnId,
+							contentDESC: $scope.contentDESC,
+							contentType: "default",
+							contentWithHTML: $scope.editor.getContent(),
+							contentText: $scope.editor.getContentTxt()
+						}
+					}).then(function (data) {
+						if (data.statusText === 'OK') {
+							new PNotify({
+								type: 'success',
+								text: '发布文章成功!'
+							});
+							//todo
+						}
+						new PNotify({
+							type: 'error',
+							text: '发布文章失败!'
+						});
+					}, function (data) {
+						new PNotify({
+							type: 'error',
+							text: '发布文章失败!'
+						});
+					});
 				};
 				$scope.initJsTree = function () {
 					$http({
@@ -50,11 +92,6 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config'], f
 							break;
 						}
 					}
-					// $scope.selected = $scope.originalData[parseInt(selected.selected[0]) - 1];
-					$scope.selectedcolumnName = $scope.parentColumnName = $scope.selected.text;
-					$scope.parentColumnId = $scope.selected.id;
-					$scope.selectedDESC = $scope.selected.DESC;
-					$scope.type = null;
 				};
 				$scope.treeEventsObj = {
 					'select_node': $scope.selectColumn

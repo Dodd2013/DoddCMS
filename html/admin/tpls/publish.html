@@ -1,24 +1,41 @@
 <form>
     <div class="form-group">
-        <label for="title">文章标题</label>
-        <input type="text" class="form-control" ng-model='contentTitle' id="title" placeholder="文章标题">
-    </div>
-    <div class="form-group">
-        <label for="simpletitle">简要标题</label>
-        <input type="text" class="form-control" id="simpletitle" placeholder="文章标题">
-    </div>
-    <div class="form-group">
-        <label for="title">简介</label>
-        <textarea type="text" class="form-control" ng-model='contentDESC' id="contentDESC" placeholder="简介"></textarea>
+        <div class="row">
+            <div class="col-md-8 col-sm-12">
+                <label for="title">文章标题</label>
+                <input type="text" class="form-control" ng-model='contentTitle' id="title" placeholder="文章标题">
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <label for="simpleTitle">简要标题</label>
+                <input type="text" class="form-control" id="simpleTitle" ng-model='simpleTitle' placeholder="文章标题">
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="column">所属栏目</label>
         <input type="text" class="form-control" ng-model='belongtoColumn' readonly placeholder="点击选择所属栏目" ng-click='selectColumnInput()'>
     </div>
     <div class="form-group">
+        <label for="title">简介</label>
+        <textarea type="text" class="form-control" ng-model='contentDESC' id="contentDESC" placeholder="简介"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <label for="column">来源(可选)</label>
+                <input type="text" class="form-control" ng-model='source' placeholder="来源(可选)">
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="column">来源URL地址(可选)</label>
+                <input type="text" class="form-control" ng-model='sourceUrl' placeholder="来源地址(可选)">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="container">文章内容</label>
         <textarea name="content" id="container"></textarea>
     </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="publish()">发布</button>
 </form>
 <div class="modal fade" id="seletColumnModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
