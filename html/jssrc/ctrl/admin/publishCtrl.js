@@ -68,7 +68,7 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 							type: 'error',
 							text: '发布文章失败!'
 						});
-					},function(data) {
+					}, function(data) {
 						new PNotify({
 							type: 'error',
 							text: '发布文章失败!'
