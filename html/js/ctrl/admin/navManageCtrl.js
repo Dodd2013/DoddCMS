@@ -27,6 +27,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 			"name": CtrlName,
 			"fn": ['$scope', '$http', function ($scope, $http) {
 				$scope.premission = null;
+				$scope.canAddNav = true;
 				//获取数据用的ajax
 				$scope.ajaxRequest = function (params) {
 					// data you need
@@ -39,9 +40,10 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 					});
 					if ($scope.premission === null) {
 						$http({
-							url: config.api + '/navbar/getPermission',
+							url: config.api + '/getPermission',
 							method: 'GET',
-							withCredentials: true
+							withCredentials: true,
+							params: { functionModel: 201 }
 						}).then(function (data) {
 							$scope.premission = data.data;
 							return getdata;
@@ -142,6 +144,9 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
 						for (var _iterator = $scope.premission[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 							var pms = _step.value;
 
+							if (pms.permissionName === 'addNavBar') {
+								$scope.canAddNav = false;
+							}
 							if (pms.permissionName === 'editNavBar') {
 								editBtn = '<a data-op=\'edit\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5BFC\u822A\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
 							}

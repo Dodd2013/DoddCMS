@@ -3,7 +3,7 @@ var user = require("../Model/user");
 var sequelize = require('../DAO/dao');
 module.exports = {
 	getPremissionInFunctionModelForUser: function(userName, FunctionModelId) {
-		var sql = `select a.permissionId,a.actionUrl,a.permissionName,a.method,a.DESC from permission as a JOIN role_permission as b JOIN user_role as c WHERE a.permissionId=b.permissionId and c.roleId =b.roleId and c.userName='${ userName }'`;
+		var sql = `select a.permissionId,a.actionUrl,a.permissionName,a.method,a.DESC from permission as a JOIN role_permission as b JOIN user_role as c WHERE a.permissionId=b.permissionId and c.roleId =b.roleId and c.userName='${ userName }' and a.permissionId like '${ FunctionModelId }%'`;
 
 		return sequelize.query(sql, {
 			type: sequelize.QueryTypes.SELECT
@@ -16,7 +16,7 @@ module.exports = {
 				actionUrl: req._parsedUrl.pathname
 			}
 		}).then(function(permission) {
-			console.log(JSON.stringify(permission));
+			// console.log(JSON.stringify(permission));
 			// todo效率有待修正
 			if (permission != null) {
 				if (permission.public) {

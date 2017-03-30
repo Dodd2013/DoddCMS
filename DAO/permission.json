@@ -110,11 +110,11 @@
 	"belongTo": 201
 },{
 	"permission": {
-		"permissionId": "2015",
-		"actionUrl": "/navbar/getPermission",
+		"permissionId": "0008",
+		"actionUrl": "/getPermission",
 		"method": "GET",
-		"permissionName": "NavBargetPermission",
-		"DESC": "导航管理权限获取",
+		"permissionName": "getPermission",
+		"DESC": "管理权限获取",
 		"public": true
 	},
 	"belongTo": null

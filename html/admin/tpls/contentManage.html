@@ -1,1 +1,61 @@
-todo
+<div class="page-header">
+    <h2>内容管理</h2>
+</div>
+<div id="toolbar">
+    <div class="form-inline btn-group" role="form">
+        <button id="add" type="button" class="btn btn-default" ng-click=""><span class="glyphicon glyphicon-plus"></span></button>
+    </div>
+</div>
+<table id='contentTable' bs-table-control="tableCtrl"></table>
+<!-- Modal -->
+<div class="modal fade" id="addAndEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加导航</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model='navId' class="form-control" name='navId' id="navId">
+                    <div class="form-group">
+                        <label for="navName">导航名称</label>
+                        <input type="text" ng-model='navName' class="form-control" name='navName' id="navName" placeholder="导航名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="navUrl">地址URL</label>
+                        <input type="text" class="form-control" ng-model='navUrl' name='url' id="navUrl" placeholder="导航地址URL">
+                    </div>
+                    <div class="form-group">
+                        <label for="navOrderBy">优先级</label>
+                        <input type="number" class="form-control" ng-model='navOrderBy' min="0" max="10" name='orderBy' id="navOrderBy" placeholder="优先级">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-click="addAndEditNavBtn()">提交</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteModalLabel">删除导航</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model='navId' class="form-control" name='navId' id="navId">
+                    <h3>你确定要删除该项目(将无法撤销)</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" ng-click="deleteNavBtn()">确定删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
