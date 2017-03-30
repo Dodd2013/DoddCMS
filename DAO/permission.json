@@ -168,4 +168,14 @@
 		"public": false
 	},
 	"belongTo": 402
+},{
+	"permission": {
+		"permissionId": "4022",
+		"actionUrl": "/content",
+		"method": "GET",
+		"permissionName": "getContentList",
+		"DESC": "获取文章管理列表",
+		"public": false
+	},
+	"belongTo": 402
 }]

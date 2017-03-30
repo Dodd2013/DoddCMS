@@ -35,9 +35,10 @@ define(['angular'], function(angular) {
 						});
 						if ($scope.premission === null) {
 							$http({
-								url: config.api + '/content/getPermission',
+								url: config.api + '/getPermission',
 								method: 'GET',
 								withCredentials: true,
+								params:{functionModel:401}
 							}).then(function(data) {
 								$scope.premission = data.data;
 								return getdata;
@@ -75,24 +76,28 @@ define(['angular'], function(angular) {
 						clickToSelect: false,
 						maintainSelected: true,
 						columns: [{
-							field: 'itemId',
-							title: '导航ID',
+							field: 'contentTitle',
+							title: '内容标题',
 							align: 'center',
-							valign: 'bottom',
-							sortable: true
+							valign: 'bottom'
 						}, {
-							field: 'itemName',
-							title: '导航名称',
+							field: 'simpleTitle',
+							title: '简单标题',
 							align: 'center',
-							valign: 'middle',
+							valign: 'middle'
 						}, {
-							field: 'url',
-							title: '地址',
+							field: 'contentDESC',
+							title: '内容描述',
 							align: 'left',
-							valign: 'top',
+							valign: 'top'
 						}, {
-							field: 'orderby',
-							title: '优先级',
+							field: 'contentType',
+							title: '内容类型',
+							align: 'left',
+							valign: 'top'
+						},{
+							field: 'viewCount',
+							title: '浏览量',
 							align: 'left',
 							valign: 'top',
 							sortable: true
@@ -116,7 +121,7 @@ define(['angular'], function(angular) {
 							align: 'center',
 							valign: 'middle',
 							clickToSelect: false,
-							formatter: opFormatter,
+							formatter: opFormatter
 							// 操作按钮单元格
 						}]
 					}
