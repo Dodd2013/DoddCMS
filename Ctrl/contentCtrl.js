@@ -2,11 +2,11 @@ var Content = require("../Model/content");
 var config = require("../config.js");
 var contentCtrl = {
 	//返回promise对象
-	addContent:function(content,userName) {
-		content.userName=userName;
+	addContent: function(content, userName) {
+		content.userName = userName;
 		return Content.create(content);
 	},
-	getContentListByParams:function(params) {
+	getContentListByParams: function(params) {
 		var p = {};
 		if (params.sort && (params.sort in Content.attributes)) {
 			p.order = params.sort + ' ' + params.order;
@@ -31,6 +31,24 @@ var contentCtrl = {
 		}
 
 		return Content.findAndCountAll(p);
+	},
+	setPass: function(contentId, state) {
+		let content = {
+			state: state
+		};
+		return Content.update(content, {
+			where: {
+				contentId: contentId
+			}
+		});
+	},
+	getContentById: function(contentId) {
+		
+		return Content.findOne({
+			where: {
+				contentId: contentId
+			}
+		});
 	}
 }
 module.exports = contentCtrl;

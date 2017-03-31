@@ -178,4 +178,44 @@
 		"public": false
 	},
 	"belongTo": 402
+},{
+	"permission": {
+		"permissionId": "4023",
+		"actionUrl": "/content/edit",
+		"method": "POST",
+		"permissionName": "editContent",
+		"DESC": "修改文章",
+		"public": false
+	},
+	"belongTo": 402
+},{
+	"permission": {
+		"permissionId": "4024",
+		"actionUrl": "/content/delete",
+		"method": "POST",
+		"permissionName": "deleteContent",
+		"DESC": "删除文章",
+		"public": false
+	},
+	"belongTo": 402
+},{
+	"permission": {
+		"permissionId": "4025",
+		"actionUrl": "/content/pass",
+		"method": "GET",
+		"permissionName": "passContent",
+		"DESC": "审核文章",
+		"public": false
+	},
+	"belongTo": 402
+},{
+	"permission": {
+		"permissionId": "4026",
+		"actionUrl": "/content/getById",
+		"method": "GET",
+		"permissionName": "passContent",
+		"DESC": "通过文章id获取文章",
+		"public": false
+	},
+	"belongTo": 402
 }]

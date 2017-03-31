@@ -7,7 +7,8 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular'], function (angular) {
+define(['angular', 'pnotify', 'jquery', 'bootstrapTableNg', 'bootstrapTableCN'], function (angular, PNotify, $) {
+	PNotify.prototype.options.styling = "bootstrap3";
 	var CtrlName = "contentManageCtrl";
 	return {
 		"route": {
@@ -21,7 +22,7 @@ define(['angular'], function (angular) {
 		},
 		"ctrl": {
 			"name": CtrlName,
-			"fn": ['$scope', '$http', function ($scope, $http) {
+			"fn": ['$scope', '$http', '$state', function ($scope, $http, $state) {
 				$scope.premission = null;
 				//获取数据用的ajax
 				$scope.ajaxRequest = function (params) {
@@ -38,7 +39,9 @@ define(['angular'], function (angular) {
 							url: config.api + '/getPermission',
 							method: 'GET',
 							withCredentials: true,
-							params: { functionModel: 401 }
+							params: {
+								functionModel: 402
+							}
 						}).then(function (data) {
 							$scope.premission = data.data;
 							return getdata;
@@ -75,10 +78,16 @@ define(['angular'], function (angular) {
 						clickToSelect: false,
 						maintainSelected: true,
 						columns: [{
+							field: 'contentId',
+							title: '内容序号',
+							align: 'center',
+							valign: 'middle',
+							formatter: idFormatter
+						}, {
 							field: 'contentTitle',
 							title: '内容标题',
 							align: 'center',
-							valign: 'bottom'
+							valign: 'middle'
 						}, {
 							field: 'simpleTitle',
 							title: '简单标题',
@@ -87,32 +96,39 @@ define(['angular'], function (angular) {
 						}, {
 							field: 'contentDESC',
 							title: '内容描述',
-							align: 'left',
-							valign: 'top'
+							align: 'center',
+							valign: 'middle'
 						}, {
 							field: 'contentType',
 							title: '内容类型',
-							align: 'left',
-							valign: 'top'
+							align: 'center',
+							valign: 'middle'
 						}, {
 							field: 'viewCount',
 							title: '浏览量',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							sortable: true
 						}, {
 							field: 'createdAt',
 							title: '创建时间',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'updatedAt',
 							title: '更新时间',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							formatter: timeFormatter,
+							sortable: true
+						}, {
+							field: 'state',
+							title: '审核状态',
+							align: 'center',
+							valign: 'middle',
+							formatter: stateFormatter,
 							sortable: true
 						}, {
 							field: 'op',
@@ -126,6 +142,16 @@ define(['angular'], function (angular) {
 					}
 				};
 
+				function stateFormatter(value, row, index) {
+					if (value == 1) return "审核通过";
+					if (value == 0) return "未审核";
+					if (value == -1) return "审核不通过";
+				};
+
+				function idFormatter(value, row, index) {
+					return '<a href="/content/' + value + '" target=\'_bank\'>' + value + '</a>';
+				};
+
 				function timeFormatter(value, row, index) {
 					if (value == null) return '未知时间';
 					var date = new Date(value);
@@ -136,6 +162,7 @@ define(['angular'], function (angular) {
 				function opFormatter(value, row, index) {
 					var editBtn = '';
 					var deleteBtn = '';
+					var passBtn = '';
 					var _iteratorNormalCompletion = true;
 					var _didIteratorError = false;
 					var _iteratorError = undefined;
@@ -144,14 +171,14 @@ define(['angular'], function (angular) {
 						for (var _iterator = $scope.premission[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 							var pms = _step.value;
 
-							if (pms.permissionName === 'addNavBar') {
-								$scope.canAddNav = false;
+							if (pms.permissionName === 'passContent') {
+								passBtn = '<a data-op=\'pass\' data-contentId=\'' + row.contentId + '\' class=\'opBtn\' title=\'\u5BA1\u6838\u901A\u8FC7\'><span class=\'glyphicon glyphicon-ok-sign color-success\'></span></a>' + ('<a data-op=\'unpass\' data-contentId=\'' + row.contentId + '\' class=\'opBtn\' title=\'\u672A\u5BA1\u6838\'><span class=\'glyphicon glyphicon-question-sign color-info\'></span></a>') + ('<a data-op=\'notpass\' data-contentId=\'' + row.contentId + '\' class=\'opBtn\' title=\'\u5BA1\u6838\u4E0D\u901A\u8FC7\'><span class=\'glyphicon glyphicon-remove-sign color-danger\'></span></a>');
 							}
-							if (pms.permissionName === 'editNavBar') {
-								editBtn = '<a data-op=\'edit\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5BFC\u822A\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
+							if (pms.permissionName === 'editContent') {
+								editBtn = '<a data-op=\'edit\' data-contentId=\'' + row.contentId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5185\u5BB9\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
 							}
-							if (pms.permissionName === 'deleteNavBar') {
-								deleteBtn = '<a data-op=\'delete\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5BFC\u822A\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
+							if (pms.permissionName === 'deleteContent') {
+								deleteBtn = '<a data-op=\'delete\' data-contentId=\'' + row.contentId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5185\u5BB9\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
 							}
 						}
 					} catch (err) {
@@ -169,27 +196,42 @@ define(['angular'], function (angular) {
 						}
 					}
 
-					return editBtn + deleteBtn;
+					return passBtn + editBtn + deleteBtn;
 				};
-				$scope.addOrEdit = 'add';
-				$('#navTable').on('click', '.opBtn', function (e) {
+
+				$('#contentTable').on('click', '.opBtn', function (e) {
 					var op = $(e.currentTarget).attr('data-op');
-					var item = {
-						contentId: $(e.currentTarget).attr('data-itemId'),
-						contentTitle: $(e.currentTarget).attr('data-itemName'),
-						url: $(e.currentTarget).attr('data-url'),
-						orderby: parseInt($(e.currentTarget).attr('data-orderby'))
-					};
+					var contentId = $(e.currentTarget).attr('data-contentId');
 					if (op === 'edit') {
-						$scope.$apply(function () {
-							$scope.showEdit(item);
-						});
+						$state.go('publish', { contentId: contentId });
 					} else if (op === 'delete') {
 						$scope.$apply(function () {
 							$scope.showRemove(item);
 						});
+					} else if (op === 'pass' || op === 'unpass' || op === 'notpass') {
+						$scope.pass(op, contentId);
 					}
 				});
+				$scope.pass = function (parmas, contentId) {
+					$http({
+						url: config.api + '/content/pass',
+						method: 'GET',
+						withCredentials: true,
+						headers: {
+							'Accept': "*/*"
+						},
+						params: {
+							contentId: contentId,
+							op: parmas
+						}
+					}).then(function (data) {
+						new PNotify({
+							type: 'success',
+							text: '\u4FEE\u6539\u5BA1\u6838\u72B6\u6001\u6210\u529F'
+						});
+						$('#contentTable').bootstrapTable('refresh');
+					});
+				};
 				$scope.showEdit = function (item) {
 					//修改内容按钮
 				};

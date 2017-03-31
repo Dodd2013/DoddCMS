@@ -18,15 +18,35 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 				url: '/publish',
 				// resolve: {},
 				templateUrl: 'tpls/publish.html',
-				controller: CtrlName
+				controller: CtrlName,
+				params: {
+					'contentId': null
+				}
 			}
 		},
 		"ctrl": {
 			"name": CtrlName,
-			"fn": ['$scope', '$http', function ($scope, $http) {
+			"fn": ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
+				var contentId = $stateParams.contentId;
 				window.ZeroClipboard = zcl;
 				window.UE.delEditor("container");
 				$scope.editor = window.UE.getEditor('container');
+				$scope.editor.ready(function () {
+					if (contentId) {
+						//编辑逻辑
+						$http({
+							url: config.api + '/content/getById',
+							method: 'GET',
+							withCredentials: true,
+							params: {
+								contentId: contentId
+							}
+						}).then(function (data) {
+							$scope.content = data.data;
+							$scope.editor.setContent($scope.content.contentWithHTML);
+						});
+					}
+				});
 				$scope.selectColumnInput = function () {
 					$('#seletColumnModal').modal('show');
 				};
@@ -63,11 +83,12 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 								text: '发布文章成功!'
 							});
 							//todo
+						} else {
+							new PNotify({
+								type: 'error',
+								text: '发布文章失败!'
+							});
 						}
-						new PNotify({
-							type: 'error',
-							text: '发布文章失败!'
-						});
 					}, function (data) {
 						new PNotify({
 							type: 'error',

@@ -7,7 +7,8 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular'], function(angular) {
+define(['angular', 'pnotify', 'jquery', 'bootstrapTableNg', 'bootstrapTableCN'], function(angular, PNotify, $) {
+	PNotify.prototype.options.styling = "bootstrap3";
 	var CtrlName = "contentManageCtrl";
 	return {
 		"route": {
@@ -21,7 +22,7 @@ define(['angular'], function(angular) {
 		},
 		"ctrl": {
 			"name": CtrlName,
-			"fn": ['$scope', '$http', function($scope, $http) {
+			"fn": ['$scope', '$http','$state', function($scope, $http,$state) {
 				$scope.premission = null;
 				//获取数据用的ajax
 				$scope.ajaxRequest = function(params) {
@@ -38,7 +39,9 @@ define(['angular'], function(angular) {
 								url: config.api + '/getPermission',
 								method: 'GET',
 								withCredentials: true,
-								params:{functionModel:401}
+								params: {
+									functionModel: 402
+								}
 							}).then(function(data) {
 								$scope.premission = data.data;
 								return getdata;
@@ -76,10 +79,16 @@ define(['angular'], function(angular) {
 						clickToSelect: false,
 						maintainSelected: true,
 						columns: [{
+							field: 'contentId',
+							title: '内容序号',
+							align: 'center',
+							valign: 'middle',
+							formatter: idFormatter,
+						}, {
 							field: 'contentTitle',
 							title: '内容标题',
 							align: 'center',
-							valign: 'bottom'
+							valign: 'middle'
 						}, {
 							field: 'simpleTitle',
 							title: '简单标题',
@@ -88,32 +97,39 @@ define(['angular'], function(angular) {
 						}, {
 							field: 'contentDESC',
 							title: '内容描述',
-							align: 'left',
-							valign: 'top'
+							align: 'center',
+							valign: 'middle'
 						}, {
 							field: 'contentType',
 							title: '内容类型',
-							align: 'left',
-							valign: 'top'
-						},{
+							align: 'center',
+							valign: 'middle'
+						}, {
 							field: 'viewCount',
 							title: '浏览量',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							sortable: true
 						}, {
 							field: 'createdAt',
 							title: '创建时间',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							formatter: timeFormatter,
 							sortable: true
 						}, {
 							field: 'updatedAt',
 							title: '更新时间',
-							align: 'left',
-							valign: 'top',
+							align: 'center',
+							valign: 'middle',
 							formatter: timeFormatter,
+							sortable: true
+						}, {
+							field: 'state',
+							title: '审核状态',
+							align: 'center',
+							valign: 'middle',
+							formatter: stateFormatter,
 							sortable: true
 						}, {
 							field: 'op',
@@ -122,9 +138,19 @@ define(['angular'], function(angular) {
 							valign: 'middle',
 							clickToSelect: false,
 							formatter: opFormatter
-							// 操作按钮单元格
+								// 操作按钮单元格
 						}]
 					}
+				};
+
+				function stateFormatter(value, row, index) {
+					if (value == 1) return "审核通过";
+					if (value == 0) return "未审核";
+					if (value == -1) return "审核不通过";
+				};
+
+				function idFormatter(value, row, index) {
+					return `<a href="/content/${value}" target='_bank'>${value}</a>`
 				};
 
 				function timeFormatter(value, row, index) {
@@ -137,39 +163,54 @@ define(['angular'], function(angular) {
 				function opFormatter(value, row, index) {
 					let editBtn = ''
 					let deleteBtn = '';
+					let passBtn = '';
 					for (let pms of $scope.premission) {
-						if (pms.permissionName === 'addNavBar') {
-							$scope.canAddNav = false;
+						if (pms.permissionName === 'passContent') {
+							passBtn = `<a data-op='pass' data-contentId='${row.contentId}' class='opBtn' title='审核通过'><span class='glyphicon glyphicon-ok-sign color-success'></span></a>` + `<a data-op='unpass' data-contentId='${row.contentId}' class='opBtn' title='未审核'><span class='glyphicon glyphicon-question-sign color-info'></span></a>` + `<a data-op='notpass' data-contentId='${row.contentId}' class='opBtn' title='审核不通过'><span class='glyphicon glyphicon-remove-sign color-danger'></span></a>`
 						}
-						if (pms.permissionName === 'editNavBar') {
-							editBtn = `<a data-op='edit' data-orderby='${row.orderby}' data-url='${row.url}' data-itemName='${row.itemName}' data-itemId='${row.itemId}' class='opBtn' title='编辑导航'><span class='glyphicon glyphicon-edit'></span></a>`
+						if (pms.permissionName === 'editContent') {
+							editBtn = `<a data-op='edit' data-contentId='${row.contentId}' class='opBtn' title='编辑内容'><span class='glyphicon glyphicon-edit'></span></a>`;
 						}
-						if (pms.permissionName === 'deleteNavBar') {
-							deleteBtn = `<a data-op='delete' data-orderby='${row.orderby}' data-url='${row.url}' data-itemName='${row.itemName}' data-itemId='${row.itemId}' class='opBtn' title='删除导航'><span class='glyphicon glyphicon-trash'></span></a>`
+						if (pms.permissionName === 'deleteContent') {
+							deleteBtn = `<a data-op='delete' data-contentId='${row.contentId}' class='opBtn' title='删除内容'><span class='glyphicon glyphicon-trash'></span></a>`;
 						}
 					}
-					return editBtn + deleteBtn;
+					return passBtn + editBtn + deleteBtn;
 				};
-				$scope.addOrEdit = 'add';
-				$('#navTable').on('click', '.opBtn', function(e) {
-					let op = $(e.currentTarget).attr('data-op');
-					let item = {
-						contentId: $(e.currentTarget).attr('data-itemId'),
-						contentTitle: $(e.currentTarget).attr('data-itemName'),
-						url: $(e.currentTarget).attr('data-url'),
-						orderby: parseInt($(e.currentTarget).attr('data-orderby'))
-					};
-					if (op === 'edit') {
-						$scope.$apply(function() {
-							$scope.showEdit(item);
-						});
 
+				$('#contentTable').on('click', '.opBtn', function(e) {
+					let op = $(e.currentTarget).attr('data-op');
+					let contentId = $(e.currentTarget).attr('data-contentId');
+					if (op === 'edit') {
+						$state.go('publish', {contentId:contentId}); 
 					} else if (op === 'delete') {
 						$scope.$apply(function() {
 							$scope.showRemove(item);
 						});
+					} else if (op === 'pass' || op === 'unpass' || op === 'notpass') {
+						$scope.pass(op, contentId);
 					}
 				});
+				$scope.pass = function(parmas, contentId) {
+					$http({
+						url: config.api + '/content/pass',
+						method: 'GET',
+						withCredentials: true,
+						headers: {
+							'Accept': "*/*"
+						},
+						params: {
+							contentId: contentId,
+							op: parmas
+						}
+					}).then(function(data) {
+						new PNotify({
+							type: 'success',
+							text: `修改审核状态成功`
+						});
+						$('#contentTable').bootstrapTable('refresh');
+					})
+				};
 				$scope.showEdit = function(item) {
 					//修改内容按钮
 				};

@@ -63,8 +63,8 @@ var content = {
         }
     },
     state: {
-        type: Sequelize.ENUM('-1', '0', '1'),
-        defaultValue: '0'
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 };
 module.exports = sequelize.define('content', content, {
