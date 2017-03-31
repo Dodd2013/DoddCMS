@@ -30,9 +30,11 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 				let contentId = $stateParams.contentId;
 				window.ZeroClipboard = zcl;
 				window.UE.delEditor("container");
+				$scope.isEdit=false;
 				$scope.editor = window.UE.getEditor('container');
 				$scope.editor.ready(function() {
 					if (contentId) {
+						$scope.isEdit=true;
 						//编辑逻辑
 						$http({
 							url: config.api + '/content/getById',
@@ -43,6 +45,11 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 							}
 						}).then(function(data) {
 							$scope.content = data.data;
+							$scope.contentTitle=$scope.content.contentTitle;
+							$scope.simpleTitle=$scope.content.simpleTitle;
+							$scope.contentDESC=$scope.content.contentDESC;
+							$scope.source=$scope.content.source;
+							$scope.sourceUrl=$scope.content.sourceUrl;
 							$scope.editor.setContent($scope.content.contentWithHTML);
 						});
 					}
@@ -56,45 +63,87 @@ define(['require', 'angular', 'ueditor', 'jquery', 'zeroclipboard', 'config', 'p
 					$('#seletColumnModal').modal('hide');
 				};
 				$scope.publish = function() {
-					$http({
-						url: config.api + '/content/add',
-						method: 'POST',
-						withCredentials: true,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-							'Accept': "*/*"
-						},
-						transformRequest: $.param,
-						data: {
-							source: $scope.source,
-							sourceUrl: $scope.sourceUrl,
-							contentTitle: $scope.contentTitle,
-							simpleTitle: $scope.simpleTitle,
-							columnId: $scope.belongtoColumnId,
-							contentDESC: $scope.contentDESC,
-							contentType: "default",
-							contentWithHTML: $scope.editor.getContent(),
-							contentText: $scope.editor.getContentTxt()
-						}
-					}).then(function(data) {
-						if (data.statusText === 'OK') {
-							new PNotify({
-								type: 'success',
-								text: '发布文章成功!'
-							});
-							//todo
-						} else {
+					if(!$scope.isEdit){
+						$http({
+							url: config.api + '/content/add',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								source: $scope.source,
+								sourceUrl: $scope.sourceUrl,
+								contentTitle: $scope.contentTitle,
+								simpleTitle: $scope.simpleTitle,
+								columnId: $scope.belongtoColumnId,
+								contentDESC: $scope.contentDESC,
+								contentType: "default",
+								contentWithHTML: $scope.editor.getContent(),
+								contentText: $scope.editor.getContentTxt()
+							}
+						}).then(function(data) {
+							if (data.statusText === 'OK') {
+								new PNotify({
+									type: 'success',
+									text: '发布文章成功!'
+								});
+								//todo
+							} else {
+								new PNotify({
+									type: 'error',
+									text: '发布文章失败!'
+								});
+							}
+						}, function(data) {
 							new PNotify({
 								type: 'error',
 								text: '发布文章失败!'
 							});
-						}
-					}, function(data) {
-						new PNotify({
-							type: 'error',
-							text: '发布文章失败!'
-						});
-					})
+						})
+					}else{
+						$http({
+							url: config.api + '/content/update',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								contentId:$scope.content.contentId,
+								source: $scope.source,
+								sourceUrl: $scope.sourceUrl,
+								contentTitle: $scope.contentTitle,
+								simpleTitle: $scope.simpleTitle,
+								contentDESC: $scope.contentDESC,
+								contentType: "default",
+								contentWithHTML: $scope.editor.getContent(),
+								contentText: $scope.editor.getContentTxt()
+							}
+						}).then(function(data) {
+							if (data.statusText === 'OK') {
+								new PNotify({
+									type: 'success',
+									text: '修改文章成功!'
+								});
+								//todo
+							} else {
+								new PNotify({
+									type: 'error',
+									text: '修改文章失败!'
+								});
+							}
+						}, function(data) {
+							new PNotify({
+								type: 'error',
+								text: '修改文章失败!'
+							});
+						})
+					}
 				};
 				$scope.initJsTree = function() {
 					$http({

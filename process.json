@@ -5,7 +5,7 @@
       "script": "bin/www",
       "watch":[
 		"bin",
-		"Controller",
+		"Ctrl",
 		"DAO",
 		"Model",
 		"node_modules",

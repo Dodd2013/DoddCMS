@@ -43,12 +43,27 @@ var contentCtrl = {
 		});
 	},
 	getContentById: function(contentId) {
-		
+
 		return Content.findOne({
 			where: {
 				contentId: contentId
 			}
 		});
+	},
+	updateContentById:function(content) {
+		content.state=0;
+		return Content.update(content,{
+			where: {
+				contentId: content.contentId
+			}
+		});
+	},
+	deleteContent:function(contentId) {
+		return Content.destroy({
+			where:{
+				contentId:contentId
+			}
+		});;
 	}
 }
 module.exports = contentCtrl;

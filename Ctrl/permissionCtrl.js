@@ -30,6 +30,7 @@ module.exports = {
 						if (data.length != 0) {
 							next();
 						} else {
+							res.status(403);
 							res.jsonp({
 								"msg": "You don't have permission to do this!",
 								status: "no"

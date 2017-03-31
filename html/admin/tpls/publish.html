@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-hide="isEdit">
         <label for="column">所属栏目</label>
         <input type="text" class="form-control" ng-model='belongtoColumn' readonly placeholder="点击选择所属栏目" ng-click='selectColumnInput()'>
     </div>
@@ -35,7 +35,7 @@
         <label for="container">文章内容</label>
         <textarea name="content" id="container" ></textarea>
     </div>
-    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="publish()">发布</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="publish()">保存并发布</button>
 </form>
 <div class="modal fade" id="seletColumnModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

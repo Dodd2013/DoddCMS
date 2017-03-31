@@ -56,7 +56,7 @@ define([], function() {
 			},
 			"402": {
 				"url": "publish",
-				"name": "投稿"
+				"name": "投稿/编辑"
 			},
 			"403": {
 				"url": "contentManage",

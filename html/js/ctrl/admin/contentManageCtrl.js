@@ -206,7 +206,7 @@ define(['angular', 'pnotify', 'jquery', 'bootstrapTableNg', 'bootstrapTableCN'],
 						$state.go('publish', { contentId: contentId });
 					} else if (op === 'delete') {
 						$scope.$apply(function () {
-							$scope.showRemove(item);
+							$scope.showRemove(contentId);
 						});
 					} else if (op === 'pass' || op === 'unpass' || op === 'notpass') {
 						$scope.pass(op, contentId);
@@ -232,35 +232,27 @@ define(['angular', 'pnotify', 'jquery', 'bootstrapTableNg', 'bootstrapTableCN'],
 						$('#contentTable').bootstrapTable('refresh');
 					});
 				};
-				$scope.showEdit = function (item) {
-					//修改内容按钮
-				};
-				$scope.showRemove = function (item) {
-					$scope.contentId = item.contentId;
+				$scope.showRemove = function (contentId) {
+					$scope.contentId = contentId;
 					$('#deleteModal').modal('show');
 				};
 				//删除导航逻辑
 				$scope.deleteContentBtn = function () {
 					$http({
 						url: config.api + '/content/delete',
-						method: 'POST',
+						method: 'GET',
 						withCredentials: true,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-							'Accept': "*/*"
-						},
-						transformRequest: $.param,
-						data: {
+						params: {
 							contentId: $scope.contentId
 						}
 					}).then(function (data) {
 						if (data.data.status === 'ok') {
 							new PNotify({
 								type: 'danger',
-								text: '\u5220\u9664\u6210\u529F'
+								text: '\u5220\u9664\u6587\u7AE0\u6210\u529F'
 							});
 							$('#deleteModal').modal('hide');
-							$('#contentIdTable').bootstrapTable('refresh');
+							$('#contentTable').bootstrapTable('refresh');
 						}
 					});
 				};
