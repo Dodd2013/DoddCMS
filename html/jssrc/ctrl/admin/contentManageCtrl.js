@@ -150,7 +150,7 @@ define(['angular', 'pnotify', 'jquery', 'bootstrapTableNg', 'bootstrapTableCN'],
 				};
 
 				function idFormatter(value, row, index) {
-					return `<a href="/content/${value}" target='_bank'>${value}</a>`
+					return `<a href="/content?contentId=${value}" target='_bank'>${value}</a>`
 				};
 
 				function timeFormatter(value, row, index) {

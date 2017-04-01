@@ -159,3 +159,14 @@ body {
     float:right !important;
     margin-left: 20px;
 }
+.margin-nav-top{
+    margin-top: 48px;
+}
+.padding-content{
+    padding-left: 80px;
+    padding-top: 20px;
+}
+#footer{
+    border-top:1px solid #666666;
+    padding-top: 10px;
+}

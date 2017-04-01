@@ -1,0 +1,1 @@
+"use strict";define(function(t,n,r){var o=t("angular"),e=t("ctrl/common/navCtrl"),c=t("ctrl/content/contentCtrl");o.module("content",[]).config(function(t){t.defaults.withCredentials=!0}).controller("navCtrl",e).controller("contentCtrl",c).filter("trustHtml",function(t){return function(n){return t.trustAsHtml(n)}}),o.bootstrap(document,["content"])});
