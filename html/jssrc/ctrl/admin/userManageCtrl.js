@@ -22,7 +22,9 @@ define(['angular'], function(angular) {
 		"ctrl": {
 			"name": CtrlName,
 			"fn": ['$scope', function($scope) {
-
+				$scope.msg="This is a msg!";
+				$scope.dataset=[{name:"Dodd121312",sex:"m"},{name:"ST",sex:"m"}];
+				//js逻辑写在这里
 			}]
 		}
 	};

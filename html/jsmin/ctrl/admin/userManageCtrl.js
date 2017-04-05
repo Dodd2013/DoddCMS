@@ -1,1 +1,1 @@
-"use strict";define(["angular"],function(e){var r="userManageCtrl";return{route:{path:"userManage",route:{url:"/userManage",templateUrl:"tpls/userManage.html",controller:r}},ctrl:{name:r,fn:["$scope",function(e){}]}}});
+"use strict";define(["angular"],function(e){var a="userManageCtrl";return{route:{path:"userManage",route:{url:"/userManage",templateUrl:"tpls/userManage.html",controller:a}},ctrl:{name:a,fn:["$scope",function(e){e.msg="This is a msg!",e.dataset=[{name:"Dodd121312",sex:"m"},{name:"ST",sex:"m"}]}]}}});
