@@ -36,8 +36,9 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 						$scope.reCreateTree();
 					});
 				};
+				$scope.onIndexPage = true;
 				$scope.createNewColumn = function () {
-					if ($scope.selected.type != 'root' && $scope.parentColumnId != '#') {
+					if ($scope.parentColumnId != '#' && $scope.selected.type != 'root') {
 						new PNotify({
 							type: 'warning',
 							text: '子栏目不允许有二级子栏目!'
@@ -62,7 +63,8 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 									parentColumnId: $scope.parentColumnId,
 									type: $scope.type,
 									columnName: $scope.columnName,
-									DESC: $scope.DESC
+									DESC: $scope.DESC,
+									onIndexPage: $scope.onIndexPage
 								}
 							}).then(function (data) {
 								new PNotify({
@@ -92,7 +94,8 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 						data: {
 							columnId: $scope.selected.id,
 							columnName: $scope.selectedcolumnName,
-							DESC: $scope.selectedDESC
+							DESC: $scope.selectedDESC,
+							onIndexPage: $scope.selectedOnIndexPage
 						}
 					}).then(function (data) {
 						new PNotify({
@@ -137,7 +140,7 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 				$scope.selectRootColumn = function () {
 					$scope.parentColumnName = "顶级父节点";
 					$scope.parentColumnId = '#';
-					$scope.type = 'root';
+					$scope.selected.type = $scope.type = 'root';
 					$scope.treeInstance.jstree(true).deselect_all();
 				};
 				$scope.selectColumn = function (node, selected, event) {
@@ -151,6 +154,7 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 					$scope.selectedcolumnName = $scope.parentColumnName = $scope.selected.text;
 					$scope.parentColumnId = $scope.selected.id;
 					$scope.selectedDESC = $scope.selected.DESC;
+					$scope.selectedOnIndexPage = $scope.selected.onIndexPage;
 					$scope.type = null;
 				};
 				$scope.treeEventsObj = {

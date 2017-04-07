@@ -14,6 +14,11 @@ var column = {
         type: Sequelize.STRING,
         allowNull: true
     },
+    onIndexPage:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
     type:{
         type: Sequelize.STRING,
         allowNull: true

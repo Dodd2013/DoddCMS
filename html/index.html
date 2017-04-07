@@ -14,10 +14,10 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-xs-4">
                 <img src="assets/img/logo.png" alt="logo">
             </div>
-            <div class="col-sm-offset-6 col-sm-2">
+            <div class="col-xs-offset-6 col-xs-2">
                 <p class="language"><a href="admin" title="admin">管理后台</a></p>
             </div>
         </div>
@@ -38,7 +38,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse-backup navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav" ng-controller="navCtrl">
-                                <li><a href="#">主页</a></li>
+                                <li><a href="/">主页</a></li>
                                 <li ng-repeat="x in navbar">
                                     <a href="{{x.url}}" ng-bind="x.itemName"></a>
                                 </li>
@@ -96,45 +96,13 @@
             <!-- <div class="swiper-scrollbar"></div> -->
         </div>
         <br/>
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="row" ng-controller="indexColumnCtrl" ng-cloak>
+            <div class="col-sm-4" ng-repeat="(key, value) in indexColumData">
                 <div class="panel panel-primary">
-                    <div class="panel-heading"><span class="fa fa-book"></span>&nbsp;栏目一<span class="pull-right"><a class="content-more" href="#" title="更多">更多</a></span></div>
+                    <div class="panel-heading"><span class="fa fa-book"></span>&nbsp;<span ng-bind="value.columnName"></span><span class="pull-right"><a class="content-more" ng-href="column/?columnId={{value.columnId}}" title="更多">更多</a></span></div>
                     <div class="panel-body">
                         <ul class="context-ul">
-                            <li><a href="#" title="">内容一</a></li>
-                            <li><a href="#" title="">内容二</a></li>
-                            <li><a href="#" title="">内容三</a></li>
-                            <li><a href="#" title="">内容四</a></li>
-                            <li><a href="#" title="">内容五</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading"><span class="fa fa-bookmark"></span>&nbsp;栏目二<span class="pull-right"><a class="content-more" href="#" title="更多">更多</a></span></div>
-                    <div class="panel-body">
-                        <ul class="context-ul">
-                            <li><a href="#" title="">内容一</a></li>
-                            <li><a href="#" title="">内容二</a></li>
-                            <li><a href="#" title="">内容三</a></li>
-                            <li><a href="#" title="">内容四</a></li>
-                            <li><a href="#" title="">内容五</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading"><span class="fa fa-cc"></span>&nbsp;栏目三<span class="pull-right"><a class="content-more" href="#" title="更多">更多</a></span></div>
-                    <div class="panel-body">
-                        <ul class="context-ul">
-                            <li><a href="#" title="">内容一</a></li>
-                            <li><a href="#" title="">内容二</a></li>
-                            <li><a href="#" title="">内容三</a></li>
-                            <li><a href="#" title="">内容四</a></li>
-                            <li><a href="#" title="">内容五</a></li>
+                            <li ng-repeat="(key1, content) in value.Content"><a ng-bind="content.simpleTitle" ng-href="/content/?contentId={{content.contentId}}" title=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -180,7 +148,7 @@
     <script type="text/javascript">
     var deps = ['view/index'];
     </script>
-    <script data-main="js/app.js" src="assets/js/require.js"></script>
+    <script data-main="js/app.js" src="assets/js/require.js" async></script>
 </body>
 
 </html>

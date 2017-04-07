@@ -27,4 +27,9 @@ router.post('/delete',function(req,res) {
 		res.jsonp(data);
 	});
 });
+router.get('/getColumnAndContentOnIndexPage',function(req,res) {
+	columnCtrl.getIndexPageCoumnAndContent().then(function(data) {
+		res.jsonp(data);
+	})
+});
 module.exports = router;

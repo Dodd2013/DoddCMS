@@ -120,6 +120,16 @@
 	"belongTo": null
 },{
 	"permission": {
+		"permissionId": "0009",
+		"actionUrl": "/column/getColumnAndContentOnIndexPage",
+		"method": "GET",
+		"permissionName": "getColumnAndContentOnIndexPage",
+		"DESC": "主页栏目获取",
+		"public": true
+	},
+	"belongTo": null
+},{
+	"permission": {
 		"permissionId": "0007",
 		"actionUrl": "/column",
 		"method": "GET",

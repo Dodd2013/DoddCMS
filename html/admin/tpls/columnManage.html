@@ -19,18 +19,23 @@
                         <h3 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">添加栏目</a></h3></div>
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                         <div class="panel-body">
-                            <form>
-                                <div class="form-group">
+                            <form class="row">
+                                <div class="form-group col-xs-12">
                                     <label for="parent">父栏目</label>
                                     <input type="text" id="parent" class="form-control" ng-model="parentColumnName" disabled placeholder="请在左侧选择一个栏目或者点击选择根栏目按钮">
                                     <input type="hidden" id="parentId" ng-model="parentColumnId" name="parent" value="">
                                     <input type="hidden" id="type" ng-model="type" name="type" value="">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-xs-9">
                                     <label for="columnName">栏目名称</label>
                                     <input type="text" id="columnName" ng-model="columnName" name="columnName" class="form-control" placeholder="栏目名称">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-xs-3 onIndexPage">
+                                    <label for="onIndexPage">
+                                      <input type="checkbox" id="onIndexPage" ng-model="onIndexPage" name="onIndexPage"> 是否在主页显示
+                                    </label>
+                                </div>
+                                <div class="form-group col-xs-12">
                                     <label for="columnDESS">栏目简介</label>
                                     <textarea rows="5" type="text" id="columnDESC" ng-model="DESC" name="columnDESC" class="form-control" placeholder="栏目简介"></textarea>
                                 </div>
@@ -52,13 +57,18 @@
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body">
-                        	<form>
-                        	    <div class="form-group">
+                        	<form class="row">
+                        	    <div class="form-group col-xs-9">
                         	        <label for="columnName">栏目名称</label>
                         	        <input type="text" id="selectColumnName" ng-model="selectedcolumnName" name="selectColumnName" class="form-control" placeholder="栏目名称">
                         	        <input type="hidden" id="Id" ng-model="selected.id" name="parent" value="">
                         	    </div>
-                        	    <div class="form-group">
+                                <div class="form-group col-xs-3 onIndexPage">
+                                    <label for="selectedOnIndexPage">
+                                      <input type="checkbox" id="selectedOnIndexPage" ng-model="selectedOnIndexPage" name="selectedOnIndexPage"> 是否在主页显示
+                                    </label>
+                                </div>
+                        	    <div class="form-group col-xs-12">
                         	        <label for="columnDESS">栏目简介</label>
                         	        <textarea rows="5" type="text" id="selectColumnDESC" ng-model="selectedDESC" name="selectColumnDESC" class="form-control" placeholder="栏目简介"></textarea>
                         	    </div>

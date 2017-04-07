@@ -1,14 +1,13 @@
 'use strict';
 
-define(['angular'], function (ng) {
-	require(['ctrl/index/headCtrl', 'ctrl/common/navCtrl', 'ctrl/index/swiperCtrl'
-	// 'directives/todoFocus', 
-	// 'directives/todoEscape',
-	// 'services/todoStorage'
-	], function (headCtrl, navCtrl, swiperCtrl) {
-		ng.module('index', []).config(function ($httpProvider) {
-			$httpProvider.defaults.withCredentials = true;
-		}).controller('headCtrl', headCtrl).controller('navCtrl', navCtrl).controller('swiperCtrl', swiperCtrl);
-		ng.bootstrap(document, ['index']);
-	});
+define(function (require, module, exports) {
+	var ng = require('angular');
+	var headCtrl = require('ctrl/index/headCtrl');
+	var navCtrl = require('ctrl/common/navCtrl');
+	var swiperCtrl = require('ctrl/index/swiperCtrl');
+	var indexColumnCtrl = require('ctrl/index/indexColumnCtrl');
+	ng.module('index', []).config(function ($httpProvider) {
+		$httpProvider.defaults.withCredentials = true;
+	}).controller('headCtrl', headCtrl).controller('navCtrl', navCtrl).controller('swiperCtrl', swiperCtrl).controller('indexColumnCtrl', indexColumnCtrl);
+	ng.bootstrap(document, ['index']);
 });
