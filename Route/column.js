@@ -12,6 +12,16 @@ router.get('/', function(req, res) {
 		res.jsonp(columnList);
 	});
 });
+router.get('/getColumnNameByColumnID', function(req, res) {
+	columnCtrl.getColumnNameByColumnID(req.query.columnId).then(function(data) {
+		res.jsonp(data);
+	});
+});
+router.get('/getContentListByColumnID', function(req, res) {
+	columnCtrl.getContentListByColumnID(req.query.columnId,JSON.parse(req.query.params)).then(function(data) {
+		res.jsonp({total:data.count,rows:data.rows});
+	});
+});
 router.post('/add', function(req, res) {
 	columnCtrl.addColumn(req.body).then(function(data) {
 		res.jsonp(data);

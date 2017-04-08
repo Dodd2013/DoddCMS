@@ -50,6 +50,31 @@ var columnCtrl = {
 				columnId: column.columnId
 			}
 		})
+	},
+	getContentListByColumnID: function(columnId, params) {
+		return Content.findAndCountAll({
+			where: {
+				columnId: columnId,
+				state: 1
+			},
+			attributes: [
+				'simpleTitle',
+				'contentId',
+				'viewCount',
+				'userName',
+				'updatedAt'
+			]
+		})
+	},
+	getColumnNameByColumnID: function(columnId) {
+		return Column.findOne({
+			where: {
+				columnId: columnId,
+			},
+			attributes: [
+				'columnName'
+			]
+		})
 	}
 }
 module.exports = columnCtrl;

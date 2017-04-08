@@ -187,3 +187,6 @@ body {
 .onIndexPage{
     margin-top: 30px;
 }
+.columnList{
+    list-style: none;
+}

@@ -1,0 +1,1 @@
+"use strict";define(["angular","config"],function(n,t){return["$scope","$http",function(n,e){t=t.config,e({url:t.api+"/column/getColumnAndContentOnIndexPage",method:"GET",withCredentials:!0}).then(function(t){n.indexColumData=t.data}),n.config=t.config}]});

@@ -130,6 +130,26 @@
 	"belongTo": null
 },{
 	"permission": {
+		"permissionId": "0010",
+		"actionUrl": "/column/getContentListByColumnID",
+		"method": "GET",
+		"permissionName": "getContentListByColumnID",
+		"DESC": "栏目内容列表获取",
+		"public": true
+	},
+	"belongTo": null
+},{
+	"permission": {
+		"permissionId": "0011",
+		"actionUrl": "/column/getColumnNameByColumnID",
+		"method": "GET",
+		"permissionName": "getColumnNameByColumnID",
+		"DESC": "栏目名称获取",
+		"public": true
+	},
+	"belongTo": null
+},{
+	"permission": {
 		"permissionId": "0007",
 		"actionUrl": "/column",
 		"method": "GET",
