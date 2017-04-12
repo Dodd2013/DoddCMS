@@ -39,4 +39,6 @@ Promise.all([
 			});
 		})();
 	}
+}).then(function() {
+	require('./initAdmin.js')();
 });

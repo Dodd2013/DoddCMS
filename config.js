@@ -1,4 +1,9 @@
 module.exports = {
+	"admin":{
+		"userName": 'Dodd',
+		"email": 'admin@DoddCMS.com',
+		"passWord": '123456'
+	},
 	"sessionConfig": {
 		"cookie": {
 			"maxAge": 1800000

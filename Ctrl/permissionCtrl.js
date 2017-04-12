@@ -9,6 +9,9 @@ module.exports = {
 			type: sequelize.QueryTypes.SELECT
 		});
 	},
+	getAllPermissions: function() {
+		return Permission.findAll();
+	},
 	middleware: function(req, res, next) {
 		Permission.findOne({
 			where: {

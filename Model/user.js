@@ -29,7 +29,7 @@ var user = {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [6, 16]
+            len: [30, 256]
         }
     }
 };
