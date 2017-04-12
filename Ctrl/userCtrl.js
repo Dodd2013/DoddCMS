@@ -8,6 +8,7 @@ var userCtrl = {
 		passWord
 	}) {
 		passWord=CryptoJS.MD5(passWord+config.secretKey).toString();
+		console.log(passWord);
 		var res={status: true};
 		return User.findOne({
 			where: {
