@@ -2,6 +2,12 @@ var Permission = require("../Model/permission");
 var user = require("../Model/user");
 var sequelize = require('../DAO/dao');
 module.exports = {
+    hasPremissionForUser: function (userName, permissionId) {
+        var sql = `select a.permissionId,a.actionUrl,a.permissionName,a.method,a.DESC from permission as a JOIN role_permission as b JOIN user_role as c WHERE a.permissionId=b.permissionId and c.roleId =b.roleId and c.userName='${ userName }' and a.permissionId = '${ permissionId }'`;
+        return sequelize.query(sql, {
+            type: sequelize.QueryTypes.SELECT
+        });
+    },
 	getPremissionInFunctionModelForUser: function(userName, FunctionModelId) {
 		var sql = `select a.permissionId,a.actionUrl,a.permissionName,a.method,a.DESC from permission as a JOIN role_permission as b JOIN user_role as c WHERE a.permissionId=b.permissionId and c.roleId =b.roleId and c.userName='${ userName }' and a.permissionId like '${ FunctionModelId }%'`;
 

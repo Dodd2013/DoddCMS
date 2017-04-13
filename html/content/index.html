@@ -82,6 +82,11 @@
             <div class="col-md-9 col-sm-12 padding-content">
                 <div ng-controller="contentCtrl">
                     <h1 ng-bind='content.contentTitle'></h1>
+                    <div>
+                        <small>发布时间:<span ng-bind='content.createdAt'></span> &nbsp;更新时间:<span
+                                ng-bind='content.updatedAt'></span>&nbsp;&nbsp;作者:<span
+                                ng-bind='content.userName'></span></small>
+                    </div>
                     <article ng-bind-html="content.contentWithHTML | trustHtml">
                     </article>
                 </div>

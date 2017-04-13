@@ -16,7 +16,7 @@ define(['angular', 'bootstrapTable', 'bootstrapTableNg', 'bootstrapTableCN', 'co
 		function GetQueryString(name) {
 			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 			var r = window.location.search.substr(1).match(reg);
-			if (r != null) return unescape(r[2]);
+            if (r != null) return decodeURIComponent(r[2]);
 			return null;
 		}
 		$http({
@@ -72,7 +72,7 @@ define(['angular', 'bootstrapTable', 'bootstrapTableNg', 'bootstrapTableCN', 'co
 					field: 'contentId',
 					title: '内容ID',
 					align: 'center',
-					valign: 'bottom',
+                    valign: 'middle',
 					visible: false
 				}, {
 					field: 'simpleTitle',
@@ -84,14 +84,14 @@ define(['angular', 'bootstrapTable', 'bootstrapTableNg', 'bootstrapTableCN', 'co
 				}, {
 					field: 'viewCount',
 					title: '浏览量',
-					align: 'left',
-					valign: 'top',
+                    align: 'center',
+                    valign: 'middle',
 					sortable: true
 				}, {
 					field: 'updatedAt',
 					title: '更新时间',
-					align: 'left',
-					valign: 'top',
+                    align: 'center',
+                    valign: 'middle',
 					formatter: timeFormatter,
 					sortable: true
 				}]

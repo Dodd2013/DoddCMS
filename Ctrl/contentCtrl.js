@@ -50,20 +50,28 @@ var contentCtrl = {
 			}
 		});
 	},
-	updateContentById:function(content) {
-		content.state=0;
-		return Content.update(content,{
-			where: {
-				contentId: content.contentId
-			}
-		});
-	},
-	deleteContent:function(contentId) {
-		return Content.destroy({
+	getPublicContentById:function (contentId) {
+		return Content.findOne({
 			where:{
-				contentId:contentId
+				contentId:contentId,
+				state:1
 			}
-		});;
-	}
+		})
+    },
+    updateContentById:function(content) {
+        content.state=0;
+        return Content.update(content,{
+            where: {
+                contentId: content.contentId
+            }
+        });
+    },
+    deleteContent:function(contentId) {
+        return Content.destroy({
+            where:{
+                contentId:contentId
+            }
+        });;
+    }
 }
 module.exports = contentCtrl;

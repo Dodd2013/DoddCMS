@@ -245,7 +245,7 @@
 		"method": "GET",
 		"permissionName": "passContent",
 		"DESC": "通过文章id获取文章",
-		"public": false
+		"public": true
 	},
 	"belongTo": 402
 },{

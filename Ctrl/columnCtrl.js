@@ -19,7 +19,7 @@ var columnCtrl = {
 	getIndexPageCoumnAndContent: function() {
 		return Column.findAll({
 			where: {
-				onIndexPage: 1,
+                onIndexPage: true,
 				type: {
 					$not: 'root'
 				}

@@ -27,6 +27,10 @@ define(function(require, module, exports) {
 					contentId:GetQueryString('contentId')
 				}
 			}).then(function(data) {
+                if (data.data != null) {
+                    data.data.createdAt = new Date(data.data.createdAt).toLocaleString();
+                    data.data.updatedAt = new Date(data.data.updatedAt).toLocaleString();
+                }
 				$scope.content = data.data;
 			}, function(data) {
 
