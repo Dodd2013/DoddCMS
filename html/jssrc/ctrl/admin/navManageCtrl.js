@@ -137,7 +137,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
                             clickToSelect: false,
                             formatter: opFormatter,
                             // 操作按钮单元格
-                        }]
+                        }] 
                     }
                 };
 
