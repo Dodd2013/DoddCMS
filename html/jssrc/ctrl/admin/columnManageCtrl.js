@@ -36,12 +36,18 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 						$scope.reCreateTree();
 					});
 				};
-				$scope.onIndexPage=true;
+				$scope.onIndexPage = true;
+				$scope.isRoot = false;
 				$scope.createNewColumn = function() {
-					if ($scope.parentColumnId != '#' && $scope.selected.type != 'root') {
+					if ($scope.parentColumnId !== '#' && $scope.selected.type != 'root') {
 						new PNotify({
 							type: 'warning',
 							text: '子栏目不允许有二级子栏目!'
+						});
+					} else if ($scope.parentColumnId !== '#' && $scope.isRoot === true) {
+						new PNotify({
+							type: 'warning',
+							text: '不允许有二级根栏目!'
 						});
 					} else {
 						if ($scope.columnName === '' || $scope.DESC === '') {
@@ -64,7 +70,8 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 									type: $scope.type,
 									columnName: $scope.columnName,
 									DESC: $scope.DESC,
-									onIndexPage:$scope.onIndexPage
+									onIndexPage: $scope.onIndexPage,
+									type: $scope.isRoot ? "root" : ""
 								}
 							}).then(function(data) {
 								new PNotify({
@@ -82,35 +89,43 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 					}
 				};
 				$scope.editColumn = function() {
-					$http({
-						url: config.api + '/column/edit',
-						method: 'POST',
-						withCredentials: true,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded',
-							'Accept': "*/*"
-						},
-						transformRequest: $.param,
-						data: {
-							columnId: $scope.selected.id,
-							columnName: $scope.selectedcolumnName,
-							DESC: $scope.selectedDESC,
-							onIndexPage:$scope.selectedOnIndexPage
-						}
-					}).then(function(data) {
+					if ($scope.selectParentColumnId !== '#' && $scope.selectIsRoot === true) {
 						new PNotify({
-							type: 'success',
-							text: '修改栏目成功!'
+							type: 'warning',
+							text: '不允许有二级根栏目!'
 						});
-						$scope.initJsTree();
-					}, function() {
-						new PNotify({
-							type: 'error',
-							text: '修改栏目失败!'
+					} else {
+						$http({
+							url: config.api + '/column/edit',
+							method: 'POST',
+							withCredentials: true,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+								'Accept': "*/*"
+							},
+							transformRequest: $.param,
+							data: {
+								columnId: $scope.selected.id,
+								columnName: $scope.selectedcolumnName,
+								DESC: $scope.selectedDESC,
+								onIndexPage: $scope.selectedOnIndexPage,
+								type: $scope.selectIsRoot ? "root" : ""
+							}
+						}).then(function(data) {
+							new PNotify({
+								type: 'success',
+								text: '修改栏目成功!'
+							});
+							$scope.initJsTree();
+						}, function() {
+							new PNotify({
+								type: 'error',
+								text: '修改栏目失败!'
+							});
 						});
-					});
+					}
 				};
-				$scope.deleteColumn=function() {
+				$scope.deleteColumn = function() {
 					$http({
 						url: config.api + '/column/delete',
 						method: 'POST',
@@ -136,26 +151,27 @@ define(['angular', 'jquery', 'jstree', 'ngJsTree', 'config', 'pnotify'], functio
 							text: '删除栏目失败!'
 						});
 					});
-					
+
 				};
 				$scope.selectRootColumn = function() {
 					$scope.parentColumnName = "顶级父节点";
 					$scope.parentColumnId = '#';
-					$scope.selected.type=$scope.type = 'root';
+					$scope.selected.type = $scope.type = 'root';
 					$scope.treeInstance.jstree(true).deselect_all()
 				};
 				$scope.selectColumn = function(node, selected, event) {
-					for(let key in $scope.originalData){
-						if($scope.originalData[key].id===selected.selected[0]){
-							$scope.selected=$scope.originalData[key];
+					for (let key in $scope.originalData) {
+						if ($scope.originalData[key].id === selected.selected[0]) {
+							$scope.selected = $scope.originalData[key];
 							break;
 						}
 					}
-					// $scope.selected = $scope.originalData[parseInt(selected.selected[0]) - 1];
+					$scope.selectIsRoot = $scope.selected.type === 'root' ? true : false;
 					$scope.selectedcolumnName = $scope.parentColumnName = $scope.selected.text;
 					$scope.parentColumnId = $scope.selected.id;
 					$scope.selectedDESC = $scope.selected.DESC;
-					$scope.selectedOnIndexPage=$scope.selected.onIndexPage;
+					$scope.selectParentColumnId = $scope.selected.parentColumnId;
+					$scope.selectedOnIndexPage = $scope.selected.onIndexPage;
 					$scope.type = null;
 				};
 				$scope.treeEventsObj = {

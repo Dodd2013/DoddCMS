@@ -7,7 +7,8 @@ var routes = {
 	"/logout": require("./Route/logout.js"),
 	"/navbar": require("./Route/navbar.js"),
 	"/column": require("./Route/column.js"),
-	"/content":require("./Route/content.js")
+	"/content":require("./Route/content.js"),
+	"/user":require("./Route/user.js")
 }
 module.exports = function(app) {
 

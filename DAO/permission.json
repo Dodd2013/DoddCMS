@@ -48,7 +48,7 @@
 		"public": true
 	},
 	"belongTo": null
-},{
+}, {
 	"permission": {
 		"permissionId": "0006",
 		"actionUrl": "/getNavBar",
@@ -58,97 +58,7 @@
 		"public": true
 	},
 	"belongTo": null
-},{
-	"permission": {
-		"permissionId": "2011",
-		"actionUrl": "/navbar",
-		"method": "GET",
-		"permissionName": "getNavNarManage",
-		"DESC": "首页导航管理获取数据",
-		"public": false
-	},
-	"belongTo": 201
-},{
-	"permission": {
-		"permissionId": "2012",
-		"actionUrl": "/navbar/add",
-		"method": "POST",
-		"permissionName": "addNavBar",
-		"DESC": "添加导航",
-		"public": false
-	},
-	"belongTo": 201
-},{
-	"permission": {
-		"permissionId": "2013",
-		"actionUrl": "/navbar/delete",
-		"method": "POST",
-		"permissionName": "deleteNavBar",
-		"DESC": "删除导航",
-		"public": false
-	},
-	"belongTo": 201
-},{
-	"permission": {
-		"permissionId": "2014",
-		"actionUrl": "/navbar/edit",
-		"method": "POST",
-		"permissionName": "editNavBar",
-		"DESC": "修改导航",
-		"public": false
-	},
-	"belongTo": 201
-},{
-	"permission": {
-		"permissionId": "2015",
-		"actionUrl": "/navbar/changeOrderBy",
-		"method": "POST",
-		"permissionName": "NavBarChangeOrderBy",
-		"DESC": "修改导航优先级",
-		"public": false
-	},
-	"belongTo": 201
-},{
-	"permission": {
-		"permissionId": "0008",
-		"actionUrl": "/getPermission",
-		"method": "GET",
-		"permissionName": "getPermission",
-		"DESC": "管理权限获取",
-		"public": true
-	},
-	"belongTo": null
-},{
-	"permission": {
-		"permissionId": "0009",
-		"actionUrl": "/column/getColumnAndContentOnIndexPage",
-		"method": "GET",
-		"permissionName": "getColumnAndContentOnIndexPage",
-		"DESC": "主页栏目获取",
-		"public": true
-	},
-	"belongTo": null
-},{
-	"permission": {
-		"permissionId": "0010",
-		"actionUrl": "/column/getContentListByColumnID",
-		"method": "GET",
-		"permissionName": "getContentListByColumnID",
-		"DESC": "栏目内容列表获取",
-		"public": true
-	},
-	"belongTo": null
-},{
-	"permission": {
-		"permissionId": "0011",
-		"actionUrl": "/column/getColumnNameByColumnID",
-		"method": "GET",
-		"permissionName": "getColumnNameByColumnID",
-		"DESC": "栏目名称获取",
-		"public": true
-	},
-	"belongTo": null
-},{
+}, {
 	"permission": {
 		"permissionId": "0007",
 		"actionUrl": "/column",
@@ -158,7 +68,137 @@
 		"public": true
 	},
 	"belongTo": null
-},{
+}, {
+	"permission": {
+		"permissionId": "0008",
+		"actionUrl": "/getPermission",
+		"method": "GET",
+		"permissionName": "getPermission",
+		"DESC": "管理权限获取",
+		"public": true
+	},
+	"belongTo": null
+}, {
+	"permission": {
+		"permissionId": "0009",
+		"actionUrl": "/column/getColumnAndContentOnIndexPage",
+		"method": "GET",
+		"permissionName": "getColumnAndContentOnIndexPage",
+		"DESC": "主页栏目获取",
+		"public": true
+	},
+	"belongTo": null
+}, {
+	"permission": {
+		"permissionId": "0010",
+		"actionUrl": "/column/getContentListByColumnID",
+		"method": "GET",
+		"permissionName": "getContentListByColumnID",
+		"DESC": "栏目内容列表获取",
+		"public": true
+	},
+	"belongTo": null
+}, {
+	"permission": {
+		"permissionId": "0011",
+		"actionUrl": "/column/getColumnNameByColumnID",
+		"method": "GET",
+		"permissionName": "getColumnNameByColumnID",
+		"DESC": "栏目名称获取",
+		"public": true
+	},
+	"belongTo": null
+}, {
+	"permission": {
+		"permissionId": "1011",
+		"actionUrl": "/user",
+		"method": "get",
+		"permissionName": "getUser",
+		"DESC": "获取用户",
+		"public": false
+	},
+	"belongTo": 101
+}, {
+	"permission": {
+		"permissionId": "1012",
+		"actionUrl": "/user/add",
+		"method": "POST",
+		"permissionName": "addUser",
+		"DESC": "添加用户",
+		"public": false
+	},
+	"belongTo": 101
+}, {
+	"permission": {
+		"permissionId": "1013",
+		"actionUrl": "/user/edit",
+		"method": "POST",
+		"permissionName": "editUser",
+		"DESC": "添加用户",
+		"public": false
+	},
+	"belongTo": 101
+}, {
+	"permission": {
+		"permissionId": "1014",
+		"actionUrl": "/user/delete",
+		"method": "POST",
+		"permissionName": "deleteUser",
+		"DESC": "添加用户",
+		"public": false
+	},
+	"belongTo": 101
+}, {
+	"permission": {
+		"permissionId": "2011",
+		"actionUrl": "/navbar",
+		"method": "GET",
+		"permissionName": "getNavNarManage",
+		"DESC": "首页导航管理获取数据",
+		"public": false
+	},
+	"belongTo": 201
+}, {
+	"permission": {
+		"permissionId": "2012",
+		"actionUrl": "/navbar/add",
+		"method": "POST",
+		"permissionName": "addNavBar",
+		"DESC": "添加导航",
+		"public": false
+	},
+	"belongTo": 201
+}, {
+	"permission": {
+		"permissionId": "2013",
+		"actionUrl": "/navbar/delete",
+		"method": "POST",
+		"permissionName": "deleteNavBar",
+		"DESC": "删除导航",
+		"public": false
+	},
+	"belongTo": 201
+}, {
+	"permission": {
+		"permissionId": "2014",
+		"actionUrl": "/navbar/edit",
+		"method": "POST",
+		"permissionName": "editNavBar",
+		"DESC": "修改导航",
+		"public": false
+	},
+	"belongTo": 201
+}, {
+	"permission": {
+		"permissionId": "2015",
+		"actionUrl": "/navbar/changeOrderBy",
+		"method": "POST",
+		"permissionName": "NavBarChangeOrderBy",
+		"DESC": "修改导航优先级",
+		"public": false
+	},
+	"belongTo": 201
+}, {
 	"permission": {
 		"permissionId": "4011",
 		"actionUrl": "/column/add",
@@ -168,7 +208,7 @@
 		"public": false
 	},
 	"belongTo": 401
-},{
+}, {
 	"permission": {
 		"permissionId": "4012",
 		"actionUrl": "/column/edit",
@@ -178,7 +218,7 @@
 		"public": false
 	},
 	"belongTo": 401
-},{
+}, {
 	"permission": {
 		"permissionId": "4013",
 		"actionUrl": "/column/delete",
@@ -188,7 +228,7 @@
 		"public": false
 	},
 	"belongTo": 401
-},{
+}, {
 	"permission": {
 		"permissionId": "4021",
 		"actionUrl": "/content/add",
@@ -198,7 +238,7 @@
 		"public": false
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4022",
 		"actionUrl": "/content",
@@ -208,7 +248,7 @@
 		"public": false
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4023",
 		"actionUrl": "/content/edit",
@@ -218,7 +258,7 @@
 		"public": false
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4024",
 		"actionUrl": "/content/delete",
@@ -228,7 +268,7 @@
 		"public": false
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4025",
 		"actionUrl": "/content/pass",
@@ -238,7 +278,7 @@
 		"public": false
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4026",
 		"actionUrl": "/content/getById",
@@ -248,7 +288,7 @@
 		"public": true
 	},
 	"belongTo": 402
-},{
+}, {
 	"permission": {
 		"permissionId": "4027",
 		"actionUrl": "/content/update",

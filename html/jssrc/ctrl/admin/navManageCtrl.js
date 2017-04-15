@@ -107,26 +107,26 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
                         }, {
                             field: 'url',
                             title: '地址',
-                            align: 'left',
-                            valign: 'top',
+                            align: 'center',
+                            valign: 'middle',
                         }, {
                             field: 'orderby',
                             title: '优先级',
-                            align: 'left',
-                            valign: 'top',
+                            align: 'center',
+                            valign: 'middle',
                             sortable: true
                         }, {
                             field: 'createdAt',
                             title: '创建时间',
-                            align: 'left',
-                            valign: 'top',
+                            align: 'center',
+                            valign: 'middle',
                             formatter: timeFormatter,
                             sortable: true
                         }, {
                             field: 'updatedAt',
                             title: '更新时间',
-                            align: 'left',
-                            valign: 'top',
+                            align: 'center',
+                            valign: 'middle',
                             formatter: timeFormatter,
                             sortable: true
                         }, {

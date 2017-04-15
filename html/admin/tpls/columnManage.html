@@ -3,7 +3,7 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-md-4 col-xs-12">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h3 class="panel-title">栏目列表</h3></div>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-8">
+        <div class="col-md-8 col-xs-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -20,17 +20,22 @@
                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                         <div class="panel-body">
                             <form class="row">
-                                <div class="form-group col-xs-12">
+                                <div class="form-group col-md-9 col-xs-12">
                                     <label for="parent">父栏目</label>
                                     <input type="text" id="parent" class="form-control" ng-model="parentColumnName" disabled placeholder="请在左侧选择一个栏目或者点击选择根栏目按钮">
                                     <input type="hidden" id="parentId" ng-model="parentColumnId" name="parent" value="">
                                     <input type="hidden" id="type" ng-model="type" name="type" value="">
                                 </div>
-                                <div class="form-group col-xs-9">
+                                <div class="form-group col-md-3 col-xs-12 onIndexPage">
+                                    <label for="isRoot">
+                                      <input type="checkbox" id="isRoot" ng-model="isRoot" value="root" name="isRoot"> 是否为根栏目
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-9 col-xs-12">
                                     <label for="columnName">栏目名称</label>
                                     <input type="text" id="columnName" ng-model="columnName" name="columnName" class="form-control" placeholder="栏目名称">
                                 </div>
-                                <div class="form-group col-xs-3 onIndexPage">
+                                <div class="form-group col-md-3 onIndexPage col-xs-12">
                                     <label for="onIndexPage">
                                       <input type="checkbox" id="onIndexPage" ng-model="onIndexPage" name="onIndexPage"> 是否在主页显示
                                     </label>
@@ -58,12 +63,17 @@
                     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                         <div class="panel-body">
                         	<form class="row">
-                        	    <div class="form-group col-xs-9">
+                        	    <div class="form-group col-md-6 col-xs-12">
                         	        <label for="columnName">栏目名称</label>
                         	        <input type="text" id="selectColumnName" ng-model="selectedcolumnName" name="selectColumnName" class="form-control" placeholder="栏目名称">
                         	        <input type="hidden" id="Id" ng-model="selected.id" name="parent" value="">
                         	    </div>
-                                <div class="form-group col-xs-3 onIndexPage">
+                                <div class="form-group col-md-3 col-xs-12 onIndexPage">
+                                    <label for="selectIsRoot">
+                                      <input type="checkbox" id="selectIsRoot" value="root" ng-model="selectIsRoot" name="selectIsRoot"> 是否为根栏目
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-3 col-xs-12 onIndexPage">
                                     <label for="selectedOnIndexPage">
                                       <input type="checkbox" id="selectedOnIndexPage" ng-model="selectedOnIndexPage" name="selectedOnIndexPage"> 是否在主页显示
                                     </label>
