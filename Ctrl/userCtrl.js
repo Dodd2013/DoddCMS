@@ -36,6 +36,21 @@ var userCtrl = {
 		passWord = CryptoJS.MD5(passWord + config.secretKey).toString();
 		return User.findOrCreate({where: {userName: userName}, defaults: {passWord:passWord,email:email,nickName:nickName,trueName:trueName}});
 	},
+	editUser: function(user) {
+		user.passWord=CryptoJS.MD5(user.passWord + config.secretKey).toString();
+		return User.update(user, {
+			where: {
+				userName: user.userName
+			}
+		});
+	},
+	deleteUser: function(user) {
+		return User.destroy({
+			where: {
+				userName:user.userName
+			}
+		});
+	},
 	getUserByParams:function(params) {
 		var p = {};
 		if (params.sort && (params.sort in User.attributes)) {

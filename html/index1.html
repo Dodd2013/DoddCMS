@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head ng-controller="headCtrl">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title ng-cloak class="ng-cloak">主页- {{config.projectName}} </title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index1.css">
+    <link rel="stylesheet" href="assets/css/swiper-3.4.1.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+</head>
+
+<body class="container-fluid">
+    <header>
+        <div class="container header-logo">
+            <div class="row">
+                <div class="col-sm-7">
+                    <img height="60px;" src="assets/img/logo.png" alt="logo">
+                </div>
+                <div class="col-sm-5">
+                    <div class="row pull-right language">
+                        中文 &nbsp|&nbsp English &nbsp|&nbsp
+                        <a href="admin" title="admin">管理后台</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row pull-right">
+                        <span class="hottel">热线电话:</span>xxx-xxx-xxx
+                        <form class="searchform" action="search" method="get" accept-charset="utf-8">
+                            <input class="serachinput" type="text" name="" value="" placeholder="">
+                            <button type="submit" class="searchbtn"><span class="glyphicon glyphicon-search"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mynavbar" ng-controller="navCtrl">
+            <nav class="container">
+                <ul class="navul text-center">
+                    <span>|</span>
+                    <li class="navli active"><a href="/">主页</a></li>
+                    <span>|</span>
+                    <li class="navli" ng-repeat="x in navbar">
+                        <a href="{{x.url}}"  ng-bind="x.itemName"></a>
+                    <span>|</span></li>
+                    
+                </ul>
+            </nav>
+        </div>
+        <div class="swiper-container" ng-cloak ng-controller="swiperCtrl">
+            <div class="swiper-wrapper">
+                <div ng-repeat="x in imgs" class="swiper-slide">
+                    <img class="swiper-index-img" ng-src="{{ x.src }}" ng-alt="{{ x.alt }}" /></div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div ng-cloak class="swiper-pagination"></div>
+            <!-- 如果需要导航按钮 -->
+            <div ng-cloak class="swiper-button-prev"></div>
+            <div ng-cloak class="swiper-button-next"></div>
+            <!-- 如果需要滚动条 -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+        <!-- <div id="slideBox" class="slideBox">
+            <div class="hd">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="bd">
+                <ul>
+                    <li>
+                        <a href="http://www.SuperSlide2.com" target="_blank"><img src="banner1.png" /></a>
+                    </li>
+                    <li>
+                        <a href="http://www.SuperSlide2.com" target="_blank"><img src="banner1.png" /></a>
+                    </li>
+                    <li>
+                        <a href="http://www.SuperSlide2.com" target="_blank"><img src="banner1.png" /></a>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+    </header>
+    <script type="text/javascript">
+    var deps = ['view/index'];
+    </script>
+    <script data-main="js/app.js" src="assets/js/require.js" async></script>
+</body>
+
+</html>

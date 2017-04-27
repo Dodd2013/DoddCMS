@@ -7,7 +7,9 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular'], function (angular) {
+define(['angular', 'pnotify'], function (angular) {
+    var PNotify = require('pnotify');
+    PNotify.prototype.options.styling = "bootstrap3";
     var CtrlName = "userManageCtrl";
     return {
         "route": {
@@ -40,7 +42,9 @@ define(['angular'], function (angular) {
                             url: config.api + '/getPermission',
                             method: 'GET',
                             withCredentials: true,
-                            params: { functionModel: 101 }
+                            params: {
+                                functionModel: 101
+                            }
                         }).then(function (data) {
                             $scope.premission = data.data;
                             var _iteratorNormalCompletion = true;
@@ -79,8 +83,7 @@ define(['angular'], function (angular) {
                             return getdata;
                         }).then(function (data) {
                             params.success(data.data);
-                        });
-                        ;
+                        });;
                     } else {
                         getdata.then(function (data) {
                             params.success(data.data);
@@ -109,6 +112,7 @@ define(['angular'], function (angular) {
                         minimumCountColumns: 2,
                         clickToSelect: false,
                         maintainSelected: true,
+                        uniqueId: 'userName',
                         columns: [{
                             field: 'userName',
                             title: '用户名',
@@ -154,38 +158,151 @@ define(['angular'], function (angular) {
                         }]
                     }
                 };
+
                 function timeFormatter(value, row, index) {
                     if (value == null) return '未知时间';
                     var date = new Date(value);
                     var localeString = date.toLocaleString();
                     return localeString;
                 };
+
                 function opFormatter(value, row, index) {
                     var editBtn = '';
                     var deleteBtn = '';
                     if ($scope.editUser) {
-                        editBtn = '<a data-op=\'edit\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'编辑用户\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
+                        editBtn = '<a data-op="edit" data-userName="' + row.userName + '"  class="opBtn" title="\u7F16\u8F91\u7528\u6237"><span class="glyphicon glyphicon-edit"></span></a>';
                     }
                     if ($scope.deleteUser) {
-                        deleteBtn = '<a data-op=\'delete\' data-orderby=\'' + row.orderby + '\' data-url=\'' + row.url + '\' data-itemName=\'' + row.itemName + '\' data-itemId=\'' + row.itemId + '\' class=\'opBtn\' title=\'删除用户\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
+                        deleteBtn = '<a data-op="delete" data-userName="' + row.userName + '" class="opBtn" title="\u5220\u9664\u7528\u6237"><span class="glyphicon glyphicon-trash"></span></a>';
                     }
                     return editBtn + deleteBtn;
                 };
+                $scope.addOrEdit = 'add';
+                $scope.addOrEditBool = false; //add
+                $('#userTable').on('click', '.opBtn', function (e) {
+                    var op = $(e.target).parent().attr('data-op');
+                    var item = $('#userTable').bootstrapTable('getRowByUniqueId', $(e.currentTarget).attr('data-userName'));
+                    if (op === 'edit') {
+                        $scope.$apply(function () {
+                            $scope.showEdit(item);
+                        });
+                    } else if (op === 'delete') {
+                        $scope.$apply(function () {
+                            $scope.showRemove(item);
+                        });
+                    }
+                });
                 $scope.showAdd = function () {
                     $scope.addOrEdit = 'add';
+                    $scope.addOrEditBool = false;
+                    $scope.userName = $scope.email = $scope.passWord = $scope.nickName = $scope.trueName = '';
                     $('#addAndEditModal').modal('show');
                 };
                 $scope.showEdit = function (item) {
-                    $scope.navId = item.itemId;
+                    $scope.userName = item.userName;
                     $scope.addOrEdit = 'edit';
-                    $scope.navName = item.itemName;
-                    $scope.navUrl = item.url;
-                    $scope.navOrderBy = item.orderby;
+                    $scope.addOrEditBool = true;
+                    $scope.email = item.email;
+                    $scope.passWord = '';
+                    $scope.nickName = item.nickName;
+                    $scope.trueName = item.trueName;
                     $('#addAndEditModal').modal('show');
                 };
                 $scope.showRemove = function (item) {
-                    $scope.navId = item.itemId;
+                    $scope.userName = item.userName;
                     $('#deleteModal').modal('show');
+                };
+                //删除导航逻辑
+                $scope.deleteNavBtn = function () {
+                    $http({
+                        url: config.api + '/user/delete',
+                        method: 'POST',
+                        withCredentials: true,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Accept': "*/*"
+                        },
+                        transformRequest: $.param,
+                        data: {
+                            userName: $scope.userName
+                        }
+                    }).then(function (data) {
+                        if (data.data.status === 'ok') {
+                            new PNotify({
+                                type: 'danger',
+                                text: '\u5220\u9664\u6210\u529F'
+                            });
+                            $scope.userName = $scope.email = $scope.passWord = $scope.nickName = $scope.trueName = '';
+                            $('#deleteModal').modal('hide');
+                            $('#userTable').bootstrapTable('refresh');
+                        }
+                    });
+                };
+                //添加导航逻辑
+                $scope.addAndEditNavBtn = function () {
+                    if ($scope.addOrEdit == 'edit') {
+                        $http({
+                            url: config.api + '/user/edit',
+                            method: 'POST',
+                            withCredentials: true,
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'Accept': "*/*"
+                            },
+                            transformRequest: $.param,
+                            data: {
+                                userName: $scope.userName,
+                                email: $scope.email,
+                                passWord: $scope.passWord,
+                                nickName: $scope.nickName,
+                                trueName: $scope.trueName
+                            }
+                        }).then(function (data) {
+                            new PNotify({
+                                type: 'info',
+                                text: '\u4FEE\u6539\u6210\u529F'
+                            });
+                            $scope.userName = $scope.email = $scope.passWord = $scope.nickName = $scope.trueName = '';
+                            $('#addAndEditModal').modal('hide');
+                            $('#userTable').bootstrapTable('refresh');
+                        }, function (data) {
+                            new PNotify({
+                                type: 'error',
+                                text: '\u4FEE\u6539\u5931\u8D25'
+                            });
+                        });
+                    } else if ($scope.addOrEdit == 'add') {
+                        $http({
+                            url: config.api + '/user/add',
+                            method: 'POST',
+                            withCredentials: true,
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'Accept': "*/*"
+                            },
+                            transformRequest: $.param,
+                            data: {
+                                userName: $scope.userName,
+                                email: $scope.email,
+                                passWord: $scope.passWord,
+                                nickName: $scope.nickName,
+                                trueName: $scope.trueName
+                            }
+                        }).then(function (data) {
+                            new PNotify({
+                                type: 'info',
+                                text: '\u6DFB\u52A0\u6210\u529F'
+                            });
+                            $scope.userName = $scope.email = $scope.passWord = $scope.nickName = $scope.trueName = '';
+                            $('#addAndEditModal').modal('hide');
+                            $('#userTable').bootstrapTable('refresh');
+                        }, function (data) {
+                            new PNotify({
+                                type: 'error',
+                                text: '\u6DFB\u52A0\u5931\u8D25'
+                            });
+                        });
+                    }
                 };
             }]
         }

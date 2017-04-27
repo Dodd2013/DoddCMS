@@ -18,7 +18,8 @@ router.post('/edit', function(req, res, next) {
 });
 router.post('/delete', function(req, res, next) {
 	userCtrl.deleteUser(req.body).then(function(data) {
-		if(data==1)res.jsonp({status:'ok'});
+		if(data===1)res.jsonp({status:'ok'});
+		if(data===0)res.jsonp({status:'no'});
 	});
 });
 module.exports = router;
