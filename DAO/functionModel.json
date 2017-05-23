@@ -35,12 +35,6 @@
 	"adminUrl":"",
 	"DESC":"2系统设置模块-02导航栏管理"
 },{
-	"functionModelId":"203",
-	"parentFunctionModelId":"2",
-	"functionModelName":"数据库备份",
-	"adminUrl":"",
-	"DESC":"2系统设置模块-03数据库备份"
-},{
 	"functionModelId":"3",
 	"parentFunctionModelId":"0",
 	"functionModelName":"权限管理",

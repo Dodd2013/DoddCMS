@@ -153,7 +153,7 @@
 		"permissionId": "2011",
 		"actionUrl": "/navbar",
 		"method": "GET",
-		"permissionName": "getNavNarManage",
+		"permissionName": "getNavBarManage",
 		"DESC": "首页导航管理获取数据",
 		"public": false
 	},
@@ -190,15 +190,75 @@
 	"belongTo": 201
 }, {
 	"permission": {
-		"permissionId": "2015",
-		"actionUrl": "/navbar/changeOrderBy",
-		"method": "POST",
-		"permissionName": "NavBarChangeOrderBy",
-		"DESC": "修改导航优先级",
+		"permissionId": "3011",
+		"actionUrl": "/role",
+		"method": "GET",
+		"permissionName": "getRoleManage",
+		"DESC": "获取角色",
 		"public": false
 	},
-	"belongTo": 201
+	"belongTo": 301
 }, {
+	"permission": {
+		"permissionId": "3012",
+		"actionUrl": "/role/add",
+		"method": "POST",
+		"permissionName": "addRole",
+		"DESC": "添加角色",
+		"public": false
+	},
+	"belongTo": 301
+}, {
+	"permission": {
+		"permissionId": "3013",
+		"actionUrl": "/role/delete",
+		"method": "POST",
+		"permissionName": "deleteRole",
+		"DESC": "删除角色",
+		"public": false
+	},
+	"belongTo": 301
+}, {
+	"permission": {
+		"permissionId": "3014",
+		"actionUrl": "/role/edit",
+		"method": "POST",
+		"permissionName": "editRole",
+		"DESC": "修改角色",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
+		"permissionId": "3017",
+		"actionUrl": "/userRole",
+		"method": "GET",
+		"permissionName": "getRoleManage",
+		"DESC": "获取某用户角色",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
+		"permissionId": "3015",
+		"actionUrl": "/userRole/add",
+		"method": "POST",
+		"permissionName": "addUserRole",
+		"DESC": "分配角色",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
+		"permissionId": "3016",
+		"actionUrl": "/userRole/delete",
+		"method": "POST",
+		"permissionName": "deleteUserRole",
+		"DESC": "删除分配角色",
+		"public": false
+	},
+	"belongTo": 301
+},{
 	"permission": {
 		"permissionId": "4011",
 		"actionUrl": "/column/add",

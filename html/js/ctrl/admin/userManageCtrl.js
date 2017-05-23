@@ -23,10 +23,10 @@ define(['angular', 'pnotify'], function (angular) {
         },
         "ctrl": {
             "name": CtrlName,
-            "fn": ['$scope', '$http', function ($scope, $http) {
+            "fn": ['$scope', '$http', '$state', function ($scope, $http, $state) {
                 $scope.premission = null;
                 $scope.canAddUser = true; //true的时候隐藏
-                $scope.editUser = $scope.deleteNavBtn = false;
+                $scope.editUser = $scope.deleteNavBtn = $scope.editUserRole = false;
                 //获取数据用的ajax
                 $scope.ajaxRequest = function (params) {
                     // data you need
@@ -63,6 +63,9 @@ define(['angular', 'pnotify'], function (angular) {
                                     }
                                     if (pms.permissionName === 'deleteUser') {
                                         $scope.deleteUser = true;
+                                    }
+                                    if (pms.permissionName === 'editUserRole') {
+                                        $scope.editUserRole = true;
                                     }
                                 }
                             } catch (err) {
@@ -169,13 +172,18 @@ define(['angular', 'pnotify'], function (angular) {
                 function opFormatter(value, row, index) {
                     var editBtn = '';
                     var deleteBtn = '';
+                    var editUserRole = '';
                     if ($scope.editUser) {
                         editBtn = '<a data-op="edit" data-userName="' + row.userName + '"  class="opBtn" title="\u7F16\u8F91\u7528\u6237"><span class="glyphicon glyphicon-edit"></span></a>';
                     }
                     if ($scope.deleteUser) {
                         deleteBtn = '<a data-op="delete" data-userName="' + row.userName + '" class="opBtn" title="\u5220\u9664\u7528\u6237"><span class="glyphicon glyphicon-trash"></span></a>';
                     }
-                    return editBtn + deleteBtn;
+                    if (true) {
+                        //$scope.editUserRole
+                        editUserRole = '<a data-op="editUserRole" data-userName="' + row.userName + '" class="opBtn" title="\u5206\u914D\u89D2\u8272"><span class="glyphicon glyphicon-plus"></span></a>';
+                    }
+                    return editBtn + deleteBtn + editUserRole;
                 };
                 $scope.addOrEdit = 'add';
                 $scope.addOrEditBool = false; //add
@@ -190,6 +198,8 @@ define(['angular', 'pnotify'], function (angular) {
                         $scope.$apply(function () {
                             $scope.showRemove(item);
                         });
+                    } else if (op === 'editUserRole') {
+                        $state.go("userRoleManage", { 'userName': item.userName });
                     }
                 });
                 $scope.showAdd = function () {

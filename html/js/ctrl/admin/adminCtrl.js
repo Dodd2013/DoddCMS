@@ -63,7 +63,7 @@ define(['angular', 'config', 'jquery', 'pnotify'], function (angular, config, $,
 			"nav": ["301", "302"]
 		}, {
 			"title": "2",
-			"nav": ["201", "202", "203"]
+			"nav": ["201", "202"]
 		}];
 		$http({
 			url: config.api + '/login/status',

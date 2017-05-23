@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 
-define(['angular','pnotify'], function(angular) {
+define(['angular', 'pnotify'], function(angular) {
     var PNotify = require('pnotify');
     PNotify.prototype.options.styling = "bootstrap3";
     var CtrlName = "userManageCtrl";
@@ -23,10 +23,10 @@ define(['angular','pnotify'], function(angular) {
         },
         "ctrl": {
             "name": CtrlName,
-            "fn": ['$scope', '$http', function($scope, $http) {
+            "fn": ['$scope', '$http','$state', function($scope, $http,$state) {
                 $scope.premission = null;
                 $scope.canAddUser = true; //true的时候隐藏
-                $scope.editUser = $scope.deleteNavBtn = false;
+                $scope.editUser = $scope.deleteNavBtn = $scope.editUserRole = false;
                 //获取数据用的ajax
                 $scope.ajaxRequest = function(params) {
                     // data you need
@@ -56,6 +56,9 @@ define(['angular','pnotify'], function(angular) {
                                 }
                                 if (pms.permissionName === 'deleteUser') {
                                     $scope.deleteUser = true;
+                                }
+                                if (pms.permissionName === 'editUserRole') {
+                                    $scope.editUserRole = true;
                                 }
                             }
                             return getdata;
@@ -149,16 +152,20 @@ define(['angular','pnotify'], function(angular) {
                 function opFormatter(value, row, index) {
                     var editBtn = '';
                     var deleteBtn = '';
+                    var editUserRole='';
                     if ($scope.editUser) {
                         editBtn = `<a data-op="edit" data-userName="${row.userName}"  class="opBtn" title="编辑用户"><span class="glyphicon glyphicon-edit"></span></a>`;
                     }
                     if ($scope.deleteUser) {
                         deleteBtn = `<a data-op="delete" data-userName="${row.userName}" class="opBtn" title="删除用户"><span class="glyphicon glyphicon-trash"></span></a>`;
                     }
-                    return editBtn + deleteBtn;
+                    if (true) {//$scope.editUserRole
+                        editUserRole = `<a data-op="editUserRole" data-userName="${row.userName}" class="opBtn" title="分配角色"><span class="glyphicon glyphicon-plus"></span></a>`;
+                    }
+                    return editBtn + deleteBtn + editUserRole;
                 };
                 $scope.addOrEdit = 'add';
-                $scope.addOrEditBool=false;//add
+                $scope.addOrEditBool = false; //add
                 $('#userTable').on('click', '.opBtn', function(e) {
                     let op = $(e.target).parent().attr('data-op');
                     let item = $('#userTable').bootstrapTable('getRowByUniqueId', $(e.currentTarget).attr('data-userName'));
@@ -171,18 +178,20 @@ define(['angular','pnotify'], function(angular) {
                         $scope.$apply(function() {
                             $scope.showRemove(item);
                         });
+                    }else if (op === 'editUserRole') {
+                        $state.go("userRoleManage",{'userName':item.userName});
                     }
                 });
                 $scope.showAdd = function() {
                     $scope.addOrEdit = 'add';
-                    $scope.addOrEditBool=false;
+                    $scope.addOrEditBool = false;
                     $scope.userName = $scope.email = $scope.passWord = $scope.nickName = $scope.trueName = '';
                     $('#addAndEditModal').modal('show');
                 };
                 $scope.showEdit = function(item) {
                     $scope.userName = item.userName;
                     $scope.addOrEdit = 'edit';
-                    $scope.addOrEditBool=true;
+                    $scope.addOrEditBool = true;
                     $scope.email = item.email;
                     $scope.passWord = '';
                     $scope.nickName = item.nickName;
@@ -232,11 +241,11 @@ define(['angular','pnotify'], function(angular) {
                             },
                             transformRequest: $.param,
                             data: {
-                                userName:$scope.userName,
-                                email:$scope.email,
-                                passWord:$scope.passWord,
-                                nickName:$scope.nickName,
-                                trueName:$scope.trueName
+                                userName: $scope.userName,
+                                email: $scope.email,
+                                passWord: $scope.passWord,
+                                nickName: $scope.nickName,
+                                trueName: $scope.trueName
                             }
                         }).then(function(data) {
                             new PNotify({
@@ -263,11 +272,11 @@ define(['angular','pnotify'], function(angular) {
                             },
                             transformRequest: $.param,
                             data: {
-                                userName:$scope.userName,
-                                email:$scope.email,
-                                passWord:$scope.passWord,
-                                nickName:$scope.nickName,
-                                trueName:$scope.trueName
+                                userName: $scope.userName,
+                                email: $scope.email,
+                                passWord: $scope.passWord,
+                                nickName: $scope.nickName,
+                                trueName: $scope.trueName
                             }
                         }).then(function(data) {
                             new PNotify({

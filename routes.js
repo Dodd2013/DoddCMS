@@ -8,7 +8,9 @@ var routes = {
 	"/navbar": require("./Route/navbar.js"),
 	"/column": require("./Route/column.js"),
 	"/content":require("./Route/content.js"),
-	"/user":require("./Route/user.js")
+	"/user":require("./Route/user.js"),
+	"/role":require("./Route/role.js"),
+	"/userRole":require("./Route/userRole.js")
 }
 module.exports = function(app) {
 

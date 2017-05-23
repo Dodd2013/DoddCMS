@@ -18,7 +18,7 @@ module.exports = {
 		}
 	},
 	"mysqlConfig": {
-		"dbhost": "localhost",
+		"dbhost": "127.0.0.1",
 		"dbname": "test",
 		"dbuser": "root",
 		"dbpwd": "",
