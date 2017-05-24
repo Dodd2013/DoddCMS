@@ -7,7 +7,8 @@ Promise.all([
 	models.permission.sync( /*{force: true}*/ ),
 	models.functionModel.sync(),
 	models.column.sync().then(function() {return models.content.sync()}),
-	models.navbar.sync()
+	models.navbar.sync(),
+	models.ad.sync()
 ]).then(function() {
 	//基础表建完之后建立关系表
 	require("../Model/relations/user_content");

@@ -5,5 +5,6 @@ module.exports={
 	functionModel:require("../Model/functionModel"),
 	column:require("../Model/column"),
 	content:require("../Model/content"),
-	navbar:require("../Model/navbar")
+	navbar:require("../Model/navbar"),
+	ad:require("../Model/ad")
 }

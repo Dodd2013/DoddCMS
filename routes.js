@@ -11,7 +11,8 @@ var routes = {
 	"/user":require("./Route/user.js"),
 	"/role":require("./Route/role.js"),
 	"/userRole":require("./Route/userRole.js"),
-	"/rolePermission":require("./Route/rolePermission.js")
+	"/rolePermission":require("./Route/rolePermission.js"),
+	"/ad":require("./Route/ad.js")
 }
 module.exports = function(app) {
 

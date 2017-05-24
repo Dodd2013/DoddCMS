@@ -190,6 +190,46 @@
 	"belongTo": 201
 }, {
 	"permission": {
+		"permissionId": "2020",
+		"actionUrl": "/ad",
+		"method": "GET",
+		"permissionName": "addAd",
+		"DESC": "获取广告位",
+		"public": false
+	},
+	"belongTo": 202
+},{
+	"permission": {
+		"permissionId": "2021",
+		"actionUrl": "/ad/add",
+		"method": "POST",
+		"permissionName": "addAd",
+		"DESC": "添加广告位",
+		"public": false
+	},
+	"belongTo": 202
+},{
+	"permission": {
+		"permissionId": "2022",
+		"actionUrl": "/ad/edit",
+		"method": "POST",
+		"permissionName": "editAd",
+		"DESC": "修改广告位",
+		"public": false
+	},
+	"belongTo": 202
+},{
+	"permission": {
+		"permissionId": "2023",
+		"actionUrl": "/ad/delete",
+		"method": "POST",
+		"permissionName": "deleteAd",
+		"DESC": "删除广告位",
+		"public": false
+	},
+	"belongTo": 202
+}, {
+	"permission": {
 		"permissionId": "3011",
 		"actionUrl": "/role",
 		"method": "GET",

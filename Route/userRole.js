@@ -3,7 +3,7 @@ var router = express.Router();
 var userRoleCtrl = require("../Ctrl/userRoleCtrl");
 router.get('/', function(req, res, next) {
 	userRoleCtrl.getUserRoleByParams(req.query).then(function(data) {
-		res.jsonp({total:data.length,rows:data});//
+		res.jsonp(data);//
 	})
 });
 router.post('/add', function(req, res, next) {
