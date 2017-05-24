@@ -1,1 +1,56 @@
-todo
+<div ng-show="!role">
+	请从角色列表转跳到此页面!
+</div>
+<div ng-show="role">
+	<h3 class="text-center">{{role.DESC}} 权限分配</h3>
+	<div id="toolbar">
+    	<div class="form-inline btn-group" role="form" ng-hide="canAddrole">
+        	<button id="add" type="button" class="btn btn-default" ng-click="showAdd()"><span class="glyphicon glyphicon-plus"></span></button>
+    	</div>
+	</div>
+	<table id='RolePermissionTable' class="UserRoleTable" bs-table-control="tableCtrl"></table>
+	<!-- Modal -->
+	<div class="modal fade" id="addAndEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <form>
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title" id="myModalLabel">分配权限</h4>
+	                </div>
+	                <div class="modal-body">
+	                    <div class="form-group">
+	                        <label for="roleName">权限名称</label>
+	                        <select class="form-control" ng-model="datax.selectRole" placeholder="权限名称" ng-options="permission as permission.DESC for permission in permissionList track by permission.permissionId">
+	                        </select>
+	                    </div>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="submit" class="btn btn-primary" ng-click="addAndEditRoleBtn()">提交</button>
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <form>
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title" id="deleteModalLabel">删除权限</h4>
+	                </div>
+	                <div class="modal-body">
+	                    <input type="hidden" ng-model='roleId' class="form-control" name='roleId' id="roleId">
+	                    <h3>你确定要删除该项目(将无法撤销)</h3>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="submit" class="btn btn-danger" ng-click="deleteRolePermissionBtn()">确定删除</button>
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+</div>

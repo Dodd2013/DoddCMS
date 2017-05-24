@@ -134,7 +134,7 @@
 		"actionUrl": "/user/edit",
 		"method": "POST",
 		"permissionName": "editUser",
-		"DESC": "添加用户",
+		"DESC": "修改用户",
 		"public": false
 	},
 	"belongTo": 101
@@ -144,7 +144,7 @@
 		"actionUrl": "/user/delete",
 		"method": "POST",
 		"permissionName": "deleteUser",
-		"DESC": "添加用户",
+		"DESC": "删除用户",
 		"public": false
 	},
 	"belongTo": 101
@@ -260,6 +260,36 @@
 	"belongTo": 301
 },{
 	"permission": {
+		"permissionId": "3018",
+		"actionUrl": "/rolePermission",
+		"method": "GET",
+		"permissionName": "getRolePermission",
+		"DESC": "获取某角色权限",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
+		"permissionId": "3019",
+		"actionUrl": "/rolePermission/add",
+		"method": "POST",
+		"permissionName": "addRolePermission",
+		"DESC": "分配权限",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
+		"permissionId": "301a",
+		"actionUrl": "/rolePermission/delete",
+		"method": "POST",
+		"permissionName": "deleteRolePermission",
+		"DESC": "删除分配权限",
+		"public": false
+	},
+	"belongTo": 301
+},{
+	"permission": {
 		"permissionId": "4011",
 		"actionUrl": "/column/add",
 		"method": "POST",
@@ -305,16 +335,6 @@
 		"method": "GET",
 		"permissionName": "getContentList",
 		"DESC": "获取文章管理列表",
-		"public": false
-	},
-	"belongTo": 402
-}, {
-	"permission": {
-		"permissionId": "4023",
-		"actionUrl": "/content/edit",
-		"method": "POST",
-		"permissionName": "editContent",
-		"DESC": "修改文章",
 		"public": false
 	},
 	"belongTo": 402

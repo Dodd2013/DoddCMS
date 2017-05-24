@@ -25,7 +25,7 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
         },
         "ctrl": {
             "name": CtrlName,
-            "fn": ['$scope', '$http', function ($scope, $http) {
+            "fn": ['$scope', '$http', '$state', function ($scope, $http, $state) {
                 $scope.premission = null;
                 $scope.canAddRole = true; //true的时候隐藏
                 $scope.editRole = $scope.deleteRoleBtn = false;
@@ -165,13 +165,18 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
                 function opFormatter(value, row, index) {
                     var editBtn = '';
                     var deleteBtn = '';
+                    var editRolePermission = '';
                     if ($scope.editRole) {
                         editBtn = '<a data-op=\'edit\' data-DESC=\'' + row.DESC + '\' data-roleName=\'' + row.roleName + '\' data-roleId=\'' + row.roleId + '\' class=\'opBtn\' title=\'\u7F16\u8F91\u5BFC\u822A\'><span class=\'glyphicon glyphicon-edit\'></span></a>';
                     }
                     if ($scope.deleteRole) {
                         deleteBtn = '<a data-op=\'delete\' data-DESC=\'' + row.DESC + '\' data-roleName=\'' + row.roleName + '\' data-roleId=\'' + row.roleId + '\' class=\'opBtn\' title=\'\u5220\u9664\u5BFC\u822A\'><span class=\'glyphicon glyphicon-trash\'></span></a>';
                     }
-                    return editBtn + deleteBtn;
+                    if (true) {
+                        //$scope.editUserRole
+                        editRolePermission = '<a data-op=\'editRolePermission\' data-DESC=\'' + row.DESC + '\' data-roleName=\'' + row.roleName + '\' data-roleId=\'' + row.roleId + '\' class=\'opBtn\' title=\'分配权限\'><span class=\'glyphicon glyphicon-plus\'></span></a>';
+                    }
+                    return editBtn + deleteBtn + editRolePermission;
                 };
                 $scope.addOrEdit = 'add';
                 $('#roleTable').on('click', '.opBtn', function (e) {
@@ -189,6 +194,8 @@ define(['angular', 'bootstrapTableNg', 'bootstrapTableCN', 'config', 'pnotify', 
                         $scope.$apply(function () {
                             $scope.showRemove(role);
                         });
+                    } else if (op === 'editRolePermission') {
+                        $state.go("rolePermissionManage", { role: role });
                     }
                 });
                 $scope.showAdd = function () {

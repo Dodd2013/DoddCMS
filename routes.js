@@ -10,7 +10,8 @@ var routes = {
 	"/content":require("./Route/content.js"),
 	"/user":require("./Route/user.js"),
 	"/role":require("./Route/role.js"),
-	"/userRole":require("./Route/userRole.js")
+	"/userRole":require("./Route/userRole.js"),
+	"/rolePermission":require("./Route/rolePermission.js")
 }
 module.exports = function(app) {
 

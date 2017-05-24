@@ -88,7 +88,7 @@ define(['angular','pnotify'], function(angular,PNotify) {
                                 classes: 'none'
                             };
                         },
-                        sidePagination: 'server',
+                        sidePagination: 'client',
                         cache: false,
                         height: 500,
                         striped: true,
